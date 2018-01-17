@@ -7,12 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		23ED7211D7EC83592503F989 /* Pods_iOS_client_wakatime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 720D77E2903182E0201514F9 /* Pods_iOS_client_wakatime.framework */; };
 		76E16582200F786400898273 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E16581200F786400898273 /* AppDelegate.swift */; };
 		76E16584200F786400898273 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E16583200F786400898273 /* ViewController.swift */; };
 		76E16587200F786400898273 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76E16585200F786400898273 /* Main.storyboard */; };
 		76E16589200F786400898273 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76E16588200F786400898273 /* Assets.xcassets */; };
 		76E1658C200F786400898273 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76E1658A200F786400898273 /* LaunchScreen.storyboard */; };
 		76E16597200F786400898273 /* iOS_client_wakatimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E16596200F786400898273 /* iOS_client_wakatimeTests.swift */; };
+		76E165A5200F82FD00898273 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 76E165A4200F82FD00898273 /* .gitignore */; };
+		9EDA42C5C2D6E2BFBB4F3FA7 /* Pods_iOS_client_wakatimeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1CFC8D035215324BAB87D29 /* Pods_iOS_client_wakatimeTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,6 +29,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3D41A6A5158E32E2EFA83206 /* Pods-iOS-client-wakatimeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-client-wakatimeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOS-client-wakatimeTests/Pods-iOS-client-wakatimeTests.debug.xcconfig"; sourceTree = "<group>"; };
+		720D77E2903182E0201514F9 /* Pods_iOS_client_wakatime.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_client_wakatime.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		76E1657E200F786400898273 /* iOS-client-wakatime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS-client-wakatime.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		76E16581200F786400898273 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		76E16583200F786400898273 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -36,6 +41,11 @@
 		76E16592200F786400898273 /* iOS-client-wakatimeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iOS-client-wakatimeTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		76E16596200F786400898273 /* iOS_client_wakatimeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_client_wakatimeTests.swift; sourceTree = "<group>"; };
 		76E16598200F786400898273 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		76E165A4200F82FD00898273 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		7B08D060A20379ABC1BFEADF /* Pods-iOS-client-wakatimeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-client-wakatimeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOS-client-wakatimeTests/Pods-iOS-client-wakatimeTests.release.xcconfig"; sourceTree = "<group>"; };
+		B527DF088FEF320031175D45 /* Pods-iOS-client-wakatime.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-client-wakatime.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOS-client-wakatime/Pods-iOS-client-wakatime.debug.xcconfig"; sourceTree = "<group>"; };
+		C8891AF9F153BC2035D85798 /* Pods-iOS-client-wakatime.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-client-wakatime.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOS-client-wakatime/Pods-iOS-client-wakatime.release.xcconfig"; sourceTree = "<group>"; };
+		D1CFC8D035215324BAB87D29 /* Pods_iOS_client_wakatimeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_client_wakatimeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23ED7211D7EC83592503F989 /* Pods_iOS_client_wakatime.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,18 +61,31 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9EDA42C5C2D6E2BFBB4F3FA7 /* Pods_iOS_client_wakatimeTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5F602BA7EE8D6ECCDF7EE35A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				720D77E2903182E0201514F9 /* Pods_iOS_client_wakatime.framework */,
+				D1CFC8D035215324BAB87D29 /* Pods_iOS_client_wakatimeTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		76E16575200F786400898273 = {
 			isa = PBXGroup;
 			children = (
+				76E165A1200F818800898273 /* git */,
 				76E16580200F786400898273 /* iOS-client-wakatime */,
 				76E16595200F786400898273 /* iOS-client-wakatimeTests */,
 				76E1657F200F786400898273 /* Products */,
+				AE7DF9270FDB0B2C4828093F /* Pods */,
+				5F602BA7EE8D6ECCDF7EE35A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -96,6 +120,25 @@
 			path = "iOS-client-wakatimeTests";
 			sourceTree = "<group>";
 		};
+		76E165A1200F818800898273 /* git */ = {
+			isa = PBXGroup;
+			children = (
+				76E165A4200F82FD00898273 /* .gitignore */,
+			);
+			path = git;
+			sourceTree = "<group>";
+		};
+		AE7DF9270FDB0B2C4828093F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B527DF088FEF320031175D45 /* Pods-iOS-client-wakatime.debug.xcconfig */,
+				C8891AF9F153BC2035D85798 /* Pods-iOS-client-wakatime.release.xcconfig */,
+				3D41A6A5158E32E2EFA83206 /* Pods-iOS-client-wakatimeTests.debug.xcconfig */,
+				7B08D060A20379ABC1BFEADF /* Pods-iOS-client-wakatimeTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -103,9 +146,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 76E1659B200F786400898273 /* Build configuration list for PBXNativeTarget "iOS-client-wakatime" */;
 			buildPhases = (
+				2DF27EAC03E807B6F1EA3473 /* [CP] Check Pods Manifest.lock */,
 				76E1657A200F786400898273 /* Sources */,
 				76E1657B200F786400898273 /* Frameworks */,
 				76E1657C200F786400898273 /* Resources */,
+				8A537FEED921BCAE84CEF552 /* [CP] Embed Pods Frameworks */,
+				85F127205E848F72A420A260 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -120,9 +166,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 76E1659E200F786400898273 /* Build configuration list for PBXNativeTarget "iOS-client-wakatimeTests" */;
 			buildPhases = (
+				9B5300AA66B71601377143FC /* [CP] Check Pods Manifest.lock */,
 				76E1658E200F786400898273 /* Sources */,
 				76E1658F200F786400898273 /* Frameworks */,
 				76E16590200F786400898273 /* Resources */,
+				72BD17AD68C40A28210F3976 /* [CP] Embed Pods Frameworks */,
+				30E1FA6A73C6514355B6265E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -179,6 +228,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76E165A5200F82FD00898273 /* .gitignore in Resources */,
 				76E1658C200F786400898273 /* LaunchScreen.storyboard in Resources */,
 				76E16589200F786400898273 /* Assets.xcassets in Resources */,
 				76E16587200F786400898273 /* Main.storyboard in Resources */,
@@ -193,6 +243,114 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2DF27EAC03E807B6F1EA3473 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iOS-client-wakatime-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		30E1FA6A73C6514355B6265E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iOS-client-wakatimeTests/Pods-iOS-client-wakatimeTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		72BD17AD68C40A28210F3976 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iOS-client-wakatimeTests/Pods-iOS-client-wakatimeTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		85F127205E848F72A420A260 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iOS-client-wakatime/Pods-iOS-client-wakatime-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8A537FEED921BCAE84CEF552 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-iOS-client-wakatime/Pods-iOS-client-wakatime-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver/SwiftyBeaver.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyBeaver.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iOS-client-wakatime/Pods-iOS-client-wakatime-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9B5300AA66B71601377143FC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iOS-client-wakatimeTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		76E1657A200F786400898273 /* Sources */ = {
@@ -351,6 +509,7 @@
 		};
 		76E1659C200F786400898273 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B527DF088FEF320031175D45 /* Pods-iOS-client-wakatime.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -366,6 +525,7 @@
 		};
 		76E1659D200F786400898273 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C8891AF9F153BC2035D85798 /* Pods-iOS-client-wakatime.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -381,6 +541,7 @@
 		};
 		76E1659F200F786400898273 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3D41A6A5158E32E2EFA83206 /* Pods-iOS-client-wakatimeTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -398,6 +559,7 @@
 		};
 		76E165A0200F786400898273 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7B08D060A20379ABC1BFEADF /* Pods-iOS-client-wakatimeTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
