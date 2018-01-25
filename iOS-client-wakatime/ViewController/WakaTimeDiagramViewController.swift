@@ -9,14 +9,15 @@
 import Foundation
 import UIKit
 import SwiftyBeaver
+import ObjectMapper
 
 class WakaTimeDiagramViewController: UIViewController {
     
     var isAuthenticated = false;
+    let statisticsController = StatisticsController();
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        super.viewDidLoad();
     }
     
     override func didReceiveMemoryWarning() {
@@ -24,10 +25,35 @@ class WakaTimeDiagramViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func showAlert() {
+        let alert = UIAlertController(title: "Something happened", message: "Please.", preferredStyle: .alert);
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
+        }));
+        self.present(alert, animated: true, completion: nil);
+    }
+    
+
     override func viewDidAppear(_ animated: Bool) {
         let hasLogin = UserDefaults.standard.bool(forKey: "hasUserSecretAPIkey");
         if (!hasLogin) {
          self.performSegue(withIdentifier: "showWakaTimeLoginView", sender: self);
+        } else {
+            statisticsController.getUserStatisticsForGivenTimeRange(completionHandler: { statistic, status in
+                if (statistic != nil && status == 200) {
+                    log.debug(statistic!);
+                    let statisticJSON = Mapper<Statistic>().toJSONString(statistic!, prettyPrint: true);
+                    log.debug(statisticJSON!);
+                } else {
+                    //TODO: create specific alerts for all status code
+                    switch(status) {
+                    //TODO: 401 - Unauthorized: The request requires authentication, or your authentication was invalid.
+                    case 401:
+                        self.showAlert();
+                    default:
+                        log.debug("something else");
+                    }
+                }
+            });
         }
     }
     
