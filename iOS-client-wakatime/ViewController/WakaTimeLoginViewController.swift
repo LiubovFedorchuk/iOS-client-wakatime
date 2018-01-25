@@ -11,9 +11,6 @@ import ObjectMapper
 
 class WakaTimeLoginViewController: UIViewController, UITextFieldDelegate {
     
-    // MARK: - Properties
-//    var passwordItems: [KeychainPasswordItem] = [];
-    
     // MARK: - IBOutlets
     @IBOutlet weak var userSecretAPIkeyTextField: UITextField!
     
@@ -46,9 +43,9 @@ class WakaTimeLoginViewController: UIViewController, UITextFieldDelegate {
         return true;
     }
     
+    //TODO: implement API key validation before moving to another view.
     @IBAction func loginWakaTimeButtonTapped(_ sender: Any) {
         let newUserSecretAPIkey = userSecretAPIkeyTextField.text;
-//        let userData = UserData(userSecretAPIkey: newUserSecretAPIkey!);
         if(newUserSecretAPIkey?.isEmpty)! {
             let alert = UIAlertController(title: "Text field is empty", message: "Please, enter your secret API key.", preferredStyle: .alert);
             alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
