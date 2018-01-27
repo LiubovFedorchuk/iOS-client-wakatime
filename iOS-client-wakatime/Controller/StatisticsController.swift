@@ -8,27 +8,28 @@
 
 import Foundation
 import Alamofire
+import AlamofireObjectMapper
 
 /**
     # Controller
  
     Usage: to get user's coding activity for the given time range.
  
-    Range can be one of:
+    ## URL Parameters:
+    `range` (_String_) - necessary - show user's coding activity for:
     - `last_7_days`
     - `last_30_days`
     - `last_6_months`
     - `last_year`
  
-    ## URL Parameters:
-    `project` (_String_) - optional - Show more detailed stats limited to this project.
+    `project` (_String_) - optional - show more detailed stats limited to this project.
  */
 
 class StatisticsController {
     
     let BASE_URL = "https://wakatime.com/api/v1";
     
-    func getUserStatisticsForGivenTimeRange(completionHandler: @escaping (Statistic?, Int) -> ()) {
+    func getUserStatisticsForGivenTimeRange(completionHandler: @escaping (Statistic?, Int) -> Void) {
         
         let userSecretAPIkeyUsingEncoding = readUserSecretAPIkeyFromKeyChain().data(using: String.Encoding.utf8)!;
         let userSecretAPIkeyBase64Encoded = userSecretAPIkeyUsingEncoding.base64EncodedString(options: []);
@@ -59,6 +60,7 @@ class StatisticsController {
         }
     }
     
+    //TODO: transfer method
     func readUserSecretAPIkeyFromKeyChain() -> String {
         var userSecretAPIkey: String;
         do {

@@ -16,6 +16,7 @@
 		763F92B5201A1D6300818354 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763F92B4201A1D6300818354 /* Language.swift */; };
 		763F92B7201A1D6F00818354 /* OperatingSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763F92B6201A1D6F00818354 /* OperatingSystem.swift */; };
 		763F92B9201A1D7C00818354 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763F92B8201A1D7C00818354 /* Project.swift */; };
+		7659DC1C201CEEFF005A505C /* SummariesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7659DC1B201CEEFF005A505C /* SummariesController.swift */; };
 		76B737362018A863005260D5 /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B737352018A863005260D5 /* KeychainPasswordItem.swift */; };
 		76B737382018A8D5005260D5 /* KeychainConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B737372018A8D5005260D5 /* KeychainConfiguration.swift */; };
 		76E16582200F786400898273 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E16581200F786400898273 /* AppDelegate.swift */; };
@@ -50,6 +51,7 @@
 		763F92B4201A1D6300818354 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		763F92B6201A1D6F00818354 /* OperatingSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatingSystem.swift; sourceTree = "<group>"; };
 		763F92B8201A1D7C00818354 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
+		7659DC1B201CEEFF005A505C /* SummariesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummariesController.swift; sourceTree = "<group>"; };
 		76B737352018A863005260D5 /* KeychainPasswordItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainPasswordItem.swift; sourceTree = "<group>"; };
 		76B737372018A8D5005260D5 /* KeychainConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainConfiguration.swift; sourceTree = "<group>"; };
 		76E1657E200F786400898273 /* iOS-client-wakatime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS-client-wakatime.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				763F92AA201A007600818354 /* StatisticsController.swift */,
+				7659DC1B201CEEFF005A505C /* SummariesController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -428,6 +431,7 @@
 				76E16584200F786400898273 /* WakaTimeLoginViewController.swift in Sources */,
 				763F92B7201A1D6F00818354 /* OperatingSystem.swift in Sources */,
 				76B737382018A8D5005260D5 /* KeychainConfiguration.swift in Sources */,
+				7659DC1C201CEEFF005A505C /* SummariesController.swift in Sources */,
 				76B737362018A863005260D5 /* KeychainPasswordItem.swift in Sources */,
 				76F456FA2017677A00AF3F8B /* WakaTimeDiagramViewController.swift in Sources */,
 				763F92AF201A1D0F00818354 /* StatisticData.swift in Sources */,
