@@ -11,7 +11,6 @@
 		763F92AB201A007600818354 /* StatisticsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763F92AA201A007600818354 /* StatisticsController.swift */; };
 		763F92AF201A1D0F00818354 /* Statistic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763F92AE201A1D0F00818354 /* Statistic.swift */; };
 		763F92B3201A1D4C00818354 /* EntrySummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763F92B2201A1D4C00818354 /* EntrySummary.swift */; };
-		7659DC1C201CEEFF005A505C /* SummariesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7659DC1B201CEEFF005A505C /* SummariesController.swift */; };
 		769E2D85202098FC00E023AF /* Summary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769E2D84202098FC00E023AF /* Summary.swift */; };
 		769E2D872020B13100E023AF /* Duration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769E2D862020B13100E023AF /* Duration.swift */; };
 		76B737362018A863005260D5 /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B737352018A863005260D5 /* KeychainPasswordItem.swift */; };
@@ -43,7 +42,6 @@
 		763F92AA201A007600818354 /* StatisticsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsController.swift; sourceTree = "<group>"; };
 		763F92AE201A1D0F00818354 /* Statistic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statistic.swift; sourceTree = "<group>"; };
 		763F92B2201A1D4C00818354 /* EntrySummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntrySummary.swift; sourceTree = "<group>"; };
-		7659DC1B201CEEFF005A505C /* SummariesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummariesController.swift; sourceTree = "<group>"; };
 		769E2D84202098FC00E023AF /* Summary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Summary.swift; sourceTree = "<group>"; };
 		769E2D862020B13100E023AF /* Duration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Duration.swift; sourceTree = "<group>"; };
 		76B737352018A863005260D5 /* KeychainPasswordItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainPasswordItem.swift; sourceTree = "<group>"; };
@@ -108,7 +106,6 @@
 			isa = PBXGroup;
 			children = (
 				763F92AA201A007600818354 /* StatisticsController.swift */,
-				7659DC1B201CEEFF005A505C /* SummariesController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -421,7 +418,6 @@
 				763F92B3201A1D4C00818354 /* EntrySummary.swift in Sources */,
 				76E16584200F786400898273 /* WakaTimeLoginViewController.swift in Sources */,
 				76B737382018A8D5005260D5 /* KeychainConfiguration.swift in Sources */,
-				7659DC1C201CEEFF005A505C /* SummariesController.swift in Sources */,
 				76B737362018A863005260D5 /* KeychainPasswordItem.swift in Sources */,
 				769E2D85202098FC00E023AF /* Summary.swift in Sources */,
 				76F456FA2017677A00AF3F8B /* WakaTimeDiagramViewController.swift in Sources */,
