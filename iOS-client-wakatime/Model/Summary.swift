@@ -45,14 +45,14 @@ class Summary: Mappable {
     }
     
     func mapping(map: Map) {
-        projects   <- map["data.projects"];
-        grandTotalHoursOfCoding  <- map["data.grand_total.hours"];
-        grandTotalMinutesOfCoding  <- map["data.grand_total.minutes"];
-        grandTotalTimeOfCodindAsText <- map["data.grand_total.text"];
-        grandTotalTimeOfCodingInSeconds <- map["data.grand_total.total_seconds"];
-        dateOfCurrentRangeAsText <- map["data.range.text"];
-        currentTimezone <- map["data.range.timezone"];
-        startOfCommonRange  <- map["data.start"];
-        endOfCommonRange <- map["data.end"];
+        projects                                <- map["projects"];
+        grandTotalHoursOfCoding                 <- map["grand_total.hours"];
+        grandTotalMinutesOfCoding               <- map["grand_total.minutes"];
+        grandTotalTimeOfCodindAsText            <- map["grand_total.text"];
+        grandTotalTimeOfCodingInSeconds         <- map["grand_total.total_seconds"];
+        dateOfCurrentRangeAsText                <- map["range.text"];
+        currentTimezone                         <- map["range.timezone"];
+        startOfCommonRange                      <- map["start"];
+        endOfCommonRange                        <- map["end"];
     }
 }

@@ -1,5 +1,5 @@
 //
-//  StatisticsController.swift
+//  StatisticController.swift
 //  iOS-client-wakatime
 //
 //  Created by dorovska on 25.01.2018.
@@ -9,7 +9,6 @@
 import Foundation
 import Alamofire
 import AlamofireObjectMapper
-import ObjectMapper
 
 /**
     # Controller
@@ -24,21 +23,17 @@ import ObjectMapper
     - `last_year`
  
     `project` (_String_) - optional - show more detailed stats limited to this project.
+ 
  */
 
-class StatisticsController {
+class StatisticController {
     
     let BASE_URL = "https://wakatime.com/api/v1";
-    
     func getUserStatisticsForGivenTimeRange(completionHandler: @escaping (Statistic?, Int) -> Void) {
-        
-        let userSecretAPIkeyUsingEncoding = readUserSecretAPIkeyFromKeyChain().data(using: String.Encoding.utf8)!;
-        let userSecretAPIkeyBase64Encoded = userSecretAPIkeyUsingEncoding.base64EncodedString(options: []);
-        let headers = ["Authorization" : "Basic \(userSecretAPIkeyBase64Encoded)"];
-        
         //TODO: add opportunity to change time range for getting user's coding activity
         let range = "last_7_days";
         
+        let headers = createAuthorizationHeadersForRequest();
         Alamofire.request(BASE_URL + "/users/current/stats/\(range)",
             method: .get,
             parameters: nil,
@@ -59,6 +54,13 @@ class StatisticsController {
                     }
                 }
         }
+    }
+    
+    //TODO: transfer method
+    func createAuthorizationHeadersForRequest() -> [String : String] {
+        let userSecretAPIkeyUsingEncoding = readUserSecretAPIkeyFromKeyChain().data(using: String.Encoding.utf8)!;
+        let userSecretAPIkeyBase64Encoded = userSecretAPIkeyUsingEncoding.base64EncodedString(options: []);
+        return ["Authorization" : "Basic \(userSecretAPIkeyBase64Encoded)"];
     }
     
     //TODO: transfer method

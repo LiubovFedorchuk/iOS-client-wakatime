@@ -14,7 +14,8 @@ import ObjectMapper
 class WakaTimeDiagramViewController: UIViewController {
     
     var isAuthenticated = false;
-    let statisticsController = StatisticsController();
+    let statisticController = StatisticController();
+    let summaryController = SummaryController();
     
     override func viewDidLoad() {
         super.viewDidLoad();
@@ -38,7 +39,7 @@ class WakaTimeDiagramViewController: UIViewController {
         if (!hasLogin) {
          self.performSegue(withIdentifier: "showWakaTimeLoginView", sender: self);
         } else {
-            statisticsController.getUserStatisticsForGivenTimeRange(completionHandler: { statistic, status in
+            statisticController.getUserStatisticsForGivenTimeRange(completionHandler: { statistic, status in
                 if (statistic != nil && status == 200) {
                     log.debug(statistic!);
                     let statisticJSON = Mapper<Statistic>().toJSONString(statistic!, prettyPrint: true);
@@ -54,6 +55,30 @@ class WakaTimeDiagramViewController: UIViewController {
                     }
                 }
             });
+            
+            summaryController.getUserSummariesForGivenTimeRange(completionHandler: {summary, status in
+                if (summary != nil && status == 200) {
+                    log.debug(summary!);
+                    let summaryJSON = Mapper<Summary>().toJSONString(summary!, prettyPrint: true);
+                    log.debug(summaryJSON!);
+                    
+//                    let summJSON = Mapper<Summary>().toJSONString([summary], prettyPrint: true)
+//                    let summJSON = Mapper<Summary>().toJSONString(summary!, prettyPrint: true);
+//                    log.debug(summJSON!);
+                   
+                } else {
+                    //TODO: create specific alerts for all status code
+                    switch(status) {
+                    //TODO: 401 - Unauthorized: The request requires authentication, or your authentication was invalid.
+                    case 401:
+                        self.showAlert();
+                    default:
+                        log.debug(status);
+                        log.debug("something goes wrong.");
+                    }
+                }
+            })
+            
         }
     }
     

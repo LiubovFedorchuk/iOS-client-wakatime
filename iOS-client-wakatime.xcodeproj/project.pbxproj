@@ -8,11 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		23ED7211D7EC83592503F989 /* Pods_iOS_client_wakatime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 720D77E2903182E0201514F9 /* Pods_iOS_client_wakatime.framework */; };
-		763F92AB201A007600818354 /* StatisticsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763F92AA201A007600818354 /* StatisticsController.swift */; };
+		763F92AB201A007600818354 /* StatisticController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763F92AA201A007600818354 /* StatisticController.swift */; };
 		763F92AF201A1D0F00818354 /* Statistic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763F92AE201A1D0F00818354 /* Statistic.swift */; };
 		763F92B3201A1D4C00818354 /* EntrySummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763F92B2201A1D4C00818354 /* EntrySummary.swift */; };
 		769E2D85202098FC00E023AF /* Summary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769E2D84202098FC00E023AF /* Summary.swift */; };
 		769E2D872020B13100E023AF /* Duration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769E2D862020B13100E023AF /* Duration.swift */; };
+		769E2D892020B90500E023AF /* SummaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769E2D882020B90500E023AF /* SummaryController.swift */; };
+		769E2D8B2020DBD600E023AF /* DurationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769E2D8A2020DBD600E023AF /* DurationController.swift */; };
 		76B737362018A863005260D5 /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B737352018A863005260D5 /* KeychainPasswordItem.swift */; };
 		76B737382018A8D5005260D5 /* KeychainConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B737372018A8D5005260D5 /* KeychainConfiguration.swift */; };
 		76E16582200F786400898273 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E16581200F786400898273 /* AppDelegate.swift */; };
@@ -39,11 +41,13 @@
 /* Begin PBXFileReference section */
 		3D41A6A5158E32E2EFA83206 /* Pods-iOS-client-wakatimeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-client-wakatimeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOS-client-wakatimeTests/Pods-iOS-client-wakatimeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		720D77E2903182E0201514F9 /* Pods_iOS_client_wakatime.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_client_wakatime.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		763F92AA201A007600818354 /* StatisticsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsController.swift; sourceTree = "<group>"; };
+		763F92AA201A007600818354 /* StatisticController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticController.swift; sourceTree = "<group>"; };
 		763F92AE201A1D0F00818354 /* Statistic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statistic.swift; sourceTree = "<group>"; };
 		763F92B2201A1D4C00818354 /* EntrySummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntrySummary.swift; sourceTree = "<group>"; };
 		769E2D84202098FC00E023AF /* Summary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Summary.swift; sourceTree = "<group>"; };
 		769E2D862020B13100E023AF /* Duration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Duration.swift; sourceTree = "<group>"; };
+		769E2D882020B90500E023AF /* SummaryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryController.swift; sourceTree = "<group>"; };
+		769E2D8A2020DBD600E023AF /* DurationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationController.swift; sourceTree = "<group>"; };
 		76B737352018A863005260D5 /* KeychainPasswordItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainPasswordItem.swift; sourceTree = "<group>"; };
 		76B737372018A8D5005260D5 /* KeychainConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainConfiguration.swift; sourceTree = "<group>"; };
 		76E1657E200F786400898273 /* iOS-client-wakatime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS-client-wakatime.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,8 +109,9 @@
 		764C5C562013A6DE00526EF2 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				763F92AA201A007600818354 /* StatisticsController.swift */,
-				7659DC1B201CEEFF005A505C /* SummariesController.swift */,
+				763F92AA201A007600818354 /* StatisticController.swift */,
+				769E2D882020B90500E023AF /* SummaryController.swift */,
+				769E2D8A2020DBD600E023AF /* DurationController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -414,13 +419,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				763F92AB201A007600818354 /* StatisticsController.swift in Sources */,
+				763F92AB201A007600818354 /* StatisticController.swift in Sources */,
+				769E2D8B2020DBD600E023AF /* DurationController.swift in Sources */,
 				769E2D872020B13100E023AF /* Duration.swift in Sources */,
 				763F92B3201A1D4C00818354 /* EntrySummary.swift in Sources */,
 				76E16584200F786400898273 /* WakaTimeLoginViewController.swift in Sources */,
 				76B737382018A8D5005260D5 /* KeychainConfiguration.swift in Sources */,
-				7659DC1C201CEEFF005A505C /* SummariesController.swift in Sources */,
 				76B737362018A863005260D5 /* KeychainPasswordItem.swift in Sources */,
+				769E2D892020B90500E023AF /* SummaryController.swift in Sources */,
 				769E2D85202098FC00E023AF /* Summary.swift in Sources */,
 				76F456FA2017677A00AF3F8B /* WakaTimeDiagramViewController.swift in Sources */,
 				763F92AF201A1D0F00818354 /* Statistic.swift in Sources */,

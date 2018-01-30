@@ -32,7 +32,7 @@ class Duration: Mappable {
     }
     
     func mapping(map: Map) {
-        projectName                        <- map["data.project"];
+        projectName                        <- map["project"];
         workingTimeDuration                <- map["duration"];
         startTimeOfDuration                <- map["time"];
     }

@@ -21,16 +21,6 @@ class WakaTimeLoginViewController: UIViewController, UITextFieldDelegate {
             performSegue(withIdentifier: "dismissWakaTimeLoginView", sender: self);
         }
         self.userSecretAPIkeyTextField.delegate = self;
-        
-//        tmp test
-//        let authenticationController = AuthenticationController();
-//        authenticationController.tmp(completionHandler: {arrayOfProjects in
-//            guard arrayOfProjects == nil else {
-//                let arrayProjectsJSON = Mapper<ProjectsData>().toJSONString(arrayOfProjects!, prettyPrint: true);
-//                log.debug(arrayProjectsJSON!);
-//                return
-//            }
-//        });
         // Do any additional setup after loading the view, typically from a nib.
     }
 
