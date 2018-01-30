@@ -106,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				763F92AA201A007600818354 /* StatisticsController.swift */,
+				7659DC1B201CEEFF005A505C /* SummariesController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -418,6 +419,7 @@
 				763F92B3201A1D4C00818354 /* EntrySummary.swift in Sources */,
 				76E16584200F786400898273 /* WakaTimeLoginViewController.swift in Sources */,
 				76B737382018A8D5005260D5 /* KeychainConfiguration.swift in Sources */,
+				7659DC1C201CEEFF005A505C /* SummariesController.swift in Sources */,
 				76B737362018A863005260D5 /* KeychainPasswordItem.swift in Sources */,
 				769E2D85202098FC00E023AF /* Summary.swift in Sources */,
 				76F456FA2017677A00AF3F8B /* WakaTimeDiagramViewController.swift in Sources */,
