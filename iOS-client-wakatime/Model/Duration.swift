@@ -17,11 +17,9 @@ class Duration: Mappable {
     // numbers after decimal point are fractions of a second
     var startTimeOfDuration: Float?;
     
-    init() {
-        
-    }
-    
-    init(projectName: String, workingTimeDuration: Int, startTimeOfDuration: Float) {
+    init(projectName: String,
+         workingTimeDuration: Int,
+         startTimeOfDuration: Float) {
         self.projectName = projectName;
         self.workingTimeDuration = workingTimeDuration;
         self.startTimeOfDuration = startTimeOfDuration;

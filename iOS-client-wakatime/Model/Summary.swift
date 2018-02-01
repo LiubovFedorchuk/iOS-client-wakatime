@@ -16,19 +16,20 @@ class Summary: Mappable {
     var grandTotalMinutesOfCoding: Int?;
     var grandTotalTimeOfCodindAsText: String?;
     var grandTotalTimeOfCodingInSeconds: Int?;
-//    var dateOfCurrentRange: String?;
-//    var startOfCurrentRange: String?;
-//    var endOfCurrentRange: String?;
     var dateOfCurrentRangeAsText: String?;
     var currentTimezone: String?;
     var startOfCommonRange: String?;
     var endOfCommonRange: String?;
     
-    init() {
-        
-    }
-    
-    init(projects: [EntrySummary], grandTotalHoursOfCoding: Int, grandTotalMinutesOfCoding: Int, grandTotalTimeOfCodindAsText: String, grandTotalTimeOfCodingInSeconds: Int, dateOfCurrentRangeAsText: String, currentTimezone: String, startOfCommonRange: String, endOfCommonRange: String) {
+    init(projects: [EntrySummary],
+         grandTotalHoursOfCoding: Int,
+         grandTotalMinutesOfCoding: Int,
+         grandTotalTimeOfCodindAsText: String,
+         grandTotalTimeOfCodingInSeconds: Int,
+         dateOfCurrentRangeAsText: String,
+         currentTimezone: String,
+         startOfCommonRange: String,
+         endOfCommonRange: String) {
         self.projects = projects;
         self.grandTotalHoursOfCoding = grandTotalHoursOfCoding;
         self.grandTotalMinutesOfCoding = grandTotalMinutesOfCoding;

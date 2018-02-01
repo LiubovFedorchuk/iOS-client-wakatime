@@ -21,11 +21,15 @@ class Statistic: Mappable {
     var endOfRange: String?;
     var totalWorkingTimeInSeconds: Int?;
     
-    init() {
-        
-    }
-    
-    init(usedEditors: [EntrySummary], usedLanguages: [EntrySummary], usedOperatingSystems: [EntrySummary], humanReadableDailyAverage: String, humanReadableTotal: String, dailyAverageWorkingTime: Int, startOfRange: String, endOfRange: String, totalWorkingTimeInSeconds: Int) {
+    init(usedEditors: [EntrySummary],
+         usedLanguages: [EntrySummary],
+         usedOperatingSystems: [EntrySummary],
+         humanReadableDailyAverage: String,
+         humanReadableTotal: String,
+         dailyAverageWorkingTime: Int,
+         startOfRange: String,
+         endOfRange: String,
+         totalWorkingTimeInSeconds: Int) {
         self.usedEditors = usedEditors;
         self.usedLanguages = usedLanguages;
         self.usedOperatingSystems = usedOperatingSystems;

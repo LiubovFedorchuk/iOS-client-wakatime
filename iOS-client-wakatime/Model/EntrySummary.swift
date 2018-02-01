@@ -15,11 +15,9 @@ class EntrySummary: Mappable {
     var workingTimeInPercent: Float?;
     var workingTimeAsText: String?;
     
-    init() {
-        
-    }
-    
-    init(entryName: String, workingTimeInPercent: Float, workingTimeAsText: String) {
+    init(entryName: String,
+         workingTimeInPercent: Float,
+         workingTimeAsText: String) {
         self.entryName = entryName;
         self.workingTimeInPercent = workingTimeInPercent;
         self.workingTimeAsText = workingTimeAsText;

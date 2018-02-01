@@ -23,7 +23,6 @@ class WakaTimeDiagramViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func showAlert() {
@@ -36,6 +35,7 @@ class WakaTimeDiagramViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         let hasLogin = UserDefaults.standard.bool(forKey: "hasUserSecretAPIkey");
+        
         if (!hasLogin) {
          self.performSegue(withIdentifier: "showWakaTimeLoginView", sender: self);
         } else {
@@ -46,8 +46,8 @@ class WakaTimeDiagramViewController: UIViewController {
                     log.debug(statisticJSON!);
                 } else {
                     //TODO: create specific alerts for all status code
-                    switch(status) {
-                    //TODO: 401 - Unauthorized: The request requires authentication, or your authentication was invalid.
+                    switch(status!) {
+                    //TODO: create right alert for status code 401
                     case 401:
                         self.showAlert();
                     default:
@@ -61,19 +61,13 @@ class WakaTimeDiagramViewController: UIViewController {
                     log.debug(summary!);
                     let summaryJSON = Mapper<Summary>().toJSONString(summary!, prettyPrint: true);
                     log.debug(summaryJSON!);
-                    
-//                    let summJSON = Mapper<Summary>().toJSONString([summary], prettyPrint: true)
-//                    let summJSON = Mapper<Summary>().toJSONString(summary!, prettyPrint: true);
-//                    log.debug(summJSON!);
-                   
                 } else {
                     //TODO: create specific alerts for all status code
-                    switch(status) {
-                    //TODO: 401 - Unauthorized: The request requires authentication, or your authentication was invalid.
+                    switch(status!) {
+                    //TODO: create right alert for status code 401
                     case 401:
                         self.showAlert();
                     default:
-                        log.debug(status);
                         log.debug("something goes wrong.");
                     }
                 }
