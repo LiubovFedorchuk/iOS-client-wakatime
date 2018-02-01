@@ -14,7 +14,8 @@ import ObjectMapper
 class WakaTimeDiagramViewController: UIViewController {
     
     var isAuthenticated = false;
-    let statisticsController = StatisticsController();
+    let statisticController = StatisticController();
+    let summaryController = SummaryController();
     
     override func viewDidLoad() {
         super.viewDidLoad();
@@ -22,7 +23,6 @@ class WakaTimeDiagramViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func showAlert() {
@@ -35,18 +35,19 @@ class WakaTimeDiagramViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         let hasLogin = UserDefaults.standard.bool(forKey: "hasUserSecretAPIkey");
+        
         if (!hasLogin) {
          self.performSegue(withIdentifier: "showWakaTimeLoginView", sender: self);
         } else {
-            statisticsController.getUserStatisticsForGivenTimeRange(completionHandler: { statistic, status in
+            statisticController.getUserStatisticsForGivenTimeRange(completionHandler: { statistic, status in
                 if (statistic != nil && status == 200) {
                     log.debug(statistic!);
                     let statisticJSON = Mapper<Statistic>().toJSONString(statistic!, prettyPrint: true);
                     log.debug(statisticJSON!);
                 } else {
                     //TODO: create specific alerts for all status code
-                    switch(status) {
-                    //TODO: 401 - Unauthorized: The request requires authentication, or your authentication was invalid.
+                    switch(status!) {
+                    //TODO: create right alert for status code 401
                     case 401:
                         self.showAlert();
                     default:
@@ -54,6 +55,24 @@ class WakaTimeDiagramViewController: UIViewController {
                     }
                 }
             });
+            
+            summaryController.getUserSummariesForGivenTimeRange(completionHandler: {summary, status in
+                if (summary != nil && status == 200) {
+                    log.debug(summary!);
+                    let summaryJSON = Mapper<Summary>().toJSONString(summary!, prettyPrint: true);
+                    log.debug(summaryJSON!);
+                } else {
+                    //TODO: create specific alerts for all status code
+                    switch(status!) {
+                    //TODO: create right alert for status code 401
+                    case 401:
+                        self.showAlert();
+                    default:
+                        log.debug("something goes wrong.");
+                    }
+                }
+            })
+            
         }
     }
     

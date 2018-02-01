@@ -15,23 +15,12 @@ class WakaTimeLoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var userSecretAPIkeyTextField: UITextField!
     
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad();
+        self.userSecretAPIkeyTextField.delegate = self;
         let hasLogin = UserDefaults.standard.bool(forKey: "hasUserSecretAPIkey");
         if (hasLogin) {
             performSegue(withIdentifier: "dismissWakaTimeLoginView", sender: self);
         }
-        self.userSecretAPIkeyTextField.delegate = self;
-        
-//        tmp test
-//        let authenticationController = AuthenticationController();
-//        authenticationController.tmp(completionHandler: {arrayOfProjects in
-//            guard arrayOfProjects == nil else {
-//                let arrayProjectsJSON = Mapper<ProjectsData>().toJSONString(arrayOfProjects!, prettyPrint: true);
-//                log.debug(arrayProjectsJSON!);
-//                return
-//            }
-//        });
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
