@@ -13,4 +13,5 @@ target 'iOS-client-wakatime' do
   pod 'SwiftyBeaver'
   pod 'ObjectMapper', '~> 3.1'
   pod 'AlamofireObjectMapper', '~> 5.0'
+  pod 'Charts'
 end
