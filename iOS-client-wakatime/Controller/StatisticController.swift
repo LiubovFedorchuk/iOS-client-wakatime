@@ -50,18 +50,18 @@ class StatisticController {
                     guard status == 200 else {
                         log.debug("Request passed with status code, but not 200 OK: \(status!)");
                         completionHandler(nil, status!)
-                        
                         return
                     }
+                    
                     let statisticsData = response.result.value!;
                     completionHandler(statisticsData, status!);
                 case .failure(let error):
                     guard status == nil else {
                         log.debug("Request failure with status code: \(status!)");
                         completionHandler(nil, status!);
-                        
                         return
                     }
+                    
                     log.debug("Request failure with error: \(error)");
                     completionHandler(nil, nil);
                 }

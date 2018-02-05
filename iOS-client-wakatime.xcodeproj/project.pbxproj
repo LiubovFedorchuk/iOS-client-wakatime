@@ -24,7 +24,7 @@
 		76E1658C200F786400898273 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76E1658A200F786400898273 /* LaunchScreen.storyboard */; };
 		76E16597200F786400898273 /* iOS_client_wakatimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E16596200F786400898273 /* iOS_client_wakatimeTests.swift */; };
 		76E165A5200F82FD00898273 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 76E165A4200F82FD00898273 /* .gitignore */; };
-		76F456FA2017677A00AF3F8B /* WakaTimeDiagramViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F456F92017677A00AF3F8B /* WakaTimeDiagramViewController.swift */; };
+		76F456FA2017677A00AF3F8B /* WakaTimeChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F456F92017677A00AF3F8B /* WakaTimeChartViewController.swift */; };
 		9EDA42C5C2D6E2BFBB4F3FA7 /* Pods_iOS_client_wakatimeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1CFC8D035215324BAB87D29 /* Pods_iOS_client_wakatimeTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -61,7 +61,7 @@
 		76E16596200F786400898273 /* iOS_client_wakatimeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_client_wakatimeTests.swift; sourceTree = "<group>"; };
 		76E16598200F786400898273 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		76E165A4200F82FD00898273 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		76F456F92017677A00AF3F8B /* WakaTimeDiagramViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WakaTimeDiagramViewController.swift; sourceTree = "<group>"; };
+		76F456F92017677A00AF3F8B /* WakaTimeChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WakaTimeChartViewController.swift; sourceTree = "<group>"; };
 		7B08D060A20379ABC1BFEADF /* Pods-iOS-client-wakatimeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-client-wakatimeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOS-client-wakatimeTests/Pods-iOS-client-wakatimeTests.release.xcconfig"; sourceTree = "<group>"; };
 		B527DF088FEF320031175D45 /* Pods-iOS-client-wakatime.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-client-wakatime.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOS-client-wakatime/Pods-iOS-client-wakatime.debug.xcconfig"; sourceTree = "<group>"; };
 		C8891AF9F153BC2035D85798 /* Pods-iOS-client-wakatime.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-client-wakatime.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOS-client-wakatime/Pods-iOS-client-wakatime.release.xcconfig"; sourceTree = "<group>"; };
@@ -120,7 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				76E16583200F786400898273 /* WakaTimeLoginViewController.swift */,
-				76F456F92017677A00AF3F8B /* WakaTimeDiagramViewController.swift */,
+				76F456F92017677A00AF3F8B /* WakaTimeChartViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -379,6 +379,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-iOS-client-wakatime/Pods-iOS-client-wakatime-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver/SwiftyBeaver.framework",
 			);
@@ -386,6 +387,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyBeaver.framework",
 			);
@@ -428,7 +430,7 @@
 				76B737362018A863005260D5 /* KeychainPasswordItem.swift in Sources */,
 				769E2D892020B90500E023AF /* SummaryController.swift in Sources */,
 				769E2D85202098FC00E023AF /* Summary.swift in Sources */,
-				76F456FA2017677A00AF3F8B /* WakaTimeDiagramViewController.swift in Sources */,
+				76F456FA2017677A00AF3F8B /* WakaTimeChartViewController.swift in Sources */,
 				763F92AF201A1D0F00818354 /* Statistic.swift in Sources */,
 				76E16582200F786400898273 /* AppDelegate.swift in Sources */,
 			);
