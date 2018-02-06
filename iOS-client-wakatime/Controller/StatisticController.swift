@@ -81,13 +81,14 @@ class StatisticController {
     func readUserSecretAPIkeyFromKeyChain() -> String {
         var userSecretAPIkey: String;
         do {
-            let userSecretAPIkeyItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName, accessGroup: KeychainConfiguration.accessGroup);
+            let userSecretAPIkeyItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName,
+                                                            accessGroup: KeychainConfiguration.accessGroup);
             userSecretAPIkey = try userSecretAPIkeyItem.readPassword();
         }
         catch {
             fatalError("Error reading secret API key from keychain - \(error)");
         }
-        
+
         return userSecretAPIkey;
     }
 }
