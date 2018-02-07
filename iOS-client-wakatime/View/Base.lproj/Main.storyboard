@@ -28,7 +28,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Log in view" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZRs-wT-C6W">
-                                <rect key="frame" x="97" y="20" width="180" height="21"/>
+                                <rect key="frame" x="97" y="49" width="180" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
@@ -56,32 +56,78 @@
         <!--WakaTimeChartViewController-->
         <scene sceneID="HPw-XA-HLh">
             <objects>
-                <viewController title="WakaTimeChartViewController" id="yIs-8D-276" customClass="WakaTimeChartViewController" customModule="iOS_client_wakatime" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="WakaTimeChartViewController" hidesBottomBarWhenPushed="YES" id="yIs-8D-276" customClass="WakaTimeChartViewController" customModule="iOS_client_wakatime" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WTT-zC-OY9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N8j-vP-Dzj">
-                                <rect key="frame" x="90" y="572" width="195" height="75"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Log out from the WakaTime"/>
-                                <connections>
-                                    <action selector="logoutWakaTimeButtonTapped:" destination="yIs-8D-276" eventType="touchUpInside" id="Gtr-Fp-gai"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x4u-qu-v26" customClass="PieChartView" customModule="Charts">
-                                <rect key="frame" x="16" y="139" width="343" height="222"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z6y-qX-lTj">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x4u-qu-v26" customClass="PieChartView" customModule="Charts">
+                                        <rect key="frame" x="16" y="77" width="343" height="200"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="200" id="UFn-CC-WC1"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vZO-Uf-dGa" customClass="PieChartView" customModule="Charts">
+                                        <rect key="frame" x="16" y="297" width="343" height="200"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="200" id="nXO-aO-xac"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N8j-vP-Dzj">
+                                        <rect key="frame" x="93" y="17" width="188" height="30"/>
+                                        <state key="normal" title="Log out from the WakaTime"/>
+                                        <connections>
+                                            <action selector="logoutWakaTimeButtonTapped:" destination="yIs-8D-276" eventType="touchUpInside" id="Gtr-Fp-gai"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QFa-8r-00V" customClass="PieChartView" customModule="Charts">
+                                        <rect key="frame" x="16" y="517" width="343" height="200"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="200" id="jAa-MS-S8Y"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="x4u-qu-v26" firstAttribute="leading" secondItem="z6y-qX-lTj" secondAttribute="leading" constant="16" id="6Cp-EQ-N4d"/>
+                                    <constraint firstAttribute="trailing" secondItem="vZO-Uf-dGa" secondAttribute="trailing" constant="16" id="7M3-g2-xx6"/>
+                                    <constraint firstItem="vZO-Uf-dGa" firstAttribute="top" secondItem="x4u-qu-v26" secondAttribute="bottom" constant="20" id="JFI-ch-kMy"/>
+                                    <constraint firstItem="N8j-vP-Dzj" firstAttribute="centerX" secondItem="z6y-qX-lTj" secondAttribute="centerX" id="Jek-XJ-4xz"/>
+                                    <constraint firstItem="vZO-Uf-dGa" firstAttribute="leading" secondItem="z6y-qX-lTj" secondAttribute="leading" constant="16" id="N0w-Zj-gYd"/>
+                                    <constraint firstItem="N8j-vP-Dzj" firstAttribute="top" secondItem="z6y-qX-lTj" secondAttribute="top" constant="17" id="Qbj-XN-rWT"/>
+                                    <constraint firstItem="QFa-8r-00V" firstAttribute="top" secondItem="vZO-Uf-dGa" secondAttribute="bottom" constant="20" id="Urb-73-NB1"/>
+                                    <constraint firstItem="x4u-qu-v26" firstAttribute="top" secondItem="N8j-vP-Dzj" secondAttribute="bottom" constant="30" id="WDQ-du-rQY"/>
+                                    <constraint firstAttribute="trailing" secondItem="x4u-qu-v26" secondAttribute="trailing" constant="16" id="Ysv-NF-UHc"/>
+                                    <constraint firstAttribute="bottom" secondItem="QFa-8r-00V" secondAttribute="bottom" constant="20" id="lkb-wK-QWt"/>
+                                    <constraint firstItem="QFa-8r-00V" firstAttribute="leading" secondItem="z6y-qX-lTj" secondAttribute="leading" constant="16" id="olN-cJ-dfL"/>
+                                    <constraint firstItem="N8j-vP-Dzj" firstAttribute="centerX" secondItem="x4u-qu-v26" secondAttribute="centerX" id="sCc-uK-MYJ"/>
+                                    <constraint firstItem="QFa-8r-00V" firstAttribute="top" secondItem="vZO-Uf-dGa" secondAttribute="bottom" constant="20" id="v7J-6N-se3"/>
+                                    <constraint firstAttribute="trailing" secondItem="QFa-8r-00V" secondAttribute="trailing" constant="16" id="zdG-w2-C1k"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="z6y-qX-lTj" firstAttribute="top" secondItem="WTT-zC-OY9" secondAttribute="top" id="RCH-7v-aCV"/>
+                            <constraint firstItem="z6y-qX-lTj" firstAttribute="leading" secondItem="Ygx-EL-Wcw" secondAttribute="leading" id="XvP-CJ-nZk"/>
+                            <constraint firstItem="z6y-qX-lTj" firstAttribute="bottom" secondItem="Ygx-EL-Wcw" secondAttribute="bottom" id="ZS1-WX-Kkm"/>
+                            <constraint firstItem="z6y-qX-lTj" firstAttribute="trailing" secondItem="Ygx-EL-Wcw" secondAttribute="trailing" id="uQq-g4-it7"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Ygx-EL-Wcw"/>
                     </view>
                     <navigationItem key="navigationItem" id="OiN-O3-SK5"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="375" height="770"/>
                     <nil key="simulatedTopBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="editorPieChartView" destination="x4u-qu-v26" id="N8E-RT-maY"/>
+                        <outlet property="languagePieChartView" destination="vZO-Uf-dGa" id="wvr-1H-c5f"/>
+                        <outlet property="operatingSystemPieChartView" destination="QFa-8r-00V" id="zy9-sA-epd"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="showWakaTimeLoginView" id="wkD-G1-iqr"/>
                     </connections>
                 </viewController>
@@ -92,10 +138,9 @@
         <!--Navigation Controller-->
         <scene sceneID="noe-Yf-xPy">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="CMc-gl-VTF" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="CMc-gl-VTF" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Yxi-cV-do9">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
