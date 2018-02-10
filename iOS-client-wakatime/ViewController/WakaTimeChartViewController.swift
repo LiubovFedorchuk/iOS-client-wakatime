@@ -61,13 +61,10 @@ class WakaTimeChartViewController: UIViewController {
         statisticController.getUserStatisticsForGivenTimeRange(completionHandler: { statistic, status in
             if (statistic != nil && status == 200) {
                 self.pieChartFill(pieChartView: self.languagePieChartView,
-                                  title: "Languages",
                                   itemsList: (statistic?.usedLanguages)!);
                 self.pieChartFill(pieChartView: self.editorPieChartView,
-                                    title: "Editors",
                                     itemsList: (statistic?.usedEditors)!);
                 self.pieChartFill(pieChartView: self.operatingSystemPieChartView,
-                                  title: "Operating Systems",
                                   itemsList: (statistic?.usedOperatingSystems)!);
             } else {
                 switch(status!) {
@@ -98,8 +95,7 @@ class WakaTimeChartViewController: UIViewController {
         self.present(alert, animated: true, completion: nil);
     }
     
-    func pieChartFill(pieChartView: PieChartView, title: String, itemsList: [EntrySummary]) {
-        pieChartView.chartDescription?.text = title;
+    func pieChartFill(pieChartView: PieChartView, itemsList: [EntrySummary]) {
         var entryWorkingTimeItem = [PieChartDataEntry]();
         for item in itemsList {
             let entry = PieChartDataEntry(value: Double(item.workingTimeInPercent!),
@@ -118,19 +114,13 @@ class WakaTimeChartViewController: UIViewController {
     }
     
     func setUpPieChartView(pieChartView: PieChartView) {
+        pieChartView.chartDescription?.enabled = false;
         pieChartView.drawHoleEnabled = false;
         pieChartView.noDataText = "The data is loading"
         pieChartView.notifyDataSetChanged();
         pieChartView.isUserInteractionEnabled = true;
-
         pieChartView.backgroundColor = UIColor.darkGray;
-        pieChartView.chartDescription?.textColor = UIColor.white;
         pieChartView.legend.textColor = UIColor.lightGray;
-
         pieChartView.legend.font = UIFont(name: "PingFangSC-Light", size: 12)!;
-        pieChartView.chartDescription?.font = UIFont(name: "PingFangSC-Light", size: 18)!;
-
-        pieChartView.chartDescription?.xOffset = pieChartView.frame.width * (0.53);
-        pieChartView.chartDescription?.yOffset = pieChartView.frame.height * (0.69);
     }
 }

@@ -9,6 +9,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="PingFang.ttc">
+            <string>PingFangSC-Light</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--WakaTimeLoginViewController-->
         <scene sceneID="tne-QT-ifu">
@@ -65,17 +70,42 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x4u-qu-v26" customClass="PieChartView" customModule="Charts">
-                                        <rect key="frame" x="16" y="77" width="343" height="200"/>
+                                        <rect key="frame" x="16" y="77" width="343" height="201"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Editors" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mbi-Kz-hLo">
+                                                <rect key="frame" x="10" y="10" width="49" height="21"/>
+                                                <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="15"/>
+                                                <color key="textColor" white="0.90481228298611116" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="200" id="UFn-CC-WC1"/>
+                                            <constraint firstItem="mbi-Kz-hLo" firstAttribute="top" secondItem="x4u-qu-v26" secondAttribute="top" constant="10" id="4hR-Wh-oWI"/>
+                                            <constraint firstItem="mbi-Kz-hLo" firstAttribute="leading" secondItem="x4u-qu-v26" secondAttribute="leading" constant="10" id="Ama-ov-Cfj"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="mbi-Kz-hLo" secondAttribute="trailing" id="cre-EN-yTo"/>
+                                            <constraint firstAttribute="height" constant="201" id="nPs-NO-O3G"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vZO-Uf-dGa" customClass="PieChartView" customModule="Charts">
-                                        <rect key="frame" x="16" y="297" width="343" height="200"/>
+                                        <rect key="frame" x="16" y="298" width="343" height="200"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Languages" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ok4-72-M7r">
+                                                <rect key="frame" x="10" y="10" width="75" height="20"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="20" id="Ara-wD-st0"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="15"/>
+                                                <color key="textColor" white="0.90481228298611116" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="200" id="nXO-aO-xac"/>
+                                            <constraint firstItem="Ok4-72-M7r" firstAttribute="leading" secondItem="vZO-Uf-dGa" secondAttribute="leading" constant="10" id="Mup-1M-egr"/>
+                                            <constraint firstAttribute="height" constant="200" id="Oms-Jv-Y7r"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Ok4-72-M7r" secondAttribute="trailing" id="QoM-ik-mHm"/>
+                                            <constraint firstItem="Ok4-72-M7r" firstAttribute="top" secondItem="vZO-Uf-dGa" secondAttribute="top" constant="10" id="sd4-tr-W2z"/>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N8j-vP-Dzj">
@@ -86,10 +116,24 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QFa-8r-00V" customClass="PieChartView" customModule="Charts">
-                                        <rect key="frame" x="16" y="517" width="343" height="200"/>
+                                        <rect key="frame" x="16" y="518" width="343" height="200"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Operating Systems" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ayY-ow-rQq">
+                                                <rect key="frame" x="10" y="10" width="130.5" height="20"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="20" id="wB5-9t-W4F"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="15"/>
+                                                <color key="textColor" white="0.90481228298611116" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="200" id="jAa-MS-S8Y"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ayY-ow-rQq" secondAttribute="trailing" id="Phx-ZH-OG6"/>
+                                            <constraint firstItem="ayY-ow-rQq" firstAttribute="leading" secondItem="QFa-8r-00V" secondAttribute="leading" constant="10" id="pDZ-TK-865"/>
+                                            <constraint firstAttribute="height" constant="200" id="xgv-cY-D9m"/>
+                                            <constraint firstItem="ayY-ow-rQq" firstAttribute="top" secondItem="QFa-8r-00V" secondAttribute="top" constant="10" id="yYg-NI-kTg"/>
                                         </constraints>
                                     </view>
                                 </subviews>
