@@ -65,7 +65,7 @@ class SummaryController {
                         return
                     }
                     
-                    log.debug("Request failure with error: \(error)");
+                    log.error("Request failure with error: \(error as! String)");
                     completionHandler(nil, nil);
                 }
         }
@@ -95,7 +95,7 @@ class SummaryController {
     }
     
     func getStartDayAsString() -> String {
-        let sevenDaysAgo = Calendar.current.date(byAdding: .day, value: -7, to: Date());
+        let sevenDaysAgo = Calendar.current.date(byAdding: .day, value: -6, to: Date());
         let formatter = DateFormatter();
         formatter.dateFormat = "yyyy-MM-dd";
         let result = formatter.string(from: sevenDaysAgo!);

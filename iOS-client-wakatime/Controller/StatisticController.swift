@@ -42,7 +42,7 @@ class StatisticController {
             method: .get,
             parameters: nil,
             encoding: JSONEncoding.default,
-            headers: headers).validate().responseObject {
+            headers: headers).validate().responseObject(keyPath: "data") {
                 (response: DataResponse<Statistic>) in
                 let status = response.response?.statusCode;
                 switch response.result {

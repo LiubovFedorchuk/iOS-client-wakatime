@@ -14,13 +14,22 @@ class EntrySummary: Mappable {
     var entryName: String?;
     var workingTimeInPercent: Float?;
     var workingTimeAsText: String?;
+    var totalWorkingTimeAsSecond: Int?;
+    var workingTimeHoursPortion: Int?;
+    var workingTimeMinutesPortion: Int?;
     
     init(entryName: String,
          workingTimeInPercent: Float,
-         workingTimeAsText: String) {
+         workingTimeAsText: String,
+         totalWorkingTimeAsSecond: Int,
+         workingTimeHoursPortion: Int,
+         workingTimeMinutesPortion: Int) {
         self.entryName = entryName;
         self.workingTimeInPercent = workingTimeInPercent;
         self.workingTimeAsText = workingTimeAsText;
+        self.totalWorkingTimeAsSecond = totalWorkingTimeAsSecond;
+        self.workingTimeHoursPortion = workingTimeHoursPortion;
+        self.workingTimeMinutesPortion = workingTimeMinutesPortion;
     }
     
     required init?(map: Map) {
@@ -31,5 +40,8 @@ class EntrySummary: Mappable {
         entryName                        <- map["name"];
         workingTimeInPercent             <- map["percent"];
         workingTimeAsText                <- map["text"];
+        totalWorkingTimeAsSecond         <- map["total_seconds"];
+        workingTimeHoursPortion          <- map["hours"];
+        workingTimeMinutesPortion        <- map["minutes"];
     }
 }
