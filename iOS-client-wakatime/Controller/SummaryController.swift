@@ -70,6 +70,40 @@ class SummaryController {
                 }
         }
     }
+    //TODO: Something goes wrong in the moment with switch .failure
+    func getUserSummariesForCurrentDay(completionHandler: @escaping (Summary?, Int?) -> Void) {
+        let date = getEndDateAsString();
+        let headers = createAuthorizationHeadersForRequest();
+        
+        Alamofire.request(BASE_URL + "/users/current/summaries?start=\(date)&end=\(date)",
+            method: .get,
+            parameters: nil,
+            encoding: JSONEncoding.default,
+            headers: headers).validate().responseObject(keyPath: "data") {
+                (response: DataResponse<Summary>) in
+                let status = response.response?.statusCode;
+                switch response.result {
+                case .success:
+                    guard status == 200 else {
+                        log.debug("Request passed with status code, but not 200 OK: \(status!)");
+                        completionHandler(nil, status!)
+                        return
+                    }
+                    
+                    let summaryData = response.result.value!;
+                    completionHandler(summaryData, status!);
+                case .failure(let error):
+                    guard status == nil else {
+                        log.debug("Request failure with status code: \(status!)");
+                        completionHandler(nil, status!);
+                        return
+                    }
+                    
+                    log.debug("Request failure with error: \(error)");
+                    completionHandler(nil, nil);
+                }
+        }
+    }
     
     //TODO: transfer method
     func readUserSecretAPIkeyFromKeyChain() -> String {
