@@ -17,10 +17,11 @@ class WakaTimeChartViewController: UIViewController {
     let statisticController = StatisticController();
     let summaryController = SummaryController();
     var isAuthenticated = false;
-    
 
-    @IBOutlet weak var todayWorkingTimeLabel: UILabel!
-    @IBOutlet weak var dailyAverageTimeLabel: UILabel!
+    @IBOutlet weak var todayChangesOfWorkingProgress: UILabel!;
+    @IBOutlet weak var todayWorkingProgressInPercent: UILabel!;
+    @IBOutlet weak var todayWorkingTimeLabel: UILabel!;
+    @IBOutlet weak var dailyAverageTimeLabel: UILabel!;
     @IBOutlet weak var timeOfCodingLast7DaysLabel: UILabel!;
     @IBOutlet weak var editorPieChartView: PieChartView!;
     @IBOutlet weak var languagePieChartView: PieChartView!;
@@ -45,6 +46,7 @@ class WakaTimeChartViewController: UIViewController {
             getStatisticForLast7Days();
             getSummaryForLast7Days();
             getDailyProgress();
+            fillLabelWithDailyWorkingTime();
         }
     }
     
@@ -64,6 +66,24 @@ class WakaTimeChartViewController: UIViewController {
             log.error("Error deleting keychain item from query - \(error)");
             fatalError(error as! String);
         }
+    }
+    
+    func getStartDayAsString() -> String {
+        let sevenDaysAgo = Calendar.current.date(byAdding: .day, value: -6, to: Date());
+        let formatter = DateFormatter();
+        formatter.dateFormat = "yyyy-MM-dd";
+        let result = formatter.string(from: sevenDaysAgo!);
+        
+        return result;
+    }
+    
+    func getEndDateAsString() -> String {
+        let date = Date();
+        let formatter = DateFormatter();
+        formatter.dateFormat = "yyyy-MM-dd";
+        let result = formatter.string(from: date);
+        
+        return result;
     }
     
     func getStatisticForLast7Days() {
@@ -89,16 +109,24 @@ class WakaTimeChartViewController: UIViewController {
     }
     
     func getSummaryForLast7Days() {
-        summaryController.getUserSummariesForGivenTimeRange(completionHandler: { summary, status in
+        let start = getStartDayAsString();
+        let end = getEndDateAsString();
+        summaryController.getUserSummaryForGivenTimeRange(startDate: start,
+                                                          endDate: end,
+                                                          completionHandler: { summary, status in
             if (summary != nil && status == 200) {
                 var totalWorkingHoursForLast7Days = 0;
                 var totalWorkingMinutesForLast7Days = 0;
                 for summaryItem in summary! {
+                    if (totalWorkingMinutesForLast7Days > 59) {
+                        totalWorkingHoursForLast7Days += 1;
+                        totalWorkingMinutesForLast7Days -= 60;
+                    }
                     totalWorkingHoursForLast7Days += summaryItem.grandTotalHoursOfCoding!;
                     totalWorkingMinutesForLast7Days += summaryItem.grandTotalMinutesOfCoding!;
                 }
                 self.timeOfCodingLast7DaysLabel.text = "\(totalWorkingHoursForLast7Days) hrs \(totalWorkingMinutesForLast7Days) mins in the Last 7 Days";
-
+//TODO: clean it
 //                var last7DaysList = [String]();
 //                var projectsList = [EntrySummary]();
 //                var codingTimeList = [Double]();
@@ -125,19 +153,24 @@ class WakaTimeChartViewController: UIViewController {
     }
     
     func fillLabelWithDailyWorkingTime() {
-        summaryController.getUserSummariesForCurrentDay(completionHandler: { summary, status in
+        let currentDate = getEndDateAsString();
+        summaryController.getUserSummaryForGivenTimeRange(startDate: currentDate,
+                                                          endDate: currentDate,
+                                                          completionHandler: { summary, status in
             if (summary != nil && status == 200) {
-                guard summary?.grandTotalTimeOfCodindAsText != nil else {
-                    self.todayWorkingTimeLabel.text = "0 secs";
-                    return
+                for summaryItem in summary! {
+                    guard summaryItem.grandTotalTimeOfCodindAsText != nil else {
+                        self.todayWorkingTimeLabel.text = "0 secs";
+                        return
+                    }
+                    self.todayWorkingTimeLabel.text = summaryItem.grandTotalTimeOfCodindAsText!;
                 }
-                self.todayWorkingTimeLabel.text = summary?.grandTotalTimeOfCodindAsText!;
             } else {
-                guard status != nil else {
-                    self.showAlert(alertTitle: "Unexpected error", alertMessage: "Please, try again later.");
-                    log.error("Unexpected error without status code.");
-                    return
-                }
+                    guard status != nil else {
+                        self.showAlert(alertTitle: "Unexpected error", alertMessage: "Please, try again later.");
+                        log.error("Unexpected error without status code.");
+                        return
+                    }
                 
                 self.showAlertAccordingToStatusCode(statusCode: status!);
             }
@@ -145,21 +178,30 @@ class WakaTimeChartViewController: UIViewController {
     }
     
     func getDailyProgress() {
-        statisticController.getUserStatisticsForGivenTimeRange(completionHandler:  { statistic, statusForStatistic in
-            self.summaryController.getUserSummariesForCurrentDay(completionHandler: { summary, statusForSummary in
+        let date = getEndDateAsString();
+        statisticController.getUserStatisticsForGivenTimeRange(completionHandler: { statistic, statusForStatistic in
+            self.summaryController.getUserSummaryForGivenTimeRange(startDate: date,
+                                                                     endDate: date,
+                                                                     completionHandler:{ summary, statusForSummary in
                 if (statistic != nil && statusForStatistic == 200) {
                     if (summary != nil && statusForSummary == 200) {
-                        log.debug(summary!)
                         var dailyProgressList = [Double]();
-                        let dailyAverageWorkingTimeInSeconds = (statistic?.dailyAverageWorkingTime!)!;
-                        let currentWorkingTimeInSecodns = (summary?.grandTotalTimeOfCodingInSeconds!)!;
-                        let progressWorkingTimeInPercent = (currentWorkingTimeInSecodns / dailyAverageWorkingTimeInSeconds) * 100;
-                        dailyProgressList.append(Double(progressWorkingTimeInPercent));
-                        if (progressWorkingTimeInPercent > 100) {
-                            let increase = progressWorkingTimeInPercent - 100;
-                        } else {
-                            let decrease = 100 - progressWorkingTimeInPercent;
-                            dailyProgressList.append(Double(decrease));
+                        for summaryItem in summary! {
+                            let dailyAverageWorkingTimeInSeconds = (statistic?.dailyAverageWorkingTime!)!;
+                            let currentWorkingTimeInSecodns = summaryItem.grandTotalTimeOfCodingInSeconds!;
+                            let progressTime = currentWorkingTimeInSecodns * 100;
+                            let progressWorkingTimeInPercent: Double = Double(progressTime /
+                                dailyAverageWorkingTimeInSeconds).rounded(toPlaces: 1);
+                            dailyProgressList.append(progressWorkingTimeInPercent);
+                            self.todayWorkingProgressInPercent.text = "\(progressWorkingTimeInPercent)%";
+                            if (progressWorkingTimeInPercent > 100.0) {
+                                let increase = progressWorkingTimeInPercent - 100.0;
+                                self.todayChangesOfWorkingProgress.text = "\(increase.rounded(toPlaces: 1))% Increase";
+                            } else {
+                                let decrease = 100.0 - progressWorkingTimeInPercent;
+                                dailyProgressList.append(decrease);
+                                self.todayChangesOfWorkingProgress.text = "\(decrease.rounded(toPlaces: 1)) % Decrease";
+                            }
                         }
                         self.halfPieChartFill(halfPieChartView: self.codingDailyAverageHalfPieChartView,
                                               itemsList: dailyProgressList);
@@ -185,7 +227,6 @@ class WakaTimeChartViewController: UIViewController {
                 }
             });
         });
-        
     }
     
     func showAlertAccordingToStatusCode(statusCode: Int) {
@@ -219,7 +260,7 @@ class WakaTimeChartViewController: UIViewController {
         self.present(alert, animated: true, completion: nil);
     }
     
-
+//TODO: clean it
 //    func setChart(xValues: [String], yValuesLineChart: [Double], yValuesBarChart: [Double]) {
 //        var yValuesForLineChart = [ChartDataEntry]()
 //        var yValuesForBarChart = [BarChartDataEntry]()
@@ -266,25 +307,35 @@ class WakaTimeChartViewController: UIViewController {
             entryWorkingTimeItem.append(entry);
             let dataSet = PieChartDataSet(values: entryWorkingTimeItem,
                                           label: "");
-//            if (itemsList.count == 2) {
-//                if (itemsList.first! < 20.0 && itemsList.first! > 0) {
-//                    dataSet.colors = [UIColor()]
-//                }
-//
-//            } else {
-//                if (itemsList.first == 0) {
-//                    dataSet.setColors(UIColor(red: 224.0/255.0, green: 224.0/255.0, blue: 224.0/255.0, alpha: 1.0));
-//                } else {
-//                    dataSet.setColors(UIColor(red: 96.0/255.0, green: 176.0/255.0, blue: 68.0/255.0, alpha: 1.0));
-//                }
-//            }
-            dataSet.colors = ChartColorTemplates.material();
+            if (itemsList.count == 2) {
+                if (itemsList.first! < 30.0 && itemsList.first! > 0.0) {
+                    dataSet.colors = [UIColor(red: 214.0/255.0, green: 39.0/255.0, blue: 40.0/255.0, alpha: 1.0),
+                                      UIColor(red: 224.0/255.0, green: 224.0/255.0, blue: 224.0/255.0, alpha: 1.0)];
+                } else if (itemsList.first! >= 30.0 && itemsList.first! < 60.0) {
+                    dataSet.colors = [UIColor(red: 249.0/255.0, green: 118.0/255.0, blue: 0.0/255.0, alpha: 1.0),
+                                      UIColor(red: 224.0/255.0, green: 224.0/255.0, blue: 224.0/255.0, alpha: 1.0)];
+                } else if (itemsList.first! >= 60.0 && itemsList.first! < 90.0) {
+                    dataSet.colors = [UIColor(red: 246.0/255.0, green: 198.0/255.0, blue: 0.0/255.0, alpha: 1.0),
+                                      UIColor(red: 224.0/255.0, green: 224.0/255.0, blue: 224.0/255.0, alpha: 1.0)];
+                } else if (itemsList.first! >= 90) {
+                    dataSet.colors = [UIColor(red: 96.0/255.0, green: 176.0/255.0, blue: 68.0/255.0, alpha: 1.0),
+                                      UIColor(red: 224.0/255.0, green: 224.0/255.0, blue: 224.0/255.0, alpha: 1.0)];
+                }
+            } else {
+                if (itemsList.first == 0) {
+                    dataSet.setColors(UIColor(red: 224.0/255.0, green: 224.0/255.0, blue: 224.0/255.0, alpha: 1.0));
+                } else {
+                    dataSet.setColors(UIColor(red: 96.0/255.0, green: 176.0/255.0, blue: 68.0/255.0, alpha: 1.0));
+                }
+            }
+            dataSet.drawValuesEnabled = false;
             let data = PieChartData(dataSet: dataSet);
             halfPieChartView.data = data;
         }
-        setUpPieChartView(pieChartView: halfPieChartView);
         setUpHalfPieChartView(halfPieChartView: halfPieChartView);
     }
+
+//TODO: clean it
 //    func setUpCombinedChartView(combinedChartView: CombinedChartView) {
 //        combinedChartView.noDataText = "No data to show";
 //        combinedChartView.pinchZoomEnabled = false;
@@ -317,9 +368,9 @@ class WakaTimeChartViewController: UIViewController {
         pieChartView.backgroundColor = UIColor(red: 45.0/255.0, green: 53.0/255.0, blue: 60.0/255.0, alpha: 1.0);
         pieChartView.legend.textColor = UIColor(red: 123.0/255.0, green: 128.0/255.0, blue: 131.0/255.0, alpha: 1.0);
         pieChartView.legend.font = UIFont(name: "PingFangSC-Light", size: 12)!;
-        pieChartView.legend.orientation = .vertical
-        pieChartView.legend.verticalAlignment = .center;
-        pieChartView.legend.horizontalAlignment = .right;
+        pieChartView.legend.orientation = .horizontal;
+        pieChartView.legend.verticalAlignment = .bottom
+        pieChartView.legend.horizontalAlignment = .left;
         pieChartView.notifyDataSetChanged();
     }
     
@@ -327,9 +378,22 @@ class WakaTimeChartViewController: UIViewController {
         halfPieChartView.maxAngle = 180;
         halfPieChartView.rotationAngle = 180;
         halfPieChartView.rotationEnabled = false;
+        halfPieChartView.chartDescription?.enabled = false;
+        halfPieChartView.legend.enabled = false;
+        halfPieChartView.noDataText = "No data to show";
+        halfPieChartView.isUserInteractionEnabled = true;
+        halfPieChartView.backgroundColor = UIColor(red: 45.0/255.0, green: 53.0/255.0, blue: 60.0/255.0, alpha: 1.0);
         halfPieChartView.holeColor = UIColor(red: 45.0/255.0, green: 53.0/255.0, blue: 60.0/255.0, alpha: 1.0);
         halfPieChartView.holeRadiusPercent = 0.6;
-        halfPieChartView.legend.drawInside = false;
         halfPieChartView.drawEntryLabelsEnabled = false;
+        halfPieChartView.notifyDataSetChanged();
+    }
+}
+
+extension Double {
+    func rounded(toPlaces places:Int) -> Double {
+        let divisor = pow(10.0, Double(places));
+        
+        return (self * divisor).rounded() / divisor;
     }
 }
