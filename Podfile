@@ -9,9 +9,9 @@ target 'iOS-client-wakatime' do
     inherit! :search_paths
     # Pods for testing
   end
-  pod 'Alamofire', '~> 4.5'
+  pod 'Alamofire', '~> 4.7'
   pod 'SwiftyBeaver'
-  pod 'ObjectMapper', '~> 3.1'
+  pod 'ObjectMapper', '~> 3.3'
   pod 'AlamofireObjectMapper', '~> 5.0'
   pod 'Charts'
 end

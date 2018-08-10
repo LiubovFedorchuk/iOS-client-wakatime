@@ -54,11 +54,14 @@ DerivedData/
 *.perspectivev3
 !default.perspectivev3
 xcuserdata/
+xcshareddata
 
 ## Other
 *.moved-aside
 *.xccheckout
 *.xcscmblueprint
+*.xcuserstate
+
 
 ## Obj-C/Swift specific
 *.hmap
@@ -66,9 +69,6 @@ xcuserdata/
 *.dSYM.zip
 *.dSYM
 
-## Playgrounds
-timeline.xctimeline
-playground.xcworkspace
 
 # Swift Package Manager
 #
@@ -76,8 +76,6 @@ playground.xcworkspace
 # Packages/
 # Package.pins
 .build/
-
-# CocoaPods - Refactored to standalone file
 
 # Carthage - Refactored to standalone file
 
@@ -98,11 +96,6 @@ fastlane/test_output
 #
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
 
-## Build generated
-
-## Various settings
-
-## Other
 
 ### Xcode Patch ###
 *.xcodeproj/*
