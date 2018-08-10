@@ -16,11 +16,13 @@ class WakaTimeLoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var loginButton: UIButton!;
     @IBOutlet weak var userPasswordTextField: UITextField!;
     @IBOutlet weak var userEmailTextField: UITextField!;
+    @IBOutlet weak var loginGitHubButton: UIButton!;
     
     override func viewDidLoad() {
         super.viewDidLoad();
         self.userSecretAPIkeyTextField.delegate = self;
         loginButtonSetUp(button: loginButton);
+        loginButtonSetUp(button: loginGitHubButton);
         let hasLogin = UserDefaults.standard.bool(forKey: "hasUserSecretAPIkey");
         if (hasLogin) {
             performSegue(withIdentifier: "dismissWakaTimeLoginView", sender: self);

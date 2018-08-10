@@ -17,6 +17,8 @@
 		769E2D8B2020DBD600E023AF /* DurationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769E2D8A2020DBD600E023AF /* DurationController.swift */; };
 		76B737362018A863005260D5 /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B737352018A863005260D5 /* KeychainPasswordItem.swift */; };
 		76B737382018A8D5005260D5 /* KeychainConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B737372018A8D5005260D5 /* KeychainConfiguration.swift */; };
+		76D82677211DC7520094ABDA /* ChartSetUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D82676211DC7520094ABDA /* ChartSetUp.swift */; };
+		76D82679211DC84C0094ABDA /* AlertSetUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D82678211DC84C0094ABDA /* AlertSetUp.swift */; };
 		76E16582200F786400898273 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E16581200F786400898273 /* AppDelegate.swift */; };
 		76E16584200F786400898273 /* WakaTimeLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E16583200F786400898273 /* WakaTimeLoginViewController.swift */; };
 		76E16587200F786400898273 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76E16585200F786400898273 /* Main.storyboard */; };
@@ -50,6 +52,8 @@
 		769E2D8A2020DBD600E023AF /* DurationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationController.swift; sourceTree = "<group>"; };
 		76B737352018A863005260D5 /* KeychainPasswordItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainPasswordItem.swift; sourceTree = "<group>"; };
 		76B737372018A8D5005260D5 /* KeychainConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainConfiguration.swift; sourceTree = "<group>"; };
+		76D82676211DC7520094ABDA /* ChartSetUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartSetUp.swift; sourceTree = "<group>"; };
+		76D82678211DC84C0094ABDA /* AlertSetUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertSetUp.swift; sourceTree = "<group>"; };
 		76E1657E200F786400898273 /* iOS-client-wakatime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS-client-wakatime.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		76E16581200F786400898273 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		76E16583200F786400898273 /* WakaTimeLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WakaTimeLoginViewController.swift; sourceTree = "<group>"; };
@@ -165,6 +169,8 @@
 				764C5C562013A6DE00526EF2 /* Controller */,
 				764C5C552013A6C200526EF2 /* View */,
 				76E16581200F786400898273 /* AppDelegate.swift */,
+				76D82678211DC84C0094ABDA /* AlertSetUp.swift */,
+				76D82676211DC7520094ABDA /* ChartSetUp.swift */,
 				76B737372018A8D5005260D5 /* KeychainConfiguration.swift */,
 				76B737352018A863005260D5 /* KeychainPasswordItem.swift */,
 				76E16588200F786400898273 /* Assets.xcassets */,
@@ -252,7 +258,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = dorovska;
 				TargetAttributes = {
 					76E1657D200F786400898273 = {
@@ -427,11 +433,13 @@
 				763F92B3201A1D4C00818354 /* EntrySummary.swift in Sources */,
 				76E16584200F786400898273 /* WakaTimeLoginViewController.swift in Sources */,
 				76B737382018A8D5005260D5 /* KeychainConfiguration.swift in Sources */,
+				76D82679211DC84C0094ABDA /* AlertSetUp.swift in Sources */,
 				76B737362018A863005260D5 /* KeychainPasswordItem.swift in Sources */,
 				769E2D892020B90500E023AF /* SummaryController.swift in Sources */,
 				769E2D85202098FC00E023AF /* Summary.swift in Sources */,
 				76F456FA2017677A00AF3F8B /* WakaTimeChartViewController.swift in Sources */,
 				763F92AF201A1D0F00818354 /* Statistic.swift in Sources */,
+				76D82677211DC7520094ABDA /* ChartSetUp.swift in Sources */,
 				76E16582200F786400898273 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -488,6 +496,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -495,6 +504,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -522,7 +532,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -545,6 +555,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -552,6 +563,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -573,7 +585,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
