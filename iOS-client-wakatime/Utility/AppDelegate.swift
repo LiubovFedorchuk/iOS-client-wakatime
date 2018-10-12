@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  iOS-client-wakatime
 //
-//  Created by dorovska on 17.01.2018.
-//  Copyright © 2018 dorovska. All rights reserved.
+//  Created by Liubov Fedorchuk on 17.01.2018.
+//  Copyright © 2018 Liubov Fedorchuk. All rights reserved.
 //
 
 import UIKit

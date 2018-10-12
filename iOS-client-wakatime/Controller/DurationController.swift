@@ -2,8 +2,8 @@
 //  DurationController.swift
 //  iOS-client-wakatime
 //
-//  Created by dorovska on 30.01.2018.
-//  Copyright © 2018 dorovska. All rights reserved.
+//  Created by Liubov Fedorchuk on 30.01.2018.
+//  Copyright © 2018 Liubov Fedorchuk. All rights reserved.
 //
 
 import Foundation
@@ -31,11 +31,11 @@ import AlamofireObjectMapper
 
 class DurationController {
     
-    let BASE_URL = "https://wakatime.com/api/v1";
+    let BASE_URL = "https://wakatime.com/api/v1"
     
-    func getDurationOfUserCodingActivity(completionHandler: @escaping ([Duration]?, Int?) -> Void) {
-        let headers = createAuthorizationHeadersForRequest();
-        let currentDate = getCurrentDateAsString();
+    func getDurationOfUserCodingActivity(currentDate: String, completionHandler: @escaping ([Duration]?, Int?) -> Void) {
+        let keychainManager = KeychainManager()
+        let headers = keychainManager.createAuthorizationHeadersForRequest(userApiKey: nil)
         
         Alamofire.request(BASE_URL + "/users/current/durations?date=\(currentDate)",
             method: .get,
@@ -43,7 +43,7 @@ class DurationController {
             encoding: JSONEncoding.default,
             headers: headers).validate().responseArray(keyPath: "data") {
                 (response: DataResponse<[Duration]>) in
-                let status = response.response?.statusCode;
+                let status = response.response?.statusCode
                 switch response.result {
                 case .success:
                     guard status == 200 else {
@@ -52,50 +52,18 @@ class DurationController {
                         return
                     }
                     
-                    let statisticsData = response.result.value!;
-                    completionHandler(statisticsData, status!);
+                    let statisticsData = response.result.value!
+                    completionHandler(statisticsData, status!)
                 case .failure(let error):
                     guard status == nil else {
-                        log.debug("Request failure with status code: \(status!)");
-                        completionHandler(nil, status!);
+                        log.debug("Request failure with status code: \(status!)")
+                        completionHandler(nil, status!)
                         return
                     }
                     
-                    log.debug("Request failure with error: \(error)");
+                    log.debug("Request failure with error: \(error)")
                     completionHandler(nil, nil);
                 }
         }
-    }
-    
-    //TODO: transfer method
-    func readUserSecretAPIkeyFromKeyChain() -> String {
-        var userSecretAPIkey: String;
-        do {
-            let userSecretAPIkeyItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName, accessGroup: KeychainConfiguration.accessGroup);
-            userSecretAPIkey = try userSecretAPIkeyItem.readPassword();
-        }
-        catch {
-            fatalError("Error reading secret API key from keychain - \(error)");
-        }
-        
-        return userSecretAPIkey;
-    }
-    
-     //TODO: transfer method
-    func createAuthorizationHeadersForRequest() -> [String : String] {
-        let userSecretAPIkeyUsingEncoding = readUserSecretAPIkeyFromKeyChain().data(using: String.Encoding.utf8)!;
-        let userSecretAPIkeyBase64Encoded = userSecretAPIkeyUsingEncoding.base64EncodedString(options: []);
-        let header = ["Authorization" : "Basic \(userSecretAPIkeyBase64Encoded)"];
-        
-        return header;
-    }
-    
-    func getCurrentDateAsString() -> String {
-        let date = Date();
-        let formatter = DateFormatter();
-        formatter.dateFormat = "yyyy-MM-dd";
-        let result = formatter.string(from: date);
-        
-        return result;
     }
 }

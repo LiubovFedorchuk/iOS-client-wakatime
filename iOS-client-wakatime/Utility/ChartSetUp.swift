@@ -2,8 +2,8 @@
 //  ChartSetUp.swift
 //  iOS-client-wakatime
 //
-//  Created by dorovska on 10.08.2018.
-//  Copyright © 2018 dorovska. All rights reserved.
+//  Created by Liubov Fedorchuk on 10.08.2018.
+//  Copyright © 2018 Liubov Fedorchuk. All rights reserved.
 //
 
 import Foundation
@@ -13,14 +13,14 @@ import Charts
 class ChartSetUp {
 
     func setUpPieChartView(pieChartView: PieChartView) {
-        pieChartView.chartDescription?.enabled = false;
-        pieChartView.drawHoleEnabled = false;
-        pieChartView.noDataText = "No chart data available.";
+        pieChartView.chartDescription?.enabled = false
+        pieChartView.drawHoleEnabled = false
+        pieChartView.noDataText = "No chart data available."
         pieChartView.noDataTextColor = UIColor(red: 123.0/255.0,
                                                green: 128.0/255.0,
                                                blue: 131.0/255.0,
-                                               alpha: 1.0);
-        pieChartView.isUserInteractionEnabled = true;
+                                               alpha: 1.0)
+        pieChartView.isUserInteractionEnabled = true
         pieChartView.backgroundColor = UIColor(red: 45.0/255.0,
                                                green: 53.0/255.0,
                                                blue: 60.0/255.0,
@@ -29,36 +29,36 @@ class ChartSetUp {
                                                 green: 128.0/255.0,
                                                 blue: 131.0/255.0,
                                                 alpha: 1.0);
-        pieChartView.legend.font = UIFont(name: "PingFangSC-Light", size: 12)!;
-        pieChartView.legend.orientation = .horizontal;
+        pieChartView.legend.font = UIFont(name: "PingFangSC-Light", size: 12)!
+        pieChartView.legend.orientation = .horizontal
         pieChartView.legend.verticalAlignment = .bottom
-        pieChartView.legend.horizontalAlignment = .left;
-        pieChartView.notifyDataSetChanged();
+        pieChartView.legend.horizontalAlignment = .left
+        pieChartView.notifyDataSetChanged()
     }
     
     func setUpHalfPieChartView(halfPieChartView: PieChartView) {
-        halfPieChartView.maxAngle = 180;
-        halfPieChartView.rotationAngle = 180;
-        halfPieChartView.rotationEnabled = false;
-        halfPieChartView.chartDescription?.enabled = false;
-        halfPieChartView.legend.enabled = false;
-        halfPieChartView.noDataText = "";
-        halfPieChartView.isUserInteractionEnabled = true;
+        halfPieChartView.maxAngle = 180
+        halfPieChartView.rotationAngle = 180
+        halfPieChartView.rotationEnabled = false
+        halfPieChartView.chartDescription?.enabled = false
+        halfPieChartView.legend.enabled = false
+        halfPieChartView.noDataText = ""
+        halfPieChartView.isUserInteractionEnabled = true
         halfPieChartView.backgroundColor = UIColor(red: 45.0/255.0,
                                                    green: 53.0/255.0,
                                                    blue: 60.0/255.0,
-                                                   alpha: 1.0);
+                                                   alpha: 1.0)
         halfPieChartView.holeColor = UIColor(red: 45.0/255.0,
                                              green: 53.0/255.0,
                                              blue: 60.0/255.0,
-                                             alpha: 1.0);
-        halfPieChartView.holeRadiusPercent = 0.6;
-        halfPieChartView.drawEntryLabelsEnabled = false;
-        halfPieChartView.notifyDataSetChanged();
+                                             alpha: 1.0)
+        halfPieChartView.holeRadiusPercent = 0.6
+        halfPieChartView.drawEntryLabelsEnabled = false
+        halfPieChartView.notifyDataSetChanged()
     }
     
     func setUpCombinedChartView(combinedChartView: CombinedChartView) {
-        combinedChartView.noDataText = "No chart data available.";
+        combinedChartView.noDataText = "No chart data available."
         combinedChartView.noDataTextColor = UIColor(red: 123.0/255.0,
                                                     green: 128.0/255.0,
                                                     blue: 131.0/255.0,
