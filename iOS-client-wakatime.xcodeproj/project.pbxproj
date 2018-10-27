@@ -17,6 +17,8 @@
 		769E2D8B2020DBD600E023AF /* DurationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769E2D8A2020DBD600E023AF /* DurationController.swift */; };
 		76B737362018A863005260D5 /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B737352018A863005260D5 /* KeychainPasswordItem.swift */; };
 		76B737382018A8D5005260D5 /* KeychainConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B737372018A8D5005260D5 /* KeychainConfiguration.swift */; };
+		76D82677211DC7520094ABDA /* ChartSetUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D82676211DC7520094ABDA /* ChartSetUp.swift */; };
+		76D82679211DC84C0094ABDA /* AlertSetUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D82678211DC84C0094ABDA /* AlertSetUp.swift */; };
 		76E16582200F786400898273 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E16581200F786400898273 /* AppDelegate.swift */; };
 		76E16584200F786400898273 /* WakaTimeLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E16583200F786400898273 /* WakaTimeLoginViewController.swift */; };
 		76E16587200F786400898273 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76E16585200F786400898273 /* Main.storyboard */; };
@@ -26,6 +28,13 @@
 		76E165A5200F82FD00898273 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 76E165A4200F82FD00898273 /* .gitignore */; };
 		76F456FA2017677A00AF3F8B /* WakaTimeChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F456F92017677A00AF3F8B /* WakaTimeChartViewController.swift */; };
 		9EDA42C5C2D6E2BFBB4F3FA7 /* Pods_iOS_client_wakatimeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1CFC8D035215324BAB87D29 /* Pods_iOS_client_wakatimeTests.framework */; };
+		F0374E0C2170CF39002C6DDD /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0374E0B2170CF39002C6DDD /* Connectivity.swift */; };
+		F0374E0E2170E498002C6DDD /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0374E0D2170E498002C6DDD /* UserController.swift */; };
+		F0374E102170ECF9002C6DDD /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0374E0F2170ECF9002C6DDD /* Project.swift */; };
+		F0374E122170EF19002C6DDD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0374E112170EF19002C6DDD /* User.swift */; };
+		F0F3C7C5216F88970024A74A /* Double+Conversions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F3C7C4216F88970024A74A /* Double+Conversions.swift */; };
+		F0F3C7C7216F89D80024A74A /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F3C7C6216F89D80024A74A /* KeychainManager.swift */; };
+		F0F3C7C9216FA7C00024A74A /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F3C7C8216FA7C00024A74A /* DateManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +59,8 @@
 		769E2D8A2020DBD600E023AF /* DurationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationController.swift; sourceTree = "<group>"; };
 		76B737352018A863005260D5 /* KeychainPasswordItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainPasswordItem.swift; sourceTree = "<group>"; };
 		76B737372018A8D5005260D5 /* KeychainConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainConfiguration.swift; sourceTree = "<group>"; };
+		76D82676211DC7520094ABDA /* ChartSetUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartSetUp.swift; sourceTree = "<group>"; };
+		76D82678211DC84C0094ABDA /* AlertSetUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertSetUp.swift; sourceTree = "<group>"; };
 		76E1657E200F786400898273 /* iOS-client-wakatime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS-client-wakatime.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		76E16581200F786400898273 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		76E16583200F786400898273 /* WakaTimeLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WakaTimeLoginViewController.swift; sourceTree = "<group>"; };
@@ -66,6 +77,13 @@
 		B527DF088FEF320031175D45 /* Pods-iOS-client-wakatime.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-client-wakatime.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOS-client-wakatime/Pods-iOS-client-wakatime.debug.xcconfig"; sourceTree = "<group>"; };
 		C8891AF9F153BC2035D85798 /* Pods-iOS-client-wakatime.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-client-wakatime.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOS-client-wakatime/Pods-iOS-client-wakatime.release.xcconfig"; sourceTree = "<group>"; };
 		D1CFC8D035215324BAB87D29 /* Pods_iOS_client_wakatimeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_client_wakatimeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F0374E0B2170CF39002C6DDD /* Connectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connectivity.swift; sourceTree = "<group>"; };
+		F0374E0D2170E498002C6DDD /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
+		F0374E0F2170ECF9002C6DDD /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
+		F0374E112170EF19002C6DDD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		F0F3C7C4216F88970024A74A /* Double+Conversions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Conversions.swift"; sourceTree = "<group>"; };
+		F0F3C7C6216F89D80024A74A /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
+		F0F3C7C8216FA7C00024A74A /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,34 +124,37 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		764C5C562013A6DE00526EF2 /* Controller */ = {
+		764C5C562013A6DE00526EF2 /* Services */ = {
 			isa = PBXGroup;
 			children = (
 				763F92AA201A007600818354 /* StatisticController.swift */,
 				769E2D882020B90500E023AF /* SummaryController.swift */,
 				769E2D8A2020DBD600E023AF /* DurationController.swift */,
+				F0374E0D2170E498002C6DDD /* UserController.swift */,
 			);
-			path = Controller;
+			path = Services;
 			sourceTree = "<group>";
 		};
-		764C5C572013A6F200526EF2 /* ViewController */ = {
+		764C5C572013A6F200526EF2 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				76E16583200F786400898273 /* WakaTimeLoginViewController.swift */,
 				76F456F92017677A00AF3F8B /* WakaTimeChartViewController.swift */,
 			);
-			path = ViewController;
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		764C5C582013A6FE00526EF2 /* Model */ = {
+		764C5C582013A6FE00526EF2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				763F92AE201A1D0F00818354 /* Statistic.swift */,
 				763F92B2201A1D4C00818354 /* EntrySummary.swift */,
 				769E2D84202098FC00E023AF /* Summary.swift */,
 				769E2D862020B13100E023AF /* Duration.swift */,
+				F0374E0F2170ECF9002C6DDD /* Project.swift */,
+				F0374E112170EF19002C6DDD /* User.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		76E16575200F786400898273 = {
@@ -160,14 +181,12 @@
 		76E16580200F786400898273 /* iOS-client-wakatime */ = {
 			isa = PBXGroup;
 			children = (
-				764C5C582013A6FE00526EF2 /* Model */,
-				764C5C572013A6F200526EF2 /* ViewController */,
-				764C5C562013A6DE00526EF2 /* Controller */,
+				F0F3C7C3216F885F0024A74A /* Extension */,
+				F0F3C7C2216F88010024A74A /* Utility */,
+				764C5C582013A6FE00526EF2 /* Models */,
+				764C5C572013A6F200526EF2 /* ViewControllers */,
+				764C5C562013A6DE00526EF2 /* Services */,
 				764C5C552013A6C200526EF2 /* View */,
-				76E16581200F786400898273 /* AppDelegate.swift */,
-				76B737372018A8D5005260D5 /* KeychainConfiguration.swift */,
-				76B737352018A863005260D5 /* KeychainPasswordItem.swift */,
-				76E16588200F786400898273 /* Assets.xcassets */,
 				76E1658D200F786400898273 /* Info.plist */,
 			);
 			path = "iOS-client-wakatime";
@@ -201,6 +220,30 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		F0F3C7C2216F88010024A74A /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				76E16581200F786400898273 /* AppDelegate.swift */,
+				76B737372018A8D5005260D5 /* KeychainConfiguration.swift */,
+				76B737352018A863005260D5 /* KeychainPasswordItem.swift */,
+				76D82676211DC7520094ABDA /* ChartSetUp.swift */,
+				76D82678211DC84C0094ABDA /* AlertSetUp.swift */,
+				76E16588200F786400898273 /* Assets.xcassets */,
+				F0F3C7C6216F89D80024A74A /* KeychainManager.swift */,
+				F0F3C7C8216FA7C00024A74A /* DateManager.swift */,
+				F0374E0B2170CF39002C6DDD /* Connectivity.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		F0F3C7C3216F885F0024A74A /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				F0F3C7C4216F88970024A74A /* Double+Conversions.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -213,7 +256,6 @@
 				76E1657B200F786400898273 /* Frameworks */,
 				76E1657C200F786400898273 /* Resources */,
 				8A537FEED921BCAE84CEF552 /* [CP] Embed Pods Frameworks */,
-				85F127205E848F72A420A260 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -232,8 +274,6 @@
 				76E1658E200F786400898273 /* Sources */,
 				76E1658F200F786400898273 /* Frameworks */,
 				76E16590200F786400898273 /* Resources */,
-				72BD17AD68C40A28210F3976 /* [CP] Embed Pods Frameworks */,
-				30E1FA6A73C6514355B6265E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -252,7 +292,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = dorovska;
 				TargetAttributes = {
 					76E1657D200F786400898273 = {
@@ -325,51 +365,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		30E1FA6A73C6514355B6265E /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iOS-client-wakatimeTests/Pods-iOS-client-wakatimeTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		72BD17AD68C40A28210F3976 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iOS-client-wakatimeTests/Pods-iOS-client-wakatimeTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		85F127205E848F72A420A260 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iOS-client-wakatime/Pods-iOS-client-wakatime-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		8A537FEED921BCAE84CEF552 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -423,16 +418,25 @@
 			files = (
 				763F92AB201A007600818354 /* StatisticController.swift in Sources */,
 				769E2D8B2020DBD600E023AF /* DurationController.swift in Sources */,
+				F0374E0C2170CF39002C6DDD /* Connectivity.swift in Sources */,
+				F0374E102170ECF9002C6DDD /* Project.swift in Sources */,
 				769E2D872020B13100E023AF /* Duration.swift in Sources */,
 				763F92B3201A1D4C00818354 /* EntrySummary.swift in Sources */,
 				76E16584200F786400898273 /* WakaTimeLoginViewController.swift in Sources */,
 				76B737382018A8D5005260D5 /* KeychainConfiguration.swift in Sources */,
+				76D82679211DC84C0094ABDA /* AlertSetUp.swift in Sources */,
+				F0F3C7C7216F89D80024A74A /* KeychainManager.swift in Sources */,
+				F0F3C7C9216FA7C00024A74A /* DateManager.swift in Sources */,
 				76B737362018A863005260D5 /* KeychainPasswordItem.swift in Sources */,
 				769E2D892020B90500E023AF /* SummaryController.swift in Sources */,
 				769E2D85202098FC00E023AF /* Summary.swift in Sources */,
 				76F456FA2017677A00AF3F8B /* WakaTimeChartViewController.swift in Sources */,
+				F0374E0E2170E498002C6DDD /* UserController.swift in Sources */,
 				763F92AF201A1D0F00818354 /* Statistic.swift in Sources */,
+				F0F3C7C5216F88970024A74A /* Double+Conversions.swift in Sources */,
+				76D82677211DC7520094ABDA /* ChartSetUp.swift in Sources */,
 				76E16582200F786400898273 /* AppDelegate.swift in Sources */,
+				F0374E122170EF19002C6DDD /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -488,6 +492,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -495,6 +500,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -522,7 +528,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -545,6 +551,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -552,6 +559,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -573,7 +581,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -587,10 +595,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = XB8UM3Q2JA;
+				DEVELOPMENT_TEAM = DDR28UPSK9;
 				INFOPLIST_FILE = "iOS-client-wakatime/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.dorovska.iOS-client-wakatime";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.fedorchuk.iOS-client-wakatime";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -603,10 +611,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = XB8UM3Q2JA;
+				DEVELOPMENT_TEAM = DDR28UPSK9;
 				INFOPLIST_FILE = "iOS-client-wakatime/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.dorovska.iOS-client-wakatime";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.fedorchuk.iOS-client-wakatime";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
