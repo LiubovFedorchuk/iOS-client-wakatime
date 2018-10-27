@@ -124,7 +124,7 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		764C5C562013A6DE00526EF2 /* Controller */ = {
+		764C5C562013A6DE00526EF2 /* Services */ = {
 			isa = PBXGroup;
 			children = (
 				763F92AA201A007600818354 /* StatisticController.swift */,
@@ -132,19 +132,19 @@
 				769E2D8A2020DBD600E023AF /* DurationController.swift */,
 				F0374E0D2170E498002C6DDD /* UserController.swift */,
 			);
-			path = Controller;
+			path = Services;
 			sourceTree = "<group>";
 		};
-		764C5C572013A6F200526EF2 /* ViewController */ = {
+		764C5C572013A6F200526EF2 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				76E16583200F786400898273 /* WakaTimeLoginViewController.swift */,
 				76F456F92017677A00AF3F8B /* WakaTimeChartViewController.swift */,
 			);
-			path = ViewController;
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		764C5C582013A6FE00526EF2 /* Model */ = {
+		764C5C582013A6FE00526EF2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				763F92AE201A1D0F00818354 /* Statistic.swift */,
@@ -154,7 +154,7 @@
 				F0374E0F2170ECF9002C6DDD /* Project.swift */,
 				F0374E112170EF19002C6DDD /* User.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		76E16575200F786400898273 = {
@@ -183,9 +183,9 @@
 			children = (
 				F0F3C7C3216F885F0024A74A /* Extension */,
 				F0F3C7C2216F88010024A74A /* Utility */,
-				764C5C582013A6FE00526EF2 /* Model */,
-				764C5C572013A6F200526EF2 /* ViewController */,
-				764C5C562013A6DE00526EF2 /* Controller */,
+				764C5C582013A6FE00526EF2 /* Models */,
+				764C5C572013A6F200526EF2 /* ViewControllers */,
+				764C5C562013A6DE00526EF2 /* Services */,
 				764C5C552013A6C200526EF2 /* View */,
 				76E1658D200F786400898273 /* Info.plist */,
 			);

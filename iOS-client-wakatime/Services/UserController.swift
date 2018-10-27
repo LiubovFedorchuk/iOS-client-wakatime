@@ -9,6 +9,17 @@
 import Foundation
 import Alamofire
 
+/**
+    # Controller
+ 
+    [WakaTime API v1: User]: https://wakatime.com/developers#users
+ 
+    Usage: to get a single user.
+ 
+    See also: [WakaTime API v1: User]
+ 
+ */
+
 class UserController {
     
     let BASE_URL = "https://wakatime.com/api/v1"
@@ -41,29 +52,3 @@ class UserController {
         }
     }
 }
-//            .validate().responseObject(keyPath: "data") {
-//                            (response: DataResponse<User>) in
-//                            let status = response.response?.statusCode
-//                            switch response.result {
-//                            case .success:
-//                                guard status == 200 else {
-//                                    log.debug("Request passed with status code, but not 200 OK: \(status!)");
-//                                    completionHandler(nil, status!)
-//                                    return
-//                                }
-//
-//                                let userData = response.result.value!
-//                                completionHandler(userData, status!)
-//                            case .failure(let error):
-//                                guard status == nil else {
-//                                    log.debug("Request failure with status code: \(status!)")
-//                                    completionHandler(nil, status!)
-//                                    return
-//                                }
-//
-//                                log.debug("Request failure with error: \(error)")
-//                                completionHandler(nil, nil);
-//                            }
-//        }
-
-

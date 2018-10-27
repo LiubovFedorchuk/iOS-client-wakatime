@@ -13,7 +13,7 @@ import Charts
 
 class WakaTimeChartViewController: UIViewController {
     
-    let dateManager = DateManager()
+    lazy var dateManager = DateManager()
     let statisticController = StatisticController()
     let summaryController = SummaryController()
     let chartSetUp = ChartSetUp()
@@ -117,7 +117,7 @@ class WakaTimeChartViewController: UIViewController {
         })
     }
     
-    func secondsToHoursMinutesSeconds (seconds : Int) -> (Int, Int) {
+    private func secondsToHoursMinutesSeconds (seconds : Int) -> (Int, Int) {
         return (seconds / 3600, (seconds % 3600) / 60)
     }
     
@@ -136,7 +136,7 @@ class WakaTimeChartViewController: UIViewController {
                 let totalWorkingHoursForLast7Days = self.secondsToHoursMinutesSeconds(seconds: totalWorkingSecondsForLast7Days).0
                 let totalWorkingMinutesForLast7Days = self.secondsToHoursMinutesSeconds(seconds: totalWorkingSecondsForLast7Days).1
                 self.timeOfCodingLast7DaysLabel.text = "\(totalWorkingHoursForLast7Days) hrs \(totalWorkingMinutesForLast7Days) mins in the Last 7 Days"
-//TODO: clean it
+                //TODO: clean it
 //                var last7DaysList = [String]();
 //                var projectsList = [EntrySummary]();
 //                var codingTimeList = [Double]();
@@ -203,6 +203,7 @@ class WakaTimeChartViewController: UIViewController {
                             let dailyAverageWorkingTimeInSeconds = (statistic?.dailyAverageWorkingTime!)!
                             let currentWorkingTimeInSecodns = summaryItem.grandTotalTimeOfCodingInSeconds!
                             let progressTime = currentWorkingTimeInSecodns * 100
+                            //TODO: create separate func from this part
                             if (dailyAverageWorkingTimeInSeconds == 0) {
                                 self.todayWorkingProgressInPercent.text = "0.0%"
                                 self.todayChangesOfWorkingProgress.text = "No Change"
@@ -277,6 +278,7 @@ class WakaTimeChartViewController: UIViewController {
             entryWorkingTimeItem.append(entry)
             let dataSet = PieChartDataSet(values: entryWorkingTimeItem,
                                           label: "")
+            //TODO: create separate func from this part
             if(itemsList.first! == 0) {
                     dataSet.setColors(UIColor(red: 45.0/255.0, green: 53.0/255.0, blue: 60.0/255.0, alpha: 1.0))
             }
