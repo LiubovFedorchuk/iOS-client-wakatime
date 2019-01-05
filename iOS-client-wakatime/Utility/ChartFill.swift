@@ -3,7 +3,7 @@
 //  iOS-client-wakatime
 //
 //  Created by Liubov Fedorchuk on 11/24/18.
-//  Copyright © 2018 dorovska. All rights reserved.
+//  Copyright © 2018 Liubov Fedorchuk. All rights reserved.
 //
 
 import Foundation
@@ -30,10 +30,14 @@ class ChartFill {
         chartSetUp.setUpPieChartView(pieChartView: pieChartView)
     }
     
+ 
+    
     func horizontalBarChartFill(horizontalBarChartView: HorizontalBarChartView) {
         
         let values = [100]
-        let labels = ["Coding"]
+        let labels = ["100%"]
+        
+        horizontalBarChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: labels)
         
         var dataEntries = [ChartDataEntry]()
         
@@ -47,11 +51,8 @@ class ChartFill {
         dataSet.valueTextColor = UIColor.darkGray
         dataSet.colors = [UIColor(red: 60.0/255.0, green: 163.0/255.0, blue: 232.0/255.0, alpha: 1.0),
                           UIColor(red: 254.0/255.0, green: 211.0/255.0, blue: 121.0/255.0, alpha: 1.0)]
-    
         let barChartData = BarChartData(dataSet: dataSet)
         horizontalBarChartView.data = barChartData
-        horizontalBarChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: labels)
-        
         chartSetUp.setUpHorizontalBarChartView(horizontalBarChartView: horizontalBarChartView)
     }
     
@@ -157,3 +158,14 @@ class ChartFill {
     }
 }
 
+extension BarChartView {
+    
+    class BarChartFormatter: IAxisValueFormatter {
+        
+        var labels: [String] = []
+        
+        func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+            return labels[Int(value)]
+        }
+    }
+}

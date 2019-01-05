@@ -80,12 +80,12 @@ class ChartSetUp {
         
         horizontalBarChartView.leftAxis.axisMinimum = 0.0
         horizontalBarChartView.rightAxis.axisMinimum = 0.0
-        horizontalBarChartView.xAxis.labelPosition = .topInside
-        
+        horizontalBarChartView.xAxis.labelPosition = .top
         horizontalBarChartView.xAxis.granularityEnabled = true
         horizontalBarChartView.xAxis.granularity = 1
+        horizontalBarChartView.xAxis.labelTextColor = .lightGray
         
-        horizontalBarChartView.setExtraOffsets (left: 0, top: 85.0, right:0.0, bottom: 85.0)
+        horizontalBarChartView.setExtraOffsets(left: 65.0, top: 85.0, right: 0.0, bottom: 85.0)
         
     }
     
@@ -122,28 +122,4 @@ class ChartSetUp {
         xAxis.axisMinimum = 0
         xAxis.granularity = 1
     }
-    //TODO: clean it
-    //    func setUpCombinedChartView(combinedChartView: CombinedChartView) {
-    //        combinedChartView.noDataText = "No data to show";
-    //        combinedChartView.pinchZoomEnabled = false;
-    //        combinedChartView.isUserInteractionEnabled = true;
-    //        combinedChartView.legend.enabled = false;
-    //        combinedChartView.chartDescription?.enabled = false;
-    //        combinedChartView.drawBordersEnabled = false;
-    //        combinedChartView.rightAxis.enabled = false;
-    //        combinedChartView.backgroundColor = UIColor.darkGray;
-    //        combinedChartView.gridBackgroundColor = UIColor.darkGray;
-    //        combinedChartView.xAxis.drawGridLinesEnabled = false;
-    //        combinedChartView.xAxis.labelPosition = .bottom;
-    //        combinedChartView.leftAxis.drawGridLinesEnabled = false;
-    //        combinedChartView.leftAxis.drawZeroLineEnabled = true;
-    //        combinedChartView.xAxis.axisLineColor = .black;
-    //        combinedChartView.xAxis.labelTextColor = .lightGray;
-    //        combinedChartView.xAxis.labelFont = UIFont(name: "PingFangSC-Light", size: 12)!;
-    //        combinedChartView.leftAxis.axisLineColor = .black;
-    //        combinedChartView.leftAxis.labelTextColor = .lightGray;
-    //        combinedChartView.leftAxis.minWidth = 0.0;
-    //        combinedChartView.leftAxis.maxWidth = 24.0;
-    //        combinedChartView.notifyDataSetChanged();
-    //    }
 }
