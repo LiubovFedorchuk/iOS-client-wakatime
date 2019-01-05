@@ -57,20 +57,51 @@ class ChartSetUp {
         halfPieChartView.notifyDataSetChanged()
     }
     
+    func setUpHorizontalBarChartView(horizontalBarChartView: HorizontalBarChartView) {
+        horizontalBarChartView.noDataText = "No chart data available."
+        horizontalBarChartView.noDataTextColor = UIColor(red: 123.0/255.0,
+                                                        green: 128.0/255.0,
+                                                        blue: 131.0/255.0,
+                                                        alpha: 1.0)
+        horizontalBarChartView.backgroundColor = UIColor(red: 45.0/255.0,
+                                                         green: 53.0/255.0,
+                                                         blue: 60.0/255.0,
+                                                         alpha: 1.0)
+        horizontalBarChartView.legend.enabled = false
+        horizontalBarChartView.drawBarShadowEnabled = false
+        horizontalBarChartView.chartDescription?.enabled = false
+        horizontalBarChartView.isUserInteractionEnabled = true
+        horizontalBarChartView.drawGridBackgroundEnabled = false
+        
+        horizontalBarChartView.leftAxis.enabled = false
+        horizontalBarChartView.rightAxis.enabled = false
+        horizontalBarChartView.xAxis.drawGridLinesEnabled = false
+        horizontalBarChartView.xAxis.drawAxisLineEnabled = false
+        
+        horizontalBarChartView.leftAxis.axisMinimum = 0.0
+        horizontalBarChartView.rightAxis.axisMinimum = 0.0
+        horizontalBarChartView.xAxis.labelPosition = .top
+        horizontalBarChartView.xAxis.granularityEnabled = true
+        horizontalBarChartView.xAxis.granularity = 1
+        horizontalBarChartView.xAxis.labelTextColor = .lightGray
+        
+        horizontalBarChartView.setExtraOffsets(left: 65.0, top: 85.0, right: 0.0, bottom: 85.0)
+        
+    }
+    
     func setUpCombinedChartView(combinedChartView: CombinedChartView) {
         combinedChartView.noDataText = "No chart data available."
         combinedChartView.noDataTextColor = UIColor(red: 123.0/255.0,
                                                     green: 128.0/255.0,
                                                     blue: 131.0/255.0,
-                                                    alpha: 1.0);
+                                                    alpha: 1.0)
         combinedChartView.backgroundColor = UIColor(red: 45.0/255.0,
                                                     green: 53.0/255.0,
                                                     blue: 60.0/255.0,
-                                                    alpha: 1.0);
-//        combinedChartView.delegate = combinedChartView;
-        combinedChartView.chartDescription?.enabled = false;
-        combinedChartView.drawBarShadowEnabled = false;
-        combinedChartView.highlightFullBarEnabled = false;
+                                                    alpha: 1.0)
+        combinedChartView.chartDescription?.enabled = false
+        combinedChartView.drawBarShadowEnabled = false
+        combinedChartView.highlightFullBarEnabled = false
         combinedChartView.drawOrder = [DrawOrder.bar.rawValue, DrawOrder.line.rawValue];
         
         let l = combinedChartView.legend
@@ -90,30 +121,5 @@ class ChartSetUp {
         xAxis.labelPosition = .bothSided
         xAxis.axisMinimum = 0
         xAxis.granularity = 1
-//        xAxis.valueFormatter = self
     }
-    //TODO: clean it
-    //    func setUpCombinedChartView(combinedChartView: CombinedChartView) {
-    //        combinedChartView.noDataText = "No data to show";
-    //        combinedChartView.pinchZoomEnabled = false;
-    //        combinedChartView.isUserInteractionEnabled = true;
-    //        combinedChartView.legend.enabled = false;
-    //        combinedChartView.chartDescription?.enabled = false;
-    //        combinedChartView.drawBordersEnabled = false;
-    //        combinedChartView.rightAxis.enabled = false;
-    //        combinedChartView.backgroundColor = UIColor.darkGray;
-    //        combinedChartView.gridBackgroundColor = UIColor.darkGray;
-    //        combinedChartView.xAxis.drawGridLinesEnabled = false;
-    //        combinedChartView.xAxis.labelPosition = .bottom;
-    //        combinedChartView.leftAxis.drawGridLinesEnabled = false;
-    //        combinedChartView.leftAxis.drawZeroLineEnabled = true;
-    //        combinedChartView.xAxis.axisLineColor = .black;
-    //        combinedChartView.xAxis.labelTextColor = .lightGray;
-    //        combinedChartView.xAxis.labelFont = UIFont(name: "PingFangSC-Light", size: 12)!;
-    //        combinedChartView.leftAxis.axisLineColor = .black;
-    //        combinedChartView.leftAxis.labelTextColor = .lightGray;
-    //        combinedChartView.leftAxis.minWidth = 0.0;
-    //        combinedChartView.leftAxis.maxWidth = 24.0;
-    //        combinedChartView.notifyDataSetChanged();
-    //    }
 }
