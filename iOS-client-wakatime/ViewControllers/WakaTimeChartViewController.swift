@@ -27,6 +27,7 @@ class WakaTimeChartViewController: UIViewController {
     @IBOutlet weak var todayWorkingTimeLabel: UILabel!
     @IBOutlet weak var dailyAverageTimeLabel: UILabel!
     @IBOutlet weak var timeOfCodingLast7DaysLabel: UILabel!
+    @IBOutlet weak var buildingWithTimeLabel: UILabel!
     @IBOutlet weak var codingWithTimeLabel: UILabel!
     @IBOutlet weak var editorPieChartView: PieChartView!
     @IBOutlet weak var languagePieChartView: PieChartView!
@@ -35,6 +36,7 @@ class WakaTimeChartViewController: UIViewController {
     @IBOutlet weak var codingDailyAverageHalfPieChartView: PieChartView!
     @IBOutlet weak var codingActivityCurrentlyHorizontalBarChartView: HorizontalBarChartView!
     @IBOutlet weak var weeklyBreakdownOverActivityHorizontalBarChartView: HorizontalBarChartView!
+    @IBOutlet weak var weeklyBreakdownOverActivityByDayMultipleBarChartView: BarChartView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,8 +51,9 @@ class WakaTimeChartViewController: UIViewController {
                 getStatisticForLast7Days()
                 getSummaryForLast7Days()
                 getDailyProgressForDailyCodingAvarageChart()
+                getSummaryForLast7DaysForWeeklyBreakdownOverActivity()
                 chartFill.combinedChartFill(combinedChartView: codingActivityCombinedChartView)
-                chartFill.horizontalBarChartFill(horizontalBarChartView: weeklyBreakdownOverActivityHorizontalBarChartView)
+                chartFill.multipleBarChartViewFill(multipleBarChartView: weeklyBreakdownOverActivityByDayMultipleBarChartView)
                 fillLabelWithDailyWorkingTime()
             }
         }
@@ -72,7 +75,9 @@ class WakaTimeChartViewController: UIViewController {
                 getStatisticForLast7Days()
                 getSummaryForLast7Days()
                 getDailyProgressForDailyCodingAvarageChart()
+                getSummaryForLast7DaysForWeeklyBreakdownOverActivity()
                 chartFill.combinedChartFill(combinedChartView: codingActivityCombinedChartView)
+                chartFill.multipleBarChartViewFill(multipleBarChartView: weeklyBreakdownOverActivityByDayMultipleBarChartView)
                 fillLabelWithDailyWorkingTime()
             }
         }
@@ -121,6 +126,10 @@ class WakaTimeChartViewController: UIViewController {
         return (seconds / 3600, (seconds % 3600) / 60)
     }
     
+    private func secondsToHoursMinutesSecondsforBuilding (seconds : Int) -> (Int, Int) {
+        return (seconds / 3600, (seconds % 3600) / 60)
+    }
+    
     func getSummaryForLast7Days() {
         let start = dateManager.getStartDayAsString()
         let end = dateManager.getCurrentDateAsString()
@@ -129,14 +138,45 @@ class WakaTimeChartViewController: UIViewController {
                                                           endDate: end,
                                                           completionHandler: { summary, status in
             if (summary != nil && status == 200) {
-                var totalWorkingSecondsForLast7Days = 0
+                var totalCodingSecondsForLast7Days = 0
+                var totalBuildingSecondsForLast7Days = 0
                 for summaryItem in summary! {
-                    totalWorkingSecondsForLast7Days += summaryItem.grandTotalTimeOfCodingInSeconds!
+                    totalCodingSecondsForLast7Days += summaryItem.grandTotalTimeOfCodingInSeconds!
+                    if (summaryItem.category != nil) {
+                        for categoryItem in summaryItem.category! {
+                            if(categoryItem.entryName == "Building") {
+                                totalBuildingSecondsForLast7Days += categoryItem.totalWorkingTimeAsSecond!
+                            }
+                        }
+                    }
                 }
-                let totalWorkingHoursForLast7Days = self.secondsToHoursMinutesSeconds(seconds: totalWorkingSecondsForLast7Days).0
-                let totalWorkingMinutesForLast7Days = self.secondsToHoursMinutesSeconds(seconds: totalWorkingSecondsForLast7Days).1
-                self.timeOfCodingLast7DaysLabel.text = "\(totalWorkingHoursForLast7Days) hrs \(totalWorkingMinutesForLast7Days) mins in the Last 7 Days"
-                self.codingWithTimeLabel.text = "Coding\n\(totalWorkingHoursForLast7Days)h \(totalWorkingMinutesForLast7Days)m"
+                let totalCodingHoursForLast7Days = self.secondsToHoursMinutesSeconds(seconds: totalCodingSecondsForLast7Days).0
+                let totalCodingMinutesForLast7Days = self.secondsToHoursMinutesSeconds(seconds: totalCodingSecondsForLast7Days).1
+                let totalBuildingHoursForLast7Days = self.secondsToHoursMinutesSeconds(seconds: totalBuildingSecondsForLast7Days).0
+                let totalBuildingMinutesForLast7Days = self.secondsToHoursMinutesSeconds(seconds: totalBuildingSecondsForLast7Days).1
+                
+                if(totalCodingSecondsForLast7Days != 0 && totalCodingHoursForLast7Days != 0 && totalCodingMinutesForLast7Days != 0) {
+                    self.timeOfCodingLast7DaysLabel.text = "\(totalCodingHoursForLast7Days) hrs \(totalCodingMinutesForLast7Days) mins in the Last 7 Days"
+                    self.codingWithTimeLabel.text = "Coding\n\(totalCodingHoursForLast7Days)h \(totalCodingMinutesForLast7Days)m"
+                } else if (totalCodingHoursForLast7Days == 0) {
+                    self.timeOfCodingLast7DaysLabel.text = "\(totalCodingMinutesForLast7Days) mins in the Last 7 Days"
+                    self.codingWithTimeLabel.text = "Coding\n\(totalCodingMinutesForLast7Days)m"
+                } else if (totalCodingMinutesForLast7Days == 0) {
+                    self.timeOfCodingLast7DaysLabel.text = "\(totalCodingHoursForLast7Days) hrs in the Last 7 Days"
+                    self.codingWithTimeLabel.text = "Coding\n\(totalCodingHoursForLast7Days)h"
+                } else {
+                    self.codingWithTimeLabel.text = ""
+                    self.timeOfCodingLast7DaysLabel.text = "0 hrs 0 mins in the Last 7 Days"
+                }
+                if (totalBuildingHoursForLast7Days != 0 && totalBuildingMinutesForLast7Days != 0) {
+                    self.buildingWithTimeLabel.text = "Building\n\(totalBuildingHoursForLast7Days)h \(totalBuildingMinutesForLast7Days)m"
+                } else if (totalBuildingHoursForLast7Days == 0) {
+                    self.buildingWithTimeLabel.text = "Building\n\(totalBuildingMinutesForLast7Days)m"
+                } else if (totalBuildingMinutesForLast7Days == 0) {
+                    self.buildingWithTimeLabel.text = "Building\n\(totalBuildingHoursForLast7Days)h"
+                } else {
+                    self.buildingWithTimeLabel.text = ""
+                }
             } else {
                 guard status != nil else {
                     let alert = self.alertSetUp.showAlert(alertTitle: "Unexpected error", alertMessage: "Please, try again later.")
@@ -144,9 +184,56 @@ class WakaTimeChartViewController: UIViewController {
                     log.error("Unexpected error without status code.")
                     return
                 }
-                
                 self.alertSetUp.showAlertAccordingToStatusCode(fromController: self, statusCode: status!)
             }
+        })
+    }
+    
+    func getSummaryForLast7DaysForWeeklyBreakdownOverActivity() {
+        let start = dateManager.getStartDayAsString()
+        let end = dateManager.getCurrentDateAsString()
+        
+        summaryController.getUserSummaryForGivenTimeRange(startDate: start,
+                                                          endDate: end,
+                                                          completionHandler: { summary, status in
+            if (summary != nil && status == 200) {
+                var weeklyBuildingTimeInSeconds = 0
+                var weeklyCodingTimeInSeconds = 0
+                var weeklyWorkingTime = 0
+                var weeklyCodingTimeInPercent: Double
+                var weeklyBuildingTimeInPercent: Double
+                var weeklyWorkingTimeListInPercent = [Double]()
+                var weeklyWorkingTimeListInPercentAsString = [String]()
+                for summaryItem in summary! {
+                    for categoryItem in summaryItem.category! {
+                        if (categoryItem.entryName == "Coding" && categoryItem.totalWorkingTimeAsSecond != nil) {
+                            weeklyCodingTimeInSeconds += categoryItem.totalWorkingTimeAsSecond!
+                        } else if (categoryItem.entryName == "Building" && categoryItem.totalWorkingTimeAsSecond != nil) {
+                            weeklyBuildingTimeInSeconds += categoryItem.totalWorkingTimeAsSecond!
+                        }
+                    }
+                }
+                weeklyWorkingTime = weeklyCodingTimeInSeconds + weeklyBuildingTimeInSeconds
+                weeklyBuildingTimeInPercent = Double((weeklyBuildingTimeInSeconds * 100) / weeklyWorkingTime).rounded(toPlaces: 2)
+                let weeklyBuildingTimeInPercentAsString = "\(weeklyBuildingTimeInPercent) %"
+                weeklyWorkingTimeListInPercentAsString.append(weeklyBuildingTimeInPercentAsString)
+                weeklyWorkingTimeListInPercent.append(weeklyBuildingTimeInPercent)
+                
+                weeklyCodingTimeInPercent = Double((weeklyCodingTimeInSeconds * 100) / weeklyWorkingTime).rounded(toPlaces: 2)
+                let weeklyCodingTimeInPercentAsString = "\(weeklyCodingTimeInPercent) %"
+                weeklyWorkingTimeListInPercentAsString.append(weeklyCodingTimeInPercentAsString)
+                weeklyWorkingTimeListInPercent.append(weeklyCodingTimeInPercent)
+                
+                self.chartFill.horizontalBarChartFill(horizontalBarChartView: self.weeklyBreakdownOverActivityHorizontalBarChartView, workingTimeAsPercentage: weeklyWorkingTimeListInPercent, workingTimeAsPercentageAsString: weeklyWorkingTimeListInPercentAsString)
+            } else {
+                guard status != nil else {
+                    let alert = self.alertSetUp.showAlert(alertTitle: "Unexpected error", alertMessage: "Please, try again later.")
+                    self.present(alert, animated: true, completion: nil)
+                    log.error("Unexpected error without status code.")
+                    return
+                }
+                self.alertSetUp.showAlertAccordingToStatusCode(fromController: self, statusCode: status!)
+             }
         })
     }
     
@@ -201,7 +288,7 @@ class WakaTimeChartViewController: UIViewController {
                             if (progressWorkingTimeInPercent > 100.0) {
                                 let increase = progressWorkingTimeInPercent - 100.0
                                 let progressWorkingTimeInPercentForDisplaying = progressWorkingTimeInPercent - increase
-                                self.todayWorkingProgressInPercent.text = "\(progressWorkingTimeInPercentForDisplaying.rounded(toPlaces: 1))"
+                                self.todayWorkingProgressInPercent.text = "\(progressWorkingTimeInPercentForDisplaying.rounded(toPlaces: 1))%"
                                 self.todayChangesOfWorkingProgress.text = "\(increase.rounded(toPlaces: 1))% Increase"
                             } else {
                                 let decrease = 100.0 - progressWorkingTimeInPercent

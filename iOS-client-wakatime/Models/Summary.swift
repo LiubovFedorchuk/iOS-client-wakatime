@@ -11,7 +11,8 @@ import ObjectMapper
 
 class Summary: Mappable {
     
-    var projects: [EntrySummary]?
+    var project: [EntrySummary]?
+    var category: [EntrySummary]?
     var grandTotalHoursOfCoding: Int?
     var grandTotalMinutesOfCoding: Int?
     var grandTotalTimeOfCodindAsText: String?
@@ -21,7 +22,8 @@ class Summary: Mappable {
     var startOfCommonRange: String?
     var endOfCommonRange: String?
     
-    init(projects: [EntrySummary],
+    init(project: [EntrySummary],
+         category: [EntrySummary],
          grandTotalHoursOfCoding: Int,
          grandTotalMinutesOfCoding: Int,
          grandTotalTimeOfCodindAsText: String,
@@ -30,7 +32,8 @@ class Summary: Mappable {
          currentTimezone: String,
          startOfCommonRange: String,
          endOfCommonRange: String) {
-        self.projects = projects
+        self.project = project
+        self.category = category
         self.grandTotalHoursOfCoding = grandTotalHoursOfCoding
         self.grandTotalMinutesOfCoding = grandTotalMinutesOfCoding
         self.grandTotalTimeOfCodindAsText = grandTotalTimeOfCodindAsText
@@ -46,7 +49,8 @@ class Summary: Mappable {
     }
     
     func mapping(map: Map) {
-        projects                                <- map["projects"]
+        project                                 <- map["projects"]
+        category                                <- map["categories"]
         grandTotalHoursOfCoding                 <- map["grand_total.hours"]
         grandTotalMinutesOfCoding               <- map["grand_total.minutes"]
         grandTotalTimeOfCodindAsText            <- map["grand_total.text"]

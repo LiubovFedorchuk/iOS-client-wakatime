@@ -85,8 +85,43 @@ class ChartSetUp {
         horizontalBarChartView.xAxis.granularity = 1
         horizontalBarChartView.xAxis.labelTextColor = .lightGray
         
-        horizontalBarChartView.setExtraOffsets(left: 65.0, top: 85.0, right: 0.0, bottom: 85.0)
+        horizontalBarChartView.setExtraOffsets(left: 65.0, top: 65.0, right: 0.0, bottom: 65.0)
+    }
+    
+    func setUpMultipleBarChartView(multipleBarChartView: BarChartView) {
         
+
+        multipleBarChartView.noDataText = "No chart data available."
+        multipleBarChartView.noDataTextColor = UIColor(red: 123.0/255.0,
+                                                    green: 128.0/255.0,
+                                                    blue: 131.0/255.0,
+                                                    alpha: 1.0)
+        multipleBarChartView.backgroundColor = UIColor(red: 45.0/255.0,
+                                                    green: 53.0/255.0,
+                                                    blue: 60.0/255.0,
+                                                    alpha: 1.0)
+        multipleBarChartView.chartDescription?.enabled = false
+        multipleBarChartView.drawBarShadowEnabled = false
+        multipleBarChartView.highlightFullBarEnabled = false
+        multipleBarChartView.drawGridBackgroundEnabled = false
+        multipleBarChartView.legend.enabled = false
+        multipleBarChartView.isUserInteractionEnabled = true
+        
+        multipleBarChartView.leftAxis.enabled = false
+        multipleBarChartView.rightAxis.enabled = false
+        multipleBarChartView.xAxis.drawGridLinesEnabled = false
+        multipleBarChartView.xAxis.drawAxisLineEnabled = false
+        
+        multipleBarChartView.leftAxis.axisMinimum = 0
+        multipleBarChartView.rightAxis.axisMinimum = 0
+        multipleBarChartView.xAxis.labelPosition = .top
+        multipleBarChartView.xAxis.granularityEnabled = true
+        multipleBarChartView.xAxis.granularity = 1
+        multipleBarChartView.xAxis.axisMinimum = 0
+        multipleBarChartView.xAxis.labelTextColor = .lightGray
+        
+        let months = ["Jan", "Feb", "Mar", "Apr", "May"]
+        multipleBarChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: months)
     }
     
     func setUpCombinedChartView(combinedChartView: CombinedChartView) {

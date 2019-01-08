@@ -336,10 +336,21 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iai-EQ-pFx" userLabel="Coding">
-                                                <rect key="frame" x="8" y="85" width="49" height="40"/>
+                                                <rect key="frame" x="8" y="65" width="49" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="SCJ-4A-LTc"/>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="49" id="Xm6-s0-4ig"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="13"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                                <size key="shadowOffset" width="0.0" height="0.0"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1GA-ZP-wUL" userLabel="Building">
+                                                <rect key="frame" x="8" y="112" width="49" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="Cqs-S1-LD2"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="49" id="KtL-Qx-xNk"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="13"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -352,13 +363,16 @@
                                             <constraint firstItem="4Tx-MP-Uaj" firstAttribute="leading" secondItem="QgR-Z4-9ev" secondAttribute="leading" constant="8" id="0tN-es-Tb7"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="iai-EQ-pFx" secondAttribute="trailing" constant="20" symbolic="YES" id="6Mh-T8-xcS"/>
                                             <constraint firstItem="4Tx-MP-Uaj" firstAttribute="top" secondItem="QgR-Z4-9ev" secondAttribute="top" constant="8" id="ENR-93-kZJ"/>
-                                            <constraint firstItem="iai-EQ-pFx" firstAttribute="centerY" secondItem="QgR-Z4-9ev" secondAttribute="centerY" id="RMo-Gr-9dp"/>
+                                            <constraint firstItem="iai-EQ-pFx" firstAttribute="centerY" secondItem="QgR-Z4-9ev" secondAttribute="centerY" constant="-20" id="RMo-Gr-9dp"/>
                                             <constraint firstAttribute="height" constant="210" id="T9X-xx-mC6"/>
                                             <constraint firstAttribute="trailing" secondItem="4Tx-MP-Uaj" secondAttribute="trailing" constant="8" id="W7a-Aq-zBA"/>
+                                            <constraint firstItem="1GA-ZP-wUL" firstAttribute="top" secondItem="iai-EQ-pFx" secondAttribute="bottom" constant="7" id="X7H-rx-fC8"/>
+                                            <constraint firstItem="1GA-ZP-wUL" firstAttribute="leading" secondItem="iai-EQ-pFx" secondAttribute="leading" id="eo1-3D-eXa"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1GA-ZP-wUL" secondAttribute="trailing" constant="20" symbolic="YES" id="rIg-DW-cQ4"/>
                                             <constraint firstItem="iai-EQ-pFx" firstAttribute="leading" secondItem="QgR-Z4-9ev" secondAttribute="leading" constant="8" id="tGi-Tn-CrL"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CKn-qG-AUy">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CKn-qG-AUy" userLabel="Weekly Breakdown Over Activity By Day Multiple Bar Chart View" customClass="BarChartView" customModule="Charts">
                                         <rect key="frame" x="16" y="1680" width="343" height="210"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
@@ -419,18 +433,20 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="1980"/>
                     <connections>
+                        <outlet property="buildingWithTimeLabel" destination="1GA-ZP-wUL" id="iII-nr-vPF"/>
                         <outlet property="codingActivityCombinedChartView" destination="CJP-1h-WV2" id="boi-cJ-XvX"/>
                         <outlet property="codingActivityCurrentlyHorizontalBarChartView" destination="uxV-96-bIb" id="qgv-ov-NvM"/>
                         <outlet property="codingDailyAverageHalfPieChartView" destination="RSE-YH-Ciu" id="rxa-Oi-EjE"/>
                         <outlet property="codingWithTimeLabel" destination="iai-EQ-pFx" id="6Ya-W3-lto"/>
                         <outlet property="dailyAverageTimeLabel" destination="brb-94-qxB" id="9sc-0g-S5l"/>
-                        <outlet property="editorPieChartView" destination="x4u-qu-v26" id="N8E-RT-maY"/>
+                        <outlet property="editorPieChartView" destination="x4u-qu-v26" id="4dD-sx-GjY"/>
                         <outlet property="languagePieChartView" destination="vZO-Uf-dGa" id="wvr-1H-c5f"/>
                         <outlet property="operatingSystemPieChartView" destination="QFa-8r-00V" id="zy9-sA-epd"/>
                         <outlet property="timeOfCodingLast7DaysLabel" destination="JZ1-uu-au3" id="9pm-KK-Jdm"/>
                         <outlet property="todayChangesOfWorkingProgress" destination="5Pi-Y0-BZJ" id="PyJ-3V-LJr"/>
                         <outlet property="todayWorkingProgressInPercent" destination="X4u-Vt-OdB" id="VQk-pW-XQK"/>
                         <outlet property="todayWorkingTimeLabel" destination="hhV-tr-7Ur" id="DOP-kK-eo5"/>
+                        <outlet property="weeklyBreakdownOverActivityByDayMultipleBarChartView" destination="CKn-qG-AUy" id="V0j-cF-P5x"/>
                         <outlet property="weeklyBreakdownOverActivityHorizontalBarChartView" destination="QgR-Z4-9ev" id="SMy-Oe-NJJ"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="showWakaTimeLoginView" id="wkD-G1-iqr"/>
                     </connections>
