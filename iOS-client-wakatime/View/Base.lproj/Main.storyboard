@@ -433,16 +433,16 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="1980"/>
                     <connections>
-                        <outlet property="buildingWithTimeLabel" destination="1GA-ZP-wUL" id="iII-nr-vPF"/>
                         <outlet property="codingActivityCombinedChartView" destination="CJP-1h-WV2" id="boi-cJ-XvX"/>
                         <outlet property="codingActivityCurrentlyHorizontalBarChartView" destination="uxV-96-bIb" id="qgv-ov-NvM"/>
                         <outlet property="codingDailyAverageHalfPieChartView" destination="RSE-YH-Ciu" id="rxa-Oi-EjE"/>
-                        <outlet property="codingWithTimeLabel" destination="iai-EQ-pFx" id="6Ya-W3-lto"/>
                         <outlet property="dailyAverageTimeLabel" destination="brb-94-qxB" id="9sc-0g-S5l"/>
                         <outlet property="editorPieChartView" destination="x4u-qu-v26" id="4dD-sx-GjY"/>
                         <outlet property="languagePieChartView" destination="vZO-Uf-dGa" id="wvr-1H-c5f"/>
                         <outlet property="operatingSystemPieChartView" destination="QFa-8r-00V" id="zy9-sA-epd"/>
-                        <outlet property="timeOfCodingLast7DaysLabel" destination="JZ1-uu-au3" id="9pm-KK-Jdm"/>
+                        <outlet property="timeOfBuildingForLast7DaysBreakdownOverPeriod" destination="1GA-ZP-wUL" id="iII-nr-vPF"/>
+                        <outlet property="timeOfCodingForLast7DaysBreakdownOverPeriod" destination="iai-EQ-pFx" id="6Ya-W3-lto"/>
+                        <outlet property="timeOfCodingForLast7DaysLabel" destination="JZ1-uu-au3" id="9pm-KK-Jdm"/>
                         <outlet property="todayChangesOfWorkingProgress" destination="5Pi-Y0-BZJ" id="PyJ-3V-LJr"/>
                         <outlet property="todayWorkingProgressInPercent" destination="X4u-Vt-OdB" id="VQk-pW-XQK"/>
                         <outlet property="todayWorkingTimeLabel" destination="hhV-tr-7Ur" id="DOP-kK-eo5"/>
