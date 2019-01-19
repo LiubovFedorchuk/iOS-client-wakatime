@@ -27,4 +27,12 @@ class DateManager {
         
         return result
     }
+    
+    func convertToAnotherDateFormat(date: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let date = dateFormatter.date(from: date)
+        dateFormatter.dateFormat = "MMM d"
+        return  dateFormatter.string(from: date!)
+    }
 }

@@ -32,6 +32,7 @@
 		F0374E0E2170E498002C6DDD /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0374E0D2170E498002C6DDD /* UserController.swift */; };
 		F0374E102170ECF9002C6DDD /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0374E0F2170ECF9002C6DDD /* Project.swift */; };
 		F0374E122170EF19002C6DDD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0374E112170EF19002C6DDD /* User.swift */; };
+		F04689ED21EFDE040038A36E /* BalloonMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04689EC21EFDE030038A36E /* BalloonMarker.swift */; };
 		F0722BE821A99E3A00010701 /* ChartFill.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0722BE721A99E3A00010701 /* ChartFill.swift */; };
 		F0F3C7C5216F88970024A74A /* Double+Conversions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F3C7C4216F88970024A74A /* Double+Conversions.swift */; };
 		F0F3C7C7216F89D80024A74A /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F3C7C6216F89D80024A74A /* KeychainManager.swift */; };
@@ -82,6 +83,7 @@
 		F0374E0D2170E498002C6DDD /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
 		F0374E0F2170ECF9002C6DDD /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		F0374E112170EF19002C6DDD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		F04689EC21EFDE030038A36E /* BalloonMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalloonMarker.swift; sourceTree = "<group>"; };
 		F0722BE721A99E3A00010701 /* ChartFill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartFill.swift; sourceTree = "<group>"; };
 		F0F3C7C4216F88970024A74A /* Double+Conversions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Conversions.swift"; sourceTree = "<group>"; };
 		F0F3C7C6216F89D80024A74A /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 				F0F3C7C8216FA7C00024A74A /* DateManager.swift */,
 				F0374E0B2170CF39002C6DDD /* Connectivity.swift */,
 				F0722BE721A99E3A00010701 /* ChartFill.swift */,
+				F04689EC21EFDE030038A36E /* BalloonMarker.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -431,6 +434,7 @@
 				F0F3C7C7216F89D80024A74A /* KeychainManager.swift in Sources */,
 				F0F3C7C9216FA7C00024A74A /* DateManager.swift in Sources */,
 				F0722BE821A99E3A00010701 /* ChartFill.swift in Sources */,
+				F04689ED21EFDE040038A36E /* BalloonMarker.swift in Sources */,
 				76B737362018A863005260D5 /* KeychainPasswordItem.swift in Sources */,
 				769E2D892020B90500E023AF /* SummaryController.swift in Sources */,
 				769E2D85202098FC00E023AF /* Summary.swift in Sources */,

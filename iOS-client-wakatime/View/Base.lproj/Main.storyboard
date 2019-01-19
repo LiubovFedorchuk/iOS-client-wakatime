@@ -374,7 +374,37 @@
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CKn-qG-AUy" userLabel="Weekly Breakdown Over Activity By Day Multiple Bar Chart View" customClass="BarChartView" customModule="Charts">
                                         <rect key="frame" x="16" y="1680" width="343" height="210"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ro5-Ac-UJn" userLabel="WorkingTimePerDayInPercentSecondLabel">
+                                                <rect key="frame" x="156.5" y="3" width="40" height="16"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="4jM-gY-82n"/>
+                                                    <constraint firstAttribute="height" constant="16" id="eyk-tS-TEf"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="11"/>
+                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="671-nm-H9G" userLabel="WorkingTimePerDayInPercentFirstLabel">
+                                                <rect key="frame" x="297.5" y="3" width="37.5" height="16"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="37.5" id="FIv-Q7-wMm"/>
+                                                    <constraint firstAttribute="height" constant="16" id="NNz-U3-y6D"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="11"/>
+                                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="Ro5-Ac-UJn" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="CKn-qG-AUy" secondAttribute="leading" constant="20" symbolic="YES" id="1sI-nt-Q77"/>
+                                            <constraint firstItem="671-nm-H9G" firstAttribute="top" secondItem="CKn-qG-AUy" secondAttribute="top" constant="3" id="KKX-D6-TVN"/>
+                                            <constraint firstItem="671-nm-H9G" firstAttribute="leading" secondItem="Ro5-Ac-UJn" secondAttribute="trailing" constant="101" id="KyX-a6-wH6"/>
+                                            <constraint firstItem="671-nm-H9G" firstAttribute="baseline" secondItem="Ro5-Ac-UJn" secondAttribute="baseline" id="Pc4-fc-NDL"/>
+                                            <constraint firstItem="671-nm-H9G" firstAttribute="trailing" secondItem="CKn-qG-AUy" secondAttribute="trailingMargin" id="WuL-rE-Mwo"/>
+                                            <constraint firstItem="671-nm-H9G" firstAttribute="leading" secondItem="Ro5-Ac-UJn" secondAttribute="trailing" constant="101" id="hvN-dW-FkY"/>
+                                        </constraints>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" red="0.85098039215686272" green="0.8784313725490196" blue="0.90588235294117647" alpha="1" colorSpace="calibratedRGB"/>
@@ -433,15 +463,17 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="1980"/>
                     <connections>
+                        <outlet property="buildingTimePerDayInPercentLabel" destination="671-nm-H9G" id="oLv-gZ-ShD"/>
                         <outlet property="codingActivityCombinedChartView" destination="CJP-1h-WV2" id="boi-cJ-XvX"/>
                         <outlet property="codingActivityCurrentlyHorizontalBarChartView" destination="uxV-96-bIb" id="qgv-ov-NvM"/>
                         <outlet property="codingDailyAverageHalfPieChartView" destination="RSE-YH-Ciu" id="rxa-Oi-EjE"/>
+                        <outlet property="codingTimePerDayInPercentLabel" destination="Ro5-Ac-UJn" id="fUR-pO-Sbc"/>
                         <outlet property="dailyAverageTimeLabel" destination="brb-94-qxB" id="9sc-0g-S5l"/>
                         <outlet property="editorPieChartView" destination="x4u-qu-v26" id="4dD-sx-GjY"/>
                         <outlet property="languagePieChartView" destination="vZO-Uf-dGa" id="wvr-1H-c5f"/>
                         <outlet property="operatingSystemPieChartView" destination="QFa-8r-00V" id="zy9-sA-epd"/>
-                        <outlet property="timeOfBuildingForLast7DaysBreakdownOverPeriod" destination="1GA-ZP-wUL" id="iII-nr-vPF"/>
-                        <outlet property="timeOfCodingForLast7DaysBreakdownOverPeriod" destination="iai-EQ-pFx" id="6Ya-W3-lto"/>
+                        <outlet property="timeOfBuildingForLast7DaysBreakdownOverPeriodLabel" destination="1GA-ZP-wUL" id="iII-nr-vPF"/>
+                        <outlet property="timeOfCodingForLast7DaysBreakdownOverPeriodLabel" destination="iai-EQ-pFx" id="6Ya-W3-lto"/>
                         <outlet property="timeOfCodingForLast7DaysLabel" destination="JZ1-uu-au3" id="9pm-KK-Jdm"/>
                         <outlet property="todayChangesOfWorkingProgress" destination="5Pi-Y0-BZJ" id="PyJ-3V-LJr"/>
                         <outlet property="todayWorkingProgressInPercent" destination="X4u-Vt-OdB" id="VQk-pW-XQK"/>

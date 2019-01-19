@@ -33,6 +33,7 @@ class ChartSetUp {
         pieChartView.legend.orientation = .horizontal
         pieChartView.legend.verticalAlignment = .bottom
         pieChartView.legend.horizontalAlignment = .left
+        pieChartView.animate(xAxisDuration: 1.5, yAxisDuration: 1.5, easingOption: .linear)
         pieChartView.notifyDataSetChanged()
     }
     
@@ -54,6 +55,7 @@ class ChartSetUp {
                                              alpha: 1.0)
         halfPieChartView.holeRadiusPercent = 0.6
         halfPieChartView.drawEntryLabelsEnabled = false
+        halfPieChartView.animate(xAxisDuration: 1.5, yAxisDuration: 1.5, easingOption: .linear)
         halfPieChartView.notifyDataSetChanged()
     }
     
@@ -72,6 +74,8 @@ class ChartSetUp {
         horizontalBarChartView.chartDescription?.enabled = false
         horizontalBarChartView.isUserInteractionEnabled = true
         horizontalBarChartView.drawGridBackgroundEnabled = false
+        horizontalBarChartView.animate(xAxisDuration: 1.5, yAxisDuration: 1.5, easingOption: .linear)
+        horizontalBarChartView.notifyDataSetChanged()
         
         horizontalBarChartView.leftAxis.enabled = false
         horizontalBarChartView.rightAxis.enabled = false
@@ -89,9 +93,19 @@ class ChartSetUp {
     }
     
     func setUpMultipleBarChartView(multipleBarChartView: BarChartView) {
-        
-
         multipleBarChartView.noDataText = "No chart data available."
+        multipleBarChartView.rightAxis.enabled = false
+        multipleBarChartView.chartDescription?.enabled = false
+        multipleBarChartView.drawBarShadowEnabled = false
+        multipleBarChartView.highlightFullBarEnabled = false
+        multipleBarChartView.drawGridBackgroundEnabled = false
+//        multipleBarChartView.fitBars = true
+        multipleBarChartView.isUserInteractionEnabled = true
+        multipleBarChartView.drawMarkers = true
+        multipleBarChartView.extraBottomOffset = 10
+        multipleBarChartView.animate(xAxisDuration: 1.5, yAxisDuration: 1.5, easingOption: .linear)
+        multipleBarChartView.notifyDataSetChanged()
+        
         multipleBarChartView.noDataTextColor = UIColor(red: 123.0/255.0,
                                                     green: 128.0/255.0,
                                                     blue: 131.0/255.0,
@@ -100,28 +114,38 @@ class ChartSetUp {
                                                     green: 53.0/255.0,
                                                     blue: 60.0/255.0,
                                                     alpha: 1.0)
-        multipleBarChartView.chartDescription?.enabled = false
-        multipleBarChartView.drawBarShadowEnabled = false
-        multipleBarChartView.highlightFullBarEnabled = false
-        multipleBarChartView.drawGridBackgroundEnabled = false
-        multipleBarChartView.legend.enabled = false
-        multipleBarChartView.isUserInteractionEnabled = true
+        let legend = multipleBarChartView.legend
+        legend.enabled = true
+        legend.horizontalAlignment = .right
+        legend.verticalAlignment = .top
+        legend.orientation = .horizontal
+        legend.textColor = .lightGray
+        legend.font = UIFont(name: "PingFangSC-Light", size: 11)!
+        legend.yOffset = 3.0
+        legend.xOffset = 119.0
+        legend.xEntrySpace = 90.0
         
-        multipleBarChartView.leftAxis.enabled = false
-        multipleBarChartView.rightAxis.enabled = false
-        multipleBarChartView.xAxis.drawGridLinesEnabled = false
-        multipleBarChartView.xAxis.drawAxisLineEnabled = false
+        let xAxis = multipleBarChartView.xAxis
+        xAxis.drawGridLinesEnabled = false
+        xAxis.drawAxisLineEnabled = true
+        xAxis.labelPosition = .bottom
+        xAxis.labelFont = UIFont(name: "PingFangSC-Light", size: 10)!
+        xAxis.labelTextColor = .lightGray
+        xAxis.labelCount = 7
+        xAxis.granularityEnabled = true
+        xAxis.granularity = 1
         
-        multipleBarChartView.leftAxis.axisMinimum = 0
-        multipleBarChartView.rightAxis.axisMinimum = 0
-        multipleBarChartView.xAxis.labelPosition = .top
-        multipleBarChartView.xAxis.granularityEnabled = true
-        multipleBarChartView.xAxis.granularity = 1
-        multipleBarChartView.xAxis.axisMinimum = 0
-        multipleBarChartView.xAxis.labelTextColor = .lightGray
+        let leftAxisFormatter = NumberFormatter()
+        leftAxisFormatter.minimumFractionDigits = 0
+        leftAxisFormatter.maximumFractionDigits = 2
         
-        let months = ["Jan", "Feb", "Mar", "Apr", "May"]
-        multipleBarChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: months)
+        let leftAxis = multipleBarChartView.leftAxis
+        leftAxis.valueFormatter = DefaultAxisValueFormatter(formatter: leftAxisFormatter)
+        leftAxis.axisMinimum = 0
+        leftAxis.labelCount = 6
+        leftAxis.labelFont = UIFont(name: "PingFangSC-Light", size: 10)!
+        leftAxis.labelTextColor = .lightGray
+        leftAxis.drawGridLinesEnabled = false
     }
     
     func setUpCombinedChartView(combinedChartView: CombinedChartView) {
@@ -137,14 +161,15 @@ class ChartSetUp {
         combinedChartView.chartDescription?.enabled = false
         combinedChartView.drawBarShadowEnabled = false
         combinedChartView.highlightFullBarEnabled = false
-        combinedChartView.drawOrder = [DrawOrder.bar.rawValue, DrawOrder.line.rawValue];
+        combinedChartView.drawOrder = [DrawOrder.bar.rawValue, DrawOrder.line.rawValue]
+        combinedChartView.animate(xAxisDuration: 1.5, yAxisDuration: 1.5, easingOption: .linear)
         
-        let l = combinedChartView.legend
-        l.wordWrapEnabled = true
-        l.horizontalAlignment = .center
-        l.verticalAlignment = .bottom
-        l.orientation = .horizontal
-        l.drawInside = false
+        let legend = combinedChartView.legend
+        legend.wordWrapEnabled = true
+        legend.horizontalAlignment = .center
+        legend.verticalAlignment = .bottom
+        legend.orientation = .horizontal
+        legend.drawInside = false
         
         let rightAxis = combinedChartView.rightAxis
         rightAxis.axisMinimum = 0

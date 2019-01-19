@@ -11,7 +11,7 @@ import UIKit
 import ObjectMapper
 import Charts
 
-class WakaTimeChartViewController: UIViewController {
+class WakaTimeChartViewController: UIViewController, ChartViewDelegate {
     
     lazy var dateManager = DateManager()
     lazy var chartFill = ChartFill()
@@ -19,16 +19,18 @@ class WakaTimeChartViewController: UIViewController {
     let summaryController = SummaryController()
     let alertSetUp = AlertSetUp()
     var isAuthenticated = false
-    
-    let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    var codingTimeForWeeklyBreakdownOverActivityByDayMultipleBarChartViewTap = [String]()
+    var buildingTimeForWeeklyBreakdownOverActivityByDayMultipleBarChartViewTap = [String]()
     
     @IBOutlet weak var todayChangesOfWorkingProgress: UILabel!
     @IBOutlet weak var todayWorkingProgressInPercent: UILabel!
     @IBOutlet weak var todayWorkingTimeLabel: UILabel!
     @IBOutlet weak var dailyAverageTimeLabel: UILabel!
     @IBOutlet weak var timeOfCodingForLast7DaysLabel: UILabel!
-    @IBOutlet weak var timeOfBuildingForLast7DaysBreakdownOverPeriod: UILabel!
-    @IBOutlet weak var timeOfCodingForLast7DaysBreakdownOverPeriod: UILabel!
+    @IBOutlet weak var codingTimePerDayInPercentLabel: UILabel!
+    @IBOutlet weak var buildingTimePerDayInPercentLabel: UILabel!
+    @IBOutlet weak var timeOfBuildingForLast7DaysBreakdownOverPeriodLabel: UILabel!
+    @IBOutlet weak var timeOfCodingForLast7DaysBreakdownOverPeriodLabel: UILabel!
     @IBOutlet weak var editorPieChartView: PieChartView!
     @IBOutlet weak var languagePieChartView: PieChartView!
     @IBOutlet weak var operatingSystemPieChartView: PieChartView!
@@ -40,25 +42,6 @@ class WakaTimeChartViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if !Connectivity.isConnectedToInternet {
-            let alert = alertSetUp.showAlert(alertTitle: "No Internet Conection", alertMessage: "Turn on cellural data or use Wi-Fi to access data.")
-            self.present(alert, animated: true, completion: nil)
-            log.debug("Alert with no internet connection error prsented successfully.")
-        } else {
-            let hasLogin = UserDefaults.standard.bool(forKey: "hasUserSecretAPIkey")
-            if (!hasLogin) {
-                self.performSegue(withIdentifier: "showWakaTimeLoginView", sender: self)
-                log.debug("Alert with no internet connection error prsented successfully.")
-            } else {
-                getStatisticForLast7Days()
-                getSummaryForLast7Days()
-                getDailyProgressForDailyCodingAvarageChart()
-                getSummaryForLast7DaysForWeeklyBreakdownOverActivity()
-                chartFill.combinedChartFill(combinedChartView: codingActivityCombinedChartView)
-                chartFill.multipleBarChartViewFill(multipleBarChartView: weeklyBreakdownOverActivityByDayMultipleBarChartView)
-                fillLabelWithDailyWorkingTime()
-            }
-        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -76,13 +59,14 @@ class WakaTimeChartViewController: UIViewController {
                 self.performSegue(withIdentifier: "showWakaTimeLoginView", sender: self)
                 log.debug("Unregistered user logout worked out successfully.")
             } else {
-                getStatisticForLast7Days()
-                getSummaryForLast7Days()
+                weeklyBreakdownOverActivityByDayMultipleBarChartView.delegate = self
+                getStatisticForLast7DaysForFillingPieChartsView()
+                getSummaryForLast7DaysForFillingLabelsWithWorkingTime()
                 getDailyProgressForDailyCodingAvarageChart()
                 getSummaryForLast7DaysForWeeklyBreakdownOverActivity()
+                getSummaryForLast7DaysForweeklyBreakdownOverActivityByDay()
                 chartFill.combinedChartFill(combinedChartView: codingActivityCombinedChartView)
-                chartFill.multipleBarChartViewFill(multipleBarChartView: weeklyBreakdownOverActivityByDayMultipleBarChartView)
-                fillLabelWithDailyWorkingTime()
+                fillLabelWithCurrentDailyWorkingTime()
             }
         }
     }
@@ -95,6 +79,25 @@ class WakaTimeChartViewController: UIViewController {
         self.logoutUserFromWakaTime()
     }
     
+    //MARK: Chart delegate methods
+    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
+        let position = Int(entry.x)
+        log.debug("Selecting the column of Weekly Breakdown Over Activity By Day MultipleBarChartView was successful.")
+        if(buildingTimeForWeeklyBreakdownOverActivityByDayMultipleBarChartViewTap.count == 7) {
+            buildingTimePerDayInPercentLabel.text = buildingTimeForWeeklyBreakdownOverActivityByDayMultipleBarChartViewTap[position]
+            codingTimePerDayInPercentLabel.text = codingTimeForWeeklyBreakdownOverActivityByDayMultipleBarChartViewTap[position]
+            log.debug("Coding and Building Time Per Day In Percent Labels are filled successfully.")
+        } else {
+            buildingTimePerDayInPercentLabel.isHidden = true
+            codingTimePerDayInPercentLabel.text = codingTimeForWeeklyBreakdownOverActivityByDayMultipleBarChartViewTap[position]
+            log.debug("Coding Time Per Day In Percent Label is filled successfully.")
+        }
+    }
+    
+    func chartValueNothingSelected(_ chartView: ChartViewBase) {
+        log.debug("Deselecting the column of Weekly Breakdown Over Activity By Day MultipleBarChartView was successful.")
+    }
+    
     func logoutUserFromWakaTime() {
         UserDefaults.standard.set(false, forKey: "hasUserSecretAPIkey")
         self.performSegue(withIdentifier: "showWakaTimeLoginView", sender: self)
@@ -103,7 +106,7 @@ class WakaTimeChartViewController: UIViewController {
         keychainManager.deleteUserSecretAPIkeyFromKeychain()  
     }
     
-    func getStatisticForLast7Days() {
+    func getStatisticForLast7DaysForFillingPieChartsView() {
         statisticController.getUserStatisticsForGivenTimeRange(completionHandler: { statistic, status in
             if (statistic != nil && status == 200) {
                 self.chartFill.pieChartFill(pieChartView: self.languagePieChartView,
@@ -139,11 +142,7 @@ class WakaTimeChartViewController: UIViewController {
         return (seconds / 3600, (seconds % 3600) / 60)
     }
     
-    private func secondsToHoursMinutesSecondsforBuilding (seconds : Int) -> (Int, Int) {
-        return (seconds / 3600, (seconds % 3600) / 60)
-    }
-    
-    func getSummaryForLast7Days() {
+    func getSummaryForLast7DaysForFillingLabelsWithWorkingTime() {
         let start = dateManager.getStartDayAsString()
         let end = dateManager.getCurrentDateAsString()
         
@@ -154,6 +153,7 @@ class WakaTimeChartViewController: UIViewController {
                 log.debug("Request for Summary for the last 7 days passed successfully.")
                 var totalCodingSecondsForLast7Days = 0
                 var totalBuildingSecondsForLast7Days = 0
+                var hideTimeOfBuildingForLast7DaysBreakdownOverPeriodLabel = false
                 for summaryItem in summary! {
                     totalCodingSecondsForLast7Days += summaryItem.grandTotalTimeOfCodingInSeconds!
                     if (summaryItem.category != nil) {
@@ -164,6 +164,10 @@ class WakaTimeChartViewController: UIViewController {
                         }
                     }
                 }
+                if (totalBuildingSecondsForLast7Days == 0) {
+                    hideTimeOfBuildingForLast7DaysBreakdownOverPeriodLabel = true
+                }
+                self.timeOfBuildingForLast7DaysBreakdownOverPeriodLabel.isHidden = hideTimeOfBuildingForLast7DaysBreakdownOverPeriodLabel
                 let totalCodingHoursForLast7Days = self.secondsToHoursMinutesSeconds(seconds: totalCodingSecondsForLast7Days).0
                 let totalCodingMinutesForLast7Days = self.secondsToHoursMinutesSeconds(seconds: totalCodingSecondsForLast7Days).1
                 
@@ -172,25 +176,23 @@ class WakaTimeChartViewController: UIViewController {
                 
                 if(totalCodingSecondsForLast7Days != 0 && totalCodingHoursForLast7Days != 0 && totalCodingMinutesForLast7Days != 0) {
                     self.timeOfCodingForLast7DaysLabel.text = "\(totalCodingHoursForLast7Days) hrs \(totalCodingMinutesForLast7Days) mins in the Last 7 Days"
-                    self.timeOfCodingForLast7DaysBreakdownOverPeriod.text = "Coding\n\(totalCodingHoursForLast7Days)h \(totalCodingMinutesForLast7Days)m"
+                    self.timeOfCodingForLast7DaysBreakdownOverPeriodLabel.text = "Coding\n\(totalCodingHoursForLast7Days)h \(totalCodingMinutesForLast7Days)m"
                 } else if (totalCodingHoursForLast7Days == 0 && totalCodingMinutesForLast7Days != 0) {
                     self.timeOfCodingForLast7DaysLabel.text = "\(totalCodingMinutesForLast7Days) mins in the Last 7 Days"
-                    self.timeOfCodingForLast7DaysBreakdownOverPeriod.text = "Coding\n\(totalCodingMinutesForLast7Days)m"
+                    self.timeOfCodingForLast7DaysBreakdownOverPeriodLabel.text = "Coding\n\(totalCodingMinutesForLast7Days)m"
                 } else if (totalCodingMinutesForLast7Days == 0 && totalCodingHoursForLast7Days != 0) {
                     self.timeOfCodingForLast7DaysLabel.text = "\(totalCodingHoursForLast7Days) hrs in the Last 7 Days"
-                    self.timeOfCodingForLast7DaysBreakdownOverPeriod.text = "Coding\n\(totalCodingHoursForLast7Days)h"
+                    self.timeOfCodingForLast7DaysBreakdownOverPeriodLabel.text = "Coding\n\(totalCodingHoursForLast7Days)h"
                 } else {
-                    self.timeOfCodingForLast7DaysBreakdownOverPeriod.text = "0 h 0 m"
+                    self.timeOfCodingForLast7DaysBreakdownOverPeriodLabel.text = "0 h 0 m"
                     self.timeOfCodingForLast7DaysLabel.text = "0 hrs 0 mins in the Last 7 Days"
                 }
                 if (totalBuildingHoursForLast7Days != 0 && totalBuildingMinutesForLast7Days != 0) {
-                    self.timeOfBuildingForLast7DaysBreakdownOverPeriod.text = "Building\n\(totalBuildingHoursForLast7Days)h \(totalBuildingMinutesForLast7Days)m"
+                    self.timeOfBuildingForLast7DaysBreakdownOverPeriodLabel.text = "Building\n\(totalBuildingHoursForLast7Days)h \(totalBuildingMinutesForLast7Days)m"
                 } else if (totalBuildingHoursForLast7Days == 0) {
-                    self.timeOfBuildingForLast7DaysBreakdownOverPeriod.text = "Building\n\(totalBuildingMinutesForLast7Days)m"
+                    self.timeOfBuildingForLast7DaysBreakdownOverPeriodLabel.text = "Building\n\(totalBuildingMinutesForLast7Days)m"
                 } else if (totalBuildingMinutesForLast7Days == 0) {
-                    self.timeOfBuildingForLast7DaysBreakdownOverPeriod.text = "Building\n\(totalBuildingHoursForLast7Days)h"
-                } else {
-                    self.timeOfBuildingForLast7DaysBreakdownOverPeriod.isHidden = true
+                    self.timeOfBuildingForLast7DaysBreakdownOverPeriodLabel.text = "Building\n\(totalBuildingHoursForLast7Days)h"
                 }
             } else {
                 guard status != nil else {
@@ -234,11 +236,13 @@ class WakaTimeChartViewController: UIViewController {
                     }
                 }
                 weeklyWorkingTime = weeklyCodingTimeInSeconds + weeklyBuildingTimeInSeconds
+               
                 weeklyBuildingTimeInPercent = Double((weeklyBuildingTimeInSeconds * 100) / weeklyWorkingTime).rounded(toPlaces: 2)
                 let weeklyBuildingTimeInPercentAsString = "\(weeklyBuildingTimeInPercent) %"
-                weeklyWorkingTimeListInPercentAsString.append(weeklyBuildingTimeInPercentAsString)
-                weeklyWorkingTimeListInPercent.append(weeklyBuildingTimeInPercent)
-                
+                if weeklyBuildingTimeInPercent != 0.0 {
+                    weeklyWorkingTimeListInPercentAsString.append(weeklyBuildingTimeInPercentAsString)
+                    weeklyWorkingTimeListInPercent.append(weeklyBuildingTimeInPercent)
+                }
                 weeklyCodingTimeInPercent = Double((weeklyCodingTimeInSeconds * 100) / weeklyWorkingTime).rounded(toPlaces: 2)
                 let weeklyCodingTimeInPercentAsString = "\(weeklyCodingTimeInPercent) %"
                 weeklyWorkingTimeListInPercentAsString.append(weeklyCodingTimeInPercentAsString)
@@ -261,7 +265,59 @@ class WakaTimeChartViewController: UIViewController {
         })
     }
     
-    func fillLabelWithDailyWorkingTime() {
+    func getSummaryForLast7DaysForweeklyBreakdownOverActivityByDay() {
+        let start = dateManager.getStartDayAsString()
+        let end = dateManager.getCurrentDateAsString()
+        
+        summaryController.getUserSummaryForGivenTimeRange(startDate: start,
+                                                          endDate: end,
+                                                          completionHandler: { summary, status in
+            if (summary != nil && status == 200) {
+                log.debug("Request for Summary for weekly breakdown over activity passed successfully.")
+                var codingTimePerDay = [Double]()
+                var buildingTimePerDay = [Double]()
+                var daysOfTheWeekArray = [String]()
+                
+                for summaryItem in summary! {
+                    if(summaryItem.category != nil && summaryItem.category?.isEmpty == false) {
+                        for categoryItem in summaryItem.category! {
+                            if(categoryItem.entryName == "Coding" && categoryItem.workingTimeMinutesPortion != nil) {
+                                let totalCodingTimeAsDouble = Double(categoryItem.workingTimeHoursPortion!) + Double(categoryItem.workingTimeMinutesPortion!) / 100
+                                codingTimePerDay.append(totalCodingTimeAsDouble.rounded(toPlaces: 2))
+                                
+                                self.codingTimeForWeeklyBreakdownOverActivityByDayMultipleBarChartViewTap.append("\(categoryItem.workingTimeInPercent!)%")
+//                                self.workingTimeForTap.append(categoryItem.workingTimeAsText ?? "0s")
+                            } else if(categoryItem.entryName == "Building" && categoryItem.workingTimeMinutesPortion != nil) {
+                                let totalBuilingTimeAsDouble = Double(categoryItem.workingTimeHoursPortion!) + Double(categoryItem.workingTimeMinutesPortion!) / 100
+                                buildingTimePerDay.append(totalBuilingTimeAsDouble.rounded(toPlaces: 2))
+                                
+                                self.buildingTimeForWeeklyBreakdownOverActivityByDayMultipleBarChartViewTap.append("\(categoryItem.workingTimeInPercent!)%")
+//                                self.workingTimeForTap.append(categoryItem.workingTimeAsText ?? "0s")
+                            }
+                        }
+                    } else if(summaryItem.category?.isEmpty == true ) {
+                        codingTimePerDay.append(0)
+                        buildingTimePerDay.append(0)
+                        self.codingTimeForWeeklyBreakdownOverActivityByDayMultipleBarChartViewTap.append("0%")
+                        self.buildingTimeForWeeklyBreakdownOverActivityByDayMultipleBarChartViewTap.append("0%")
+                    }
+                    let date = self.dateManager.convertToAnotherDateFormat(date: summaryItem.dateOfCurrentRange!)
+                    daysOfTheWeekArray.append(date)
+                }
+                if(buildingTimePerDay.count != 7) {
+                    self.chartFill.multipleBarChartViewFill(multipleBarChartView: self.weeklyBreakdownOverActivityByDayMultipleBarChartView, codingTimePerDay: codingTimePerDay, buildingTimePerDay: nil, daysOfTheWeekArray: daysOfTheWeekArray)
+                    log.debug("Weekly Breakdown Over Activity Multiple Bar Chart is filled successfully.")
+                } else {
+                    self.chartFill.multipleBarChartViewFill(multipleBarChartView: self.weeklyBreakdownOverActivityByDayMultipleBarChartView, codingTimePerDay: codingTimePerDay, buildingTimePerDay: buildingTimePerDay, daysOfTheWeekArray: daysOfTheWeekArray)
+                    log.debug("Weekly Breakdown Over Activity Multiple Bar Chart is filled successfully.")
+                }
+//                self.chartFill.multipleBarChartViewFill(multipleBarChartView: self.weeklyBreakdownOverActivityByDayMultipleBarChartView, codingTimePerDay: codingTimePerDay, buildingTimePerDay: buildingTimePerDay, daysOfTheWeekArray: daysOfTheWeekArray)
+//                log.debug("Weekly Breakdown Over Activity Multiple Bar Chart is filled successfully.")
+            }
+        })
+    }
+    
+    func fillLabelWithCurrentDailyWorkingTime() {
         let currentDate = dateManager.getCurrentDateAsString()
         
         summaryController.getUserSummaryForGivenTimeRange(startDate: currentDate,
@@ -350,11 +406,5 @@ class WakaTimeChartViewController: UIViewController {
                 }
             })
         })
-    }
-}
-
-extension WakaTimeChartViewController: IAxisValueFormatter {
-    func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        return months[Int(value) % months.count]
     }
 }
