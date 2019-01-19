@@ -99,7 +99,6 @@ class ChartSetUp {
         multipleBarChartView.drawBarShadowEnabled = false
         multipleBarChartView.highlightFullBarEnabled = false
         multipleBarChartView.drawGridBackgroundEnabled = false
-//        multipleBarChartView.fitBars = true
         multipleBarChartView.isUserInteractionEnabled = true
         multipleBarChartView.drawMarkers = true
         multipleBarChartView.extraBottomOffset = 10
@@ -161,25 +160,38 @@ class ChartSetUp {
         combinedChartView.chartDescription?.enabled = false
         combinedChartView.drawBarShadowEnabled = false
         combinedChartView.highlightFullBarEnabled = false
+        combinedChartView.rightAxis.enabled = false
+        combinedChartView.leftAxis.enabled = false
+//        combinedChartView.extraTopOffset = 10
         combinedChartView.drawOrder = [DrawOrder.bar.rawValue, DrawOrder.line.rawValue]
         combinedChartView.animate(xAxisDuration: 1.5, yAxisDuration: 1.5, easingOption: .linear)
+        combinedChartView.notifyDataSetChanged()
         
         let legend = combinedChartView.legend
-        legend.wordWrapEnabled = true
+        legend.enabled = true
+//        legend.wordWrapEnabled = true
         legend.horizontalAlignment = .center
         legend.verticalAlignment = .bottom
         legend.orientation = .horizontal
         legend.drawInside = false
+        legend.textColor = .lightGray
+        legend.font = UIFont(name: "PingFangSC-Light", size: 11)!
         
-        let rightAxis = combinedChartView.rightAxis
-        rightAxis.axisMinimum = 0
-        
-        let leftAxis = combinedChartView.leftAxis
-        leftAxis.axisMinimum = 0
+//        let leftAxis = combinedChartView.leftAxis
+//        leftAxis.axisMinimum = 0
         
         let xAxis = combinedChartView.xAxis
-        xAxis.labelPosition = .bothSided
+        xAxis.drawGridLinesEnabled = false
+        xAxis.drawAxisLineEnabled = true
+        xAxis.labelPosition = .bottom
+        xAxis.labelFont = UIFont(name: "PingFangSC-Light", size: 10)!
+        xAxis.labelTextColor = .lightGray
+        xAxis.labelCount = 7
         xAxis.axisMinimum = 0
+        xAxis.granularityEnabled = true
         xAxis.granularity = 1
+//        xAxis.xOffset = 10
+//        xAxis.yOffset = 10
+//        xAxis.centerAxisLabelsEnabled = true
     }
 }

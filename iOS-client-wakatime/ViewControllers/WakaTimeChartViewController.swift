@@ -34,7 +34,7 @@ class WakaTimeChartViewController: UIViewController, ChartViewDelegate {
     @IBOutlet weak var editorPieChartView: PieChartView!
     @IBOutlet weak var languagePieChartView: PieChartView!
     @IBOutlet weak var operatingSystemPieChartView: PieChartView!
-    @IBOutlet weak var codingActivityCombinedChartView: CombinedChartView!
+    @IBOutlet weak var codingActivityForLast7DaysByDaysCombinedChartView: CombinedChartView!
     @IBOutlet weak var codingDailyAverageHalfPieChartView: PieChartView!
     @IBOutlet weak var codingActivityCurrentlyHorizontalBarChartView: HorizontalBarChartView!
     @IBOutlet weak var weeklyBreakdownOverActivityHorizontalBarChartView: HorizontalBarChartView!
@@ -65,7 +65,9 @@ class WakaTimeChartViewController: UIViewController, ChartViewDelegate {
                 getDailyProgressForDailyCodingAvarageChart()
                 getSummaryForLast7DaysForWeeklyBreakdownOverActivity()
                 getSummaryForLast7DaysForweeklyBreakdownOverActivityByDay()
-                chartFill.combinedChartFill(combinedChartView: codingActivityCombinedChartView)
+                
+                chartFill.combinedChartFill(combinedChartView: codingActivityForLast7DaysByDaysCombinedChartView)
+                
                 fillLabelWithCurrentDailyWorkingTime()
             }
         }
@@ -286,13 +288,11 @@ class WakaTimeChartViewController: UIViewController, ChartViewDelegate {
                                 codingTimePerDay.append(totalCodingTimeAsDouble.rounded(toPlaces: 2))
                                 
                                 self.codingTimeForWeeklyBreakdownOverActivityByDayMultipleBarChartViewTap.append("\(categoryItem.workingTimeInPercent!)%")
-//                                self.workingTimeForTap.append(categoryItem.workingTimeAsText ?? "0s")
                             } else if(categoryItem.entryName == "Building" && categoryItem.workingTimeMinutesPortion != nil) {
                                 let totalBuilingTimeAsDouble = Double(categoryItem.workingTimeHoursPortion!) + Double(categoryItem.workingTimeMinutesPortion!) / 100
                                 buildingTimePerDay.append(totalBuilingTimeAsDouble.rounded(toPlaces: 2))
                                 
                                 self.buildingTimeForWeeklyBreakdownOverActivityByDayMultipleBarChartViewTap.append("\(categoryItem.workingTimeInPercent!)%")
-//                                self.workingTimeForTap.append(categoryItem.workingTimeAsText ?? "0s")
                             }
                         }
                     } else if(summaryItem.category?.isEmpty == true ) {
@@ -311,8 +311,6 @@ class WakaTimeChartViewController: UIViewController, ChartViewDelegate {
                     self.chartFill.multipleBarChartViewFill(multipleBarChartView: self.weeklyBreakdownOverActivityByDayMultipleBarChartView, codingTimePerDay: codingTimePerDay, buildingTimePerDay: buildingTimePerDay, daysOfTheWeekArray: daysOfTheWeekArray)
                     log.debug("Weekly Breakdown Over Activity Multiple Bar Chart is filled successfully.")
                 }
-//                self.chartFill.multipleBarChartViewFill(multipleBarChartView: self.weeklyBreakdownOverActivityByDayMultipleBarChartView, codingTimePerDay: codingTimePerDay, buildingTimePerDay: buildingTimePerDay, daysOfTheWeekArray: daysOfTheWeekArray)
-//                log.debug("Weekly Breakdown Over Activity Multiple Bar Chart is filled successfully.")
             }
         })
     }

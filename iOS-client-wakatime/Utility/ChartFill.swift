@@ -58,6 +58,132 @@ class ChartFill {
         chartSetUp.setUpHorizontalBarChartView(horizontalBarChartView: horizontalBarChartView)
     }
     
+    func combinedChartFill(combinedChartView: CombinedChartView) {
+        let daysOfTheWeekArray = ["13 Jan", "14 Jan", "15 Jan", "16 Jan", "17 Jan", "18 Jan", "19 Jan"]
+        let yValuesLineChart = [2.1, 3.3, 4.0, 1.0, 0.2, 4.5, 3.2]
+        let yValuesBarChart = [2.1, 3.3, 4.0, 1.0, 0.2, 4.5, 3.2]
+        
+        combinedChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: daysOfTheWeekArray)
+        
+        var dataEntriesCodingByProjectsForBarChar: [BarChartDataEntry] = []
+        var dataEntriesTotalCodingTimeForLineChart: [ChartDataEntry] = []
+        for i in 0..<daysOfTheWeekArray.count {
+            
+            let dataEntryCoding = BarChartDataEntry(x: Double(i) , y: yValuesBarChart[i])
+            dataEntriesCodingByProjectsForBarChar.append(dataEntryCoding)
+            
+            let dataEntryTotalCodingTime = ChartDataEntry(x: Double(i), y: yValuesLineChart[i])
+            dataEntriesTotalCodingTimeForLineChart.append(dataEntryTotalCodingTime)
+            
+        }
+        let lineDataSet = LineChartDataSet(values: dataEntriesTotalCodingTimeForLineChart, label: "total line")
+        setUpLineChart(lineChartDataSet: lineDataSet)
+        let barDataSet = BarChartDataSet(values: dataEntriesCodingByProjectsForBarChar, label: "ios-client-wakatime")
+        setUpBarChart(barChartDataSet: barDataSet)
+        
+        let data: CombinedChartData = CombinedChartData()
+        data.barData = BarChartData(dataSets: [barDataSet])
+        data.lineData = LineChartData(dataSets: [lineDataSet])
+        
+        combinedChartView.data = data
+        chartSetUp.setUpCombinedChartView(combinedChartView: combinedChartView)
+    }
+    
+    func setUpLineChart(lineChartDataSet: LineChartDataSet) {
+        lineChartDataSet.setColor(UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 0.75))
+//        lineChartDataSet.lineWidth = 2.5
+        lineChartDataSet.setCircleColor(UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 0.75))
+        lineChartDataSet.circleRadius = 3.5
+        lineChartDataSet.drawVerticalHighlightIndicatorEnabled = false
+        lineChartDataSet.drawHorizontalHighlightIndicatorEnabled = false
+//        lineChartDataSet.circleHoleRadius = 2.5
+//        lineChartDataSet.fillColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
+        lineChartDataSet.mode = .cubicBezier
+        lineChartDataSet.drawValuesEnabled = true
+        lineChartDataSet.valueFont = UIFont(name: "PingFangSC-Light", size: 10)!
+        lineChartDataSet.valueTextColor = .lightGray
+        lineChartDataSet.axisDependency = .left
+    }
+    
+    func setUpBarChart(barChartDataSet: BarChartDataSet) {
+        barChartDataSet.setColor(UIColor(red: 60.0/255.0, green: 163.0/255.0, blue: 232.0/255.0, alpha: 0.35))
+        barChartDataSet.valueTextColor = .lightGray
+        barChartDataSet.barBorderColor = UIColor(red: 60.0/255.0, green: 163.0/255.0, blue: 232.0/255.0, alpha: 1.0)
+        barChartDataSet.barBorderWidth = 1
+        barChartDataSet.drawValuesEnabled = false
+    }
+    
+//    func combinedChartFill(combinedChartView: CombinedChartView) {
+//        let data = CombinedChartData()
+//        data.lineData = generateLineData()
+//        data.barData = generateBarData()
+//
+//        combinedChartView.xAxis.axisMaximum = data.xMax + 0.25
+//        combinedChartView.data = data
+//
+//        chartSetUp.setUpCombinedChartView(combinedChartView: combinedChartView);
+//    }
+    
+//    func generateLineData() -> LineChartData {
+//        let entries = (0..<12).map { (i) -> ChartDataEntry in
+//            return ChartDataEntry(x: Double(i) + 0.5, y: Double(arc4random_uniform(15) + 5))
+//        }
+//
+//        let set = LineChartDataSet(values: entries, label: "Line DataSet")
+//        set.setColor(UIColor(red: 240/255, green: 238/255, blue: 70/255, alpha: 1))
+//        set.lineWidth = 2.5
+//        set.setCircleColor(UIColor(red: 240/255, green: 238/255, blue: 70/255, alpha: 1))
+//        set.circleRadius = 5
+//        set.circleHoleRadius = 2.5
+//        set.fillColor = UIColor(red: 240/255, green: 238/255, blue: 70/255, alpha: 1)
+//        set.mode = .cubicBezier
+//        set.drawValuesEnabled = true
+//        set.valueFont = .systemFont(ofSize: 10)
+//        set.valueTextColor = UIColor(red: 240/255, green: 238/255, blue: 70/255, alpha: 1)
+//
+//        set.axisDependency = .left
+//
+//        return LineChartData(dataSet: set)
+//    }
+    
+    
+//    func generateBarData() -> BarChartData {
+//        let entries1 = (0..<12).map { _ -> BarChartDataEntry in
+//            return BarChartDataEntry(x: 0, y: Double(arc4random_uniform(25) + 25))
+//        }
+//        let entries2 = (0..<12).map { _ -> BarChartDataEntry in
+//            return BarChartDataEntry(x: 0, yValues: [Double(arc4random_uniform(13) + 12), Double(arc4random_uniform(13) + 12)])
+//        }
+//
+//        let set1 = BarChartDataSet(values: entries1, label: "Bar 1")
+//        set1.setColor(UIColor(red: 60/255, green: 220/255, blue: 78/255, alpha: 1))
+//        set1.valueTextColor = UIColor(red: 60/255, green: 220/255, blue: 78/255, alpha: 1)
+//        set1.valueFont = .systemFont(ofSize: 10)
+//        set1.axisDependency = .left
+//
+//        let set2 = BarChartDataSet(values: entries2, label: "")
+//        set2.stackLabels = ["Stack 1", "Stack 2"]
+//        set2.colors = [UIColor(red: 61/255, green: 165/255, blue: 255/255, alpha: 1),
+//                       UIColor(red: 23/255, green: 197/255, blue: 255/255, alpha: 1)
+//        ]
+//        set2.valueTextColor = UIColor(red: 61/255, green: 165/255, blue: 255/255, alpha: 1)
+//        set2.valueFont = .systemFont(ofSize: 10)
+//        set2.axisDependency = .left
+//
+//        let groupSpace = 0.06
+//        let barSpace = 0.02 // x2 dataset
+//        let barWidth = 0.45 // x2 dataset
+//        // (0.45 + 0.02) * 2 + 0.06 = 1.00 -> interval per "group"
+//
+//        let data = BarChartData(dataSets: [set1, set2])
+//        data.barWidth = barWidth
+//
+//        // make this BarData object grouped
+//        data.groupBars(fromX: 0, groupSpace: groupSpace, barSpace: barSpace)
+//
+//        return data
+//    }
+    
     func multipleBarChartViewFill(multipleBarChartView: BarChartView, codingTimePerDay: [Double], buildingTimePerDay: [Double]?, daysOfTheWeekArray: [String]) {
         let groupCount = daysOfTheWeekArray.count
         multipleBarChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: daysOfTheWeekArray)
@@ -134,7 +260,6 @@ class ChartFill {
         let marker : BalloonMarker = BalloonMarker(color: UIColor.darkGray.withAlphaComponent(0.6), font: UIFont(name: "PingFangSC-Light", size: 11)!, textColor: UIColor.white, insets: UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0))
         marker.minimumSize = CGSize(width: CGFloat(60.0), height: CGFloat(35.0))
         multipleBarChartView.marker = marker
-
     }
 
     func halfPieChartFill(halfPieChartView: PieChartView, itemsList: [Double]) {
@@ -167,75 +292,5 @@ class ChartFill {
         }
         halfPieChartView.animate(xAxisDuration: 1.5, yAxisDuration: 1.5, easingOption: .linear)
         chartSetUp.setUpHalfPieChartView(halfPieChartView: halfPieChartView)
-    }
-    
-    func combinedChartFill(combinedChartView: CombinedChartView) {
-        let data = CombinedChartData()
-        data.lineData = generateLineData()
-        data.barData = generateBarData()
-        
-        combinedChartView.xAxis.axisMaximum = data.xMax + 0.25
-        combinedChartView.data = data
-        
-        chartSetUp.setUpCombinedChartView(combinedChartView: combinedChartView);
-    }
-    
-    func generateLineData() -> LineChartData {
-        let entries = (0..<12).map { (i) -> ChartDataEntry in
-            return ChartDataEntry(x: Double(i) + 0.5, y: Double(arc4random_uniform(15) + 5))
-        }
-        
-        let set = LineChartDataSet(values: entries, label: "Line DataSet")
-        set.setColor(UIColor(red: 240/255, green: 238/255, blue: 70/255, alpha: 1))
-        set.lineWidth = 2.5
-        set.setCircleColor(UIColor(red: 240/255, green: 238/255, blue: 70/255, alpha: 1))
-        set.circleRadius = 5
-        set.circleHoleRadius = 2.5
-        set.fillColor = UIColor(red: 240/255, green: 238/255, blue: 70/255, alpha: 1)
-        set.mode = .cubicBezier
-        set.drawValuesEnabled = true
-        set.valueFont = .systemFont(ofSize: 10)
-        set.valueTextColor = UIColor(red: 240/255, green: 238/255, blue: 70/255, alpha: 1)
-        
-        set.axisDependency = .left
-        
-        return LineChartData(dataSet: set)
-    }
-    
-    func generateBarData() -> BarChartData {
-        let entries1 = (0..<12).map { _ -> BarChartDataEntry in
-            return BarChartDataEntry(x: 0, y: Double(arc4random_uniform(25) + 25))
-        }
-        let entries2 = (0..<12).map { _ -> BarChartDataEntry in
-            return BarChartDataEntry(x: 0, yValues: [Double(arc4random_uniform(13) + 12), Double(arc4random_uniform(13) + 12)])
-        }
-        
-        let set1 = BarChartDataSet(values: entries1, label: "Bar 1")
-        set1.setColor(UIColor(red: 60/255, green: 220/255, blue: 78/255, alpha: 1))
-        set1.valueTextColor = UIColor(red: 60/255, green: 220/255, blue: 78/255, alpha: 1)
-        set1.valueFont = .systemFont(ofSize: 10)
-        set1.axisDependency = .left
-        
-        let set2 = BarChartDataSet(values: entries2, label: "")
-        set2.stackLabels = ["Stack 1", "Stack 2"]
-        set2.colors = [UIColor(red: 61/255, green: 165/255, blue: 255/255, alpha: 1),
-                       UIColor(red: 23/255, green: 197/255, blue: 255/255, alpha: 1)
-        ]
-        set2.valueTextColor = UIColor(red: 61/255, green: 165/255, blue: 255/255, alpha: 1)
-        set2.valueFont = .systemFont(ofSize: 10)
-        set2.axisDependency = .left
-        
-        let groupSpace = 0.06
-        let barSpace = 0.02 // x2 dataset
-        let barWidth = 0.45 // x2 dataset
-        // (0.45 + 0.02) * 2 + 0.06 = 1.00 -> interval per "group"
-        
-        let data = BarChartData(dataSets: [set1, set2])
-        data.barWidth = barWidth
-        
-        // make this BarData object grouped
-        data.groupBars(fromX: 0, groupSpace: groupSpace, barSpace: barSpace)
-        
-        return data
     }
 }
