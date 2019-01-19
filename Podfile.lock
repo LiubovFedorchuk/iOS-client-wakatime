@@ -1,19 +1,19 @@
 PODS:
-  - Alamofire (4.7.3)
-  - AlamofireObjectMapper (5.1.0):
-    - Alamofire (~> 4.1)
-    - ObjectMapper (~> 3.3)
-  - Charts (3.1.1):
-    - Charts/Core (= 3.1.1)
-  - Charts/Core (3.1.1)
-  - ObjectMapper (3.3.0)
-  - SwiftyBeaver (1.6.0)
+  - Alamofire (4.8.1)
+  - AlamofireObjectMapper (5.2.0):
+    - Alamofire (~> 4.7)
+    - ObjectMapper (~> 3.4)
+  - Charts (3.2.1):
+    - Charts/Core (= 3.2.1)
+  - Charts/Core (3.2.1)
+  - ObjectMapper (3.4.2)
+  - SwiftyBeaver (1.6.1)
 
 DEPENDENCIES:
   - Alamofire (~> 4.7)
-  - AlamofireObjectMapper (~> 5.1)
+  - AlamofireObjectMapper (~> 5.2)
   - Charts
-  - ObjectMapper (~> 3.3)
+  - ObjectMapper (~> 3.4)
   - SwiftyBeaver
 
 SPEC REPOS:
@@ -25,12 +25,12 @@ SPEC REPOS:
     - SwiftyBeaver
 
 SPEC CHECKSUMS:
-  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
-  AlamofireObjectMapper: 3395e698901d8b0e6f48b7d0c43bd47875325102
-  Charts: 90a4d61da0f6e06684c591e3bcab11940fe61736
-  ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
-  SwiftyBeaver: e45759613e50b522b0e6f53b1f0f14389b45ca34
+  Alamofire: 16ce2c353fb72865124ddae8a57c5942388f4f11
+  AlamofireObjectMapper: 92b6ce2423a9d159e686f6a1d514a009bf903ddc
+  Charts: f122fb70b19847fa5817d018b77d6c5a2296ab25
+  ObjectMapper: 0d4402610f4e468903ae64629eec4784531e5c51
+  SwiftyBeaver: ccfcdf85a04d429f1633f668650b0ce8020bda3a
 
-PODFILE CHECKSUM: ca22dc017a48fa17d97a49bddd48299b12f48429
+PODFILE CHECKSUM: bcd9ebda79030430975bb321804b0a403fcd5c83
 
 COCOAPODS: 1.5.3

@@ -12,14 +12,14 @@ import ObjectMapper
 class EntrySummary: Mappable {
     
     var entryName: String?
-    var workingTimeInPercent: Float?
+    var workingTimeInPercent: Double?
     var workingTimeAsText: String?
     var totalWorkingTimeAsSecond: Int?
     var workingTimeHoursPortion: Int?
     var workingTimeMinutesPortion: Int?
     
     init(entryName: String,
-         workingTimeInPercent: Float,
+         workingTimeInPercent: Double,
          workingTimeAsText: String,
          totalWorkingTimeAsSecond: Int,
          workingTimeHoursPortion: Int,
