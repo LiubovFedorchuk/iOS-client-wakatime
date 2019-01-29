@@ -46,10 +46,10 @@ class ChartFill {
         dataSet.drawValuesEnabled = false
         dataSet.valueTextColor = UIColor.darkGray
         if(workingTimeAsPercentage.count == 1) {
-            dataSet.colors = [UIColor(red: 60.0/255.0, green: 163.0/255.0, blue: 232.0/255.0, alpha: 1.0)]
+            dataSet.colors = [UIColor(red: 60/255, green: 163/255, blue: 232/255, alpha: 1.0)]
         } else {
-            dataSet.colors = [UIColor(red: 254.0/255.0, green: 211.0/255.0, blue: 121.0/255.0, alpha: 1.0),
-                              UIColor(red: 60.0/255.0, green: 163.0/255.0, blue: 232.0/255.0, alpha: 1.0)]
+            dataSet.colors = [UIColor(red: 254/255, green: 211/255, blue: 121/255, alpha: 1.0),
+                              UIColor(red: 60/255, green: 163/255, blue: 232/255, alpha: 1.0)]
         }
         
         let barChartData = BarChartData(dataSet: dataSet)
@@ -60,35 +60,61 @@ class ChartFill {
     
     func combinedChartFill(combinedChartView: CombinedChartView) {
         let daysOfTheWeekArray = ["13 Jan", "14 Jan", "15 Jan", "16 Jan", "17 Jan", "18 Jan", "19 Jan"]
-        let yValuesLineChart = [2.1, 3.3, 4.0, 1.0, 0.2, 4.5, 3.2]
-        let yValuesBarChart = [2.1, 3.3, 4.0, 1.0, 0.2, 4.5, 3.2]
-        
+//        let yValuesLineChart = [2.1, 3.3, 4.0, 1.0, 0.25, 4.5, 3.2]
+        var yValuesLineChart = [Double]()
+        let yValuesBarChart = [2.1, 3.3, 4.0, 1.0, 0.25, 4.5, 3.2]
+        //before request is not active we don`t really know how many this arrays can exist
+        let yValuesBarChart2 = [0.1, 1.3, 0.0, 0.2, 1.25, 2.25, 1.3]
+
         combinedChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: daysOfTheWeekArray)
-        
-        var dataEntriesCodingByProjectsForBarChar: [BarChartDataEntry] = []
+        var dataEntriesCodingByProjectsForBarChart: [BarChartDataEntry] = []
         var dataEntriesTotalCodingTimeForLineChart: [ChartDataEntry] = []
+        
+        var dataEntriesCodingByProjectsForBarChart2: [BarChartDataEntry] = []
         for i in 0..<daysOfTheWeekArray.count {
+
             
-            let dataEntryCoding = BarChartDataEntry(x: Double(i) , y: yValuesBarChart[i])
-            dataEntriesCodingByProjectsForBarChar.append(dataEntryCoding)
+//            let dataEntryCoding = BarChartDataEntry(x: Double(i) , y: yValuesBarChart[i])
+//            dataEntriesCodingByProjectsForBarChart.append(dataEntryCoding)
+
+
             
+            let dataEntryProject = BarChartDataEntry(x: Double(i), yValues:[yValuesBarChart[i], yValuesBarChart2[i]])
+            let sum = yValuesBarChart[i] + yValuesBarChart2[i]
+//            if(abs(yValuesBarChart[i] - yValuesBarChart2[i]) >= 0.6) {
+//                yValuesLineChart.append(sum - 0.6 + 1)
+//
+//            } else {
+                yValuesLineChart.append(sum)
+//            }
+//            if(yValuesBarChart[i] > yValuesBarChart2[i]) {
+            
+//            } else {
+//                yValuesLineChart.append(yValuesBarChart2[i])
+//            }
+            dataEntriesCodingByProjectsForBarChart2.append(dataEntryProject)
             let dataEntryTotalCodingTime = ChartDataEntry(x: Double(i), y: yValuesLineChart[i])
             dataEntriesTotalCodingTimeForLineChart.append(dataEntryTotalCodingTime)
-            
         }
         let lineDataSet = LineChartDataSet(values: dataEntriesTotalCodingTimeForLineChart, label: "total line")
         setUpLineChart(lineChartDataSet: lineDataSet)
-        let barDataSet = BarChartDataSet(values: dataEntriesCodingByProjectsForBarChar, label: "ios-client-wakatime")
-        setUpBarChart(barChartDataSet: barDataSet)
+//        let barDataSet = BarChartDataSet(values: dataEntriesCodingByProjectsForBarChart, label: "ios-client-wakatime")
+        
+        let barChartDataSet2 = BarChartDataSet(values: dataEntriesCodingByProjectsForBarChart2, label: "")
+        barChartDataSet2.stackLabels = ["azaza", "tmp"]
+        barChartDataSet2.colors =  [UIColor.darkGray, UIColor.lightGray]
+        barChartDataSet2.drawValuesEnabled = false
+//        setUpBarChart(barChartDataSet: barDataSet)
+//        setUpBarChartTMP(barChartDataSet2: barChartDataSet2)
         
         let data: CombinedChartData = CombinedChartData()
-        data.barData = BarChartData(dataSets: [barDataSet])
+        data.barData = BarChartData(dataSets: [barChartDataSet2])
+        data.barData.barWidth = 1
         data.lineData = LineChartData(dataSets: [lineDataSet])
-        
         combinedChartView.data = data
         chartSetUp.setUpCombinedChartView(combinedChartView: combinedChartView)
     }
-    
+
     func setUpLineChart(lineChartDataSet: LineChartDataSet) {
         lineChartDataSet.setColor(UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 0.75))
 //        lineChartDataSet.lineWidth = 2.5
@@ -104,14 +130,26 @@ class ChartFill {
         lineChartDataSet.valueTextColor = .lightGray
         lineChartDataSet.axisDependency = .left
     }
-    
+
     func setUpBarChart(barChartDataSet: BarChartDataSet) {
-        barChartDataSet.setColor(UIColor(red: 60.0/255.0, green: 163.0/255.0, blue: 232.0/255.0, alpha: 0.35))
+        barChartDataSet.setColor(UIColor(red: 60/255, green: 163/255, blue: 232/255, alpha: 0.35))
         barChartDataSet.valueTextColor = .lightGray
-        barChartDataSet.barBorderColor = UIColor(red: 60.0/255.0, green: 163.0/255.0, blue: 232.0/255.0, alpha: 1.0)
+        barChartDataSet.barBorderColor = UIColor(red: 60/255, green: 163/255, blue: 232/255, alpha: 1.0)
         barChartDataSet.barBorderWidth = 1
         barChartDataSet.drawValuesEnabled = false
     }
+    
+//    func setUpBarChartTMP(barChartDataSet2: BarChartDataSet) {
+//
+////        barChartDataSet2.stackLabels = ["Stack 1", "Stack 2", "Stack 3","Stack 4"]
+//        barChartDataSet2.colors = [UIColor(red: 96/255, green: 176/255, blue: 68/255, alpha: 0.35),
+//                       UIColor(red: 246/255, green: 198/255, blue: 0/255, alpha: 0.35)]
+//        barChartDataSet2.drawValuesEnabled = false
+//        barChartDataSet2.axisDependency = .left
+//        barChartDataSet2.barBorderColor = UIColor(red: 60/255, green: 163/255, blue: 232/255, alpha: 1.0)
+//        barChartDataSet2.barBorderWidth = 1
+//    }
+    
     
 //    func combinedChartFill(combinedChartView: CombinedChartView) {
 //        let data = CombinedChartData()
@@ -121,9 +159,9 @@ class ChartFill {
 //        combinedChartView.xAxis.axisMaximum = data.xMax + 0.25
 //        combinedChartView.data = data
 //
-//        chartSetUp.setUpCombinedChartView(combinedChartView: combinedChartView);
+//        chartSetUp.setUpCombinedChartView(combinedChartView: combinedChartView)
 //    }
-    
+//
 //    func generateLineData() -> LineChartData {
 //        let entries = (0..<12).map { (i) -> ChartDataEntry in
 //            return ChartDataEntry(x: Double(i) + 0.5, y: Double(arc4random_uniform(15) + 5))
@@ -145,8 +183,8 @@ class ChartFill {
 //
 //        return LineChartData(dataSet: set)
 //    }
-    
-    
+//
+//
 //    func generateBarData() -> BarChartData {
 //        let entries1 = (0..<12).map { _ -> BarChartDataEntry in
 //            return BarChartDataEntry(x: 0, y: Double(arc4random_uniform(25) + 25))
@@ -193,10 +231,10 @@ class ChartFill {
             
             for i in 0..<daysOfTheWeekArray.count {
                 
-                let dataEntryCoding = BarChartDataEntry(x: Double(i) , y: codingTimePerDay[i])
+                let dataEntryCoding = BarChartDataEntry(x: Double(i) , y: codingTimePerDay[i].rounded(toPlaces: 2))
                 dataEntriesCoding.append(dataEntryCoding)
                 
-                let dataEntryBuilding = BarChartDataEntry(x: Double(i) , y: buildingTimePerDay![i])
+                let dataEntryBuilding = BarChartDataEntry(x: Double(i) , y: buildingTimePerDay![i].rounded(toPlaces: 2))
                 dataEntriesBuilding.append(dataEntryBuilding)
             }
             

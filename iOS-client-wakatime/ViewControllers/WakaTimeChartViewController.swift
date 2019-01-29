@@ -64,7 +64,7 @@ class WakaTimeChartViewController: UIViewController, ChartViewDelegate {
                 getSummaryForLast7DaysForFillingLabelsWithWorkingTime()
                 getDailyProgressForDailyCodingAvarageChart()
                 getSummaryForLast7DaysForWeeklyBreakdownOverActivity()
-                getSummaryForLast7DaysForweeklyBreakdownOverActivityByDay()
+                getSummaryForLast7DaysForWeeklyBreakdownOverActivityByDay()
                 
                 chartFill.combinedChartFill(combinedChartView: codingActivityForLast7DaysByDaysCombinedChartView)
                 
@@ -238,7 +238,6 @@ class WakaTimeChartViewController: UIViewController, ChartViewDelegate {
                     }
                 }
                 weeklyWorkingTime = weeklyCodingTimeInSeconds + weeklyBuildingTimeInSeconds
-               
                 weeklyBuildingTimeInPercent = Double((weeklyBuildingTimeInSeconds * 100) / weeklyWorkingTime).rounded(toPlaces: 2)
                 let weeklyBuildingTimeInPercentAsString = "\(weeklyBuildingTimeInPercent) %"
                 if weeklyBuildingTimeInPercent != 0.0 {
@@ -249,7 +248,6 @@ class WakaTimeChartViewController: UIViewController, ChartViewDelegate {
                 let weeklyCodingTimeInPercentAsString = "\(weeklyCodingTimeInPercent) %"
                 weeklyWorkingTimeListInPercentAsString.append(weeklyCodingTimeInPercentAsString)
                 weeklyWorkingTimeListInPercent.append(weeklyCodingTimeInPercent)
-                
                 self.chartFill.horizontalBarChartFill(horizontalBarChartView: self.weeklyBreakdownOverActivityHorizontalBarChartView, workingTimeAsPercentage: weeklyWorkingTimeListInPercent, workingTimeAsPercentageAsString: weeklyWorkingTimeListInPercentAsString)
                 log.debug("Weekly Breakdown Over Activity Horizontal Bar Chart is filled successfully.")
             } else {
@@ -267,7 +265,7 @@ class WakaTimeChartViewController: UIViewController, ChartViewDelegate {
         })
     }
     
-    func getSummaryForLast7DaysForweeklyBreakdownOverActivityByDay() {
+    func getSummaryForLast7DaysForWeeklyBreakdownOverActivityByDay() {
         let start = dateManager.getStartDayAsString()
         let end = dateManager.getCurrentDateAsString()
         
