@@ -58,57 +58,58 @@ class ChartFill {
         chartSetUp.setUpHorizontalBarChartView(horizontalBarChartView: horizontalBarChartView)
     }
     
-    func combinedChartFill(combinedChartView: CombinedChartView) {
-        let daysOfTheWeekArray = ["13 Jan", "14 Jan", "15 Jan", "16 Jan", "17 Jan", "18 Jan", "19 Jan"]
-//        let yValuesLineChart = [2.1, 3.3, 4.0, 1.0, 0.25, 4.5, 3.2]
+    //TODO: needed refactoring THIS function
+    //fix bar chart color problem
+    //clean up
+    //rename variables
+    //add to line chart real data
+    func combinedChartFill(combinedChartView: CombinedChartView, yValuesBarChart2: [[Double]], projectNameSet: [String], daysOfTheWeekArray: [String]) {
+
         var yValuesLineChart = [Double]()
         let yValuesBarChart = [2.1, 3.3, 4.0, 1.0, 0.25, 4.5, 3.2]
-        //before request is not active we don`t really know how many this arrays can exist
-        let yValuesBarChart2 = [0.1, 1.3, 0.0, 0.2, 1.25, 2.25, 1.3]
+//        let yValuesBarChart2 = [[1.1, 2.1, 0, 3.1, 1.4, 0, 1.35], [0.0, 0.2, 1.12, 2.1, 0.0, 4.1, 2.1]]
 
         combinedChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: daysOfTheWeekArray)
         var dataEntriesCodingByProjectsForBarChart: [BarChartDataEntry] = []
         var dataEntriesTotalCodingTimeForLineChart: [ChartDataEntry] = []
         
-        var dataEntriesCodingByProjectsForBarChart2: [BarChartDataEntry] = []
+//        for n in 0..<yValuesBarChart2.count {
+//            print(yValuesBarChart2[n])
+//        }
+        
         for i in 0..<daysOfTheWeekArray.count {
-
-            
-//            let dataEntryCoding = BarChartDataEntry(x: Double(i) , y: yValuesBarChart[i])
-//            dataEntriesCodingByProjectsForBarChart.append(dataEntryCoding)
-
-
-            
-            let dataEntryProject = BarChartDataEntry(x: Double(i), yValues:[yValuesBarChart[i], yValuesBarChart2[i]])
-            let sum = yValuesBarChart[i] + yValuesBarChart2[i]
-//            if(abs(yValuesBarChart[i] - yValuesBarChart2[i]) >= 0.6) {
-//                yValuesLineChart.append(sum - 0.6 + 1)
-//
-//            } else {
+            for n in 0..<yValuesBarChart2.count {
+                let dataEntryProject = BarChartDataEntry(x: Double(i), yValues: [yValuesBarChart2[n][i]])
+                dataEntriesCodingByProjectsForBarChart.append(dataEntryProject)
+            }
+//            let dataEntryProject = BarChartDataEntry(x: Double(i), yValues: [yValuesBarChart2[0][i], yValuesBarChart2[1][i]])
+//            , yValuesBarChart2[i]])
+            let sum = yValuesBarChart[i]
+//                + yValuesBarChart2[i]
+            if(sum.truncatingRemainder(dividingBy: 1) > 0.59) {
+                yValuesLineChart.append(sum - 0.6 + 1)
+            } else {
                 yValuesLineChart.append(sum)
-//            }
-//            if(yValuesBarChart[i] > yValuesBarChart2[i]) {
+            }
+//            dataEntriesCodingByProjectsForBarChart.append(dataEntryProject)
             
-//            } else {
-//                yValuesLineChart.append(yValuesBarChart2[i])
-//            }
-            dataEntriesCodingByProjectsForBarChart2.append(dataEntryProject)
             let dataEntryTotalCodingTime = ChartDataEntry(x: Double(i), y: yValuesLineChart[i])
             dataEntriesTotalCodingTimeForLineChart.append(dataEntryTotalCodingTime)
         }
+        let barChartDataSet = BarChartDataSet(values: dataEntriesCodingByProjectsForBarChart, label: "")
+        barChartDataSet.stackLabels = Array(projectNameSet)
+        barChartDataSet.colors = [UIColor.lightGray]
+        //        , UIColor.lightGray]
+        //        barChartDataSet2.colors = ChartColorTemplates.other()
+        barChartDataSet.drawValuesEnabled = false
+        setUpBarChart(barChartDataSet: barChartDataSet)
+        
         let lineDataSet = LineChartDataSet(values: dataEntriesTotalCodingTimeForLineChart, label: "total line")
         setUpLineChart(lineChartDataSet: lineDataSet)
-//        let barDataSet = BarChartDataSet(values: dataEntriesCodingByProjectsForBarChart, label: "ios-client-wakatime")
-        
-        let barChartDataSet2 = BarChartDataSet(values: dataEntriesCodingByProjectsForBarChart2, label: "")
-        barChartDataSet2.stackLabels = ["azaza", "tmp"]
-        barChartDataSet2.colors =  [UIColor.darkGray, UIColor.lightGray]
-        barChartDataSet2.drawValuesEnabled = false
-//        setUpBarChart(barChartDataSet: barDataSet)
-//        setUpBarChartTMP(barChartDataSet2: barChartDataSet2)
+
         
         let data: CombinedChartData = CombinedChartData()
-        data.barData = BarChartData(dataSets: [barChartDataSet2])
+        data.barData = BarChartData(dataSets: [barChartDataSet])
         data.barData.barWidth = 1
         data.lineData = LineChartData(dataSets: [lineDataSet])
         combinedChartView.data = data
@@ -132,9 +133,9 @@ class ChartFill {
     }
 
     func setUpBarChart(barChartDataSet: BarChartDataSet) {
-        barChartDataSet.setColor(UIColor(red: 60/255, green: 163/255, blue: 232/255, alpha: 0.35))
+//        barChartDataSet.setColor(UIColor(red: 60/255, green: 163/255, blue: 232/255, alpha: 0.35))
         barChartDataSet.valueTextColor = .lightGray
-        barChartDataSet.barBorderColor = UIColor(red: 60/255, green: 163/255, blue: 232/255, alpha: 1.0)
+//        barChartDataSet.barBorderColor = UIColor(red: 60/255, green: 163/255, blue: 232/255, alpha: 1.0)
         barChartDataSet.barBorderWidth = 1
         barChartDataSet.drawValuesEnabled = false
     }

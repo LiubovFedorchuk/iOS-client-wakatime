@@ -66,7 +66,7 @@ class WakaTimeChartViewController: UIViewController, ChartViewDelegate {
                 getSummaryForLast7DaysForWeeklyBreakdownOverActivity()
                 getSummaryForLast7DaysForWeeklyBreakdownOverActivityByDay()
                 
-                chartFill.combinedChartFill(combinedChartView: codingActivityForLast7DaysByDaysCombinedChartView)
+                getSummaryOfCodingActivityForLast7DaysByDays()
                 
                 fillLabelWithCurrentDailyWorkingTime()
             }
@@ -211,6 +211,93 @@ class WakaTimeChartViewController: UIViewController, ChartViewDelegate {
         })
     }
     
+    //TODO: needed refactoring THIS function
+    //rename variables, add logs,errors, alerts and warnings
+    //less loops
+    func getSummaryOfCodingActivityForLast7DaysByDays() {
+        let start = dateManager.getStartDayAsString()
+        let end = dateManager.getCurrentDateAsString()
+        var projectNameSet = Set<String>()
+        var projectDictionary = [String:[Double]]()
+        var daysOfTheWeekArray = [String]()
+        
+        var n = 0
+        
+        summaryController.getUserSummaryForGivenTimeRange(startDate: start,
+                                                          endDate: end,
+                                                          completionHandler: {summary, status in
+            if(summary != nil && status == 200) {
+                log.debug("Request for Summary Of coding activity for last 7 days by days passed successfully.")
+                for summaryItem in summary! {
+                    guard let projects = summaryItem.project else {
+                        //TODO: add some warning or error
+                        return
+                    }
+                    if(projects.isEmpty && !projectDictionary.isEmpty) {
+                        for key in projectDictionary.keys {
+                            projectDictionary[key]?.insert(0, at: n)
+                        }
+                    }
+                    
+                    
+                    for projectItem in projects {
+                       
+                        guard let projectName = projectItem.entryName else {
+                            //TODO: add some warning or error
+                            return
+                        }
+                        
+                        
+                        var totalCodingTimeHoursPortionPerProjectByDay = projectItem.workingTimeHoursPortion
+                        var totalCodingTimeMinutesPortionPerProjectByDay = projectItem.workingTimeMinutesPortion
+                        var totalCodingTimePerProjectByDay = Double(totalCodingTimeHoursPortionPerProjectByDay!) + (Double(totalCodingTimeMinutesPortionPerProjectByDay!) * 0.01)
+                        
+                        if(!projectDictionary.keys.contains(projectName)) {
+                            var array = [Double]()
+                            array = Array(repeating: 0, count: n)
+                            array.insert(totalCodingTimePerProjectByDay, at: n)
+                            projectDictionary[projectName] = array
+                        } else {
+                            if(projects.count < projectDictionary.keys.count) {
+                                for key in projectDictionary.keys {
+                                    projectDictionary[key]?.insert(0, at: n)
+                                }
+                                projectDictionary[projectName]?.remove(at: n)
+                                projectDictionary[projectName]?.insert(totalCodingTimePerProjectByDay, at: n)
+                            } else {
+                                projectDictionary[projectName]?.insert(totalCodingTimePerProjectByDay, at: n)
+                            }
+                        }
+                        log.verbose(projectDictionary.debugDescription)
+                        projectNameSet.insert(projectName)
+                    }
+
+                    log.warning(projectDictionary.debugDescription)
+                    let date = self.dateManager.convertToAnotherDateFormat(date: summaryItem.dateOfCurrentRange!)
+                    daysOfTheWeekArray.append(date)
+                    n = n + 1
+                }
+                
+                self.chartFill.combinedChartFill(combinedChartView: self.codingActivityForLast7DaysByDaysCombinedChartView,
+                                                 yValuesBarChart2: Array(projectDictionary.values),
+                                                 projectNameSet: Array(projectDictionary.keys),
+                                                 daysOfTheWeekArray: daysOfTheWeekArray)
+            } else {
+                guard status != nil else {
+                    let alert = self.alertSetUp.showAlert(alertTitle: "Unexpected error", alertMessage: "Please, try again later.")
+                    self.present(alert, animated: true, completion: nil)
+                    log.error("Unexpected error without status code.")
+                    log.debug("Alert with unexpected error shown successfully.")
+                    return
+                }
+                self.alertSetUp.showAlertAccordingToStatusCode(fromController: self, statusCode: status!)
+                log.debug("Alert according to status code shown successfully.")
+                log.error("Unexpected error with statistic request with status code: \(status!)")
+            }
+        })
+       
+    }
+    
     func getSummaryForLast7DaysForWeeklyBreakdownOverActivity() {
         let start = dateManager.getStartDayAsString()
         let end = dateManager.getCurrentDateAsString()
@@ -265,6 +352,8 @@ class WakaTimeChartViewController: UIViewController, ChartViewDelegate {
         })
     }
     
+    
+    //TODO: add alerts
     func getSummaryForLast7DaysForWeeklyBreakdownOverActivityByDay() {
         let start = dateManager.getStartDayAsString()
         let end = dateManager.getCurrentDateAsString()
