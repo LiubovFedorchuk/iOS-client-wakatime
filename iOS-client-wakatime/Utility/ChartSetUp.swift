@@ -171,7 +171,6 @@ class ChartSetUp {
         combinedChartView.notifyDataSetChanged()
         
         let legend = combinedChartView.legend
-        legend.enabled = true
         legend.horizontalAlignment = .center
         legend.verticalAlignment = .bottom
         legend.orientation = .horizontal
@@ -199,8 +198,6 @@ class ChartSetUp {
         xAxis.labelFont = UIFont(name: "PingFangSC-Light", size: 10)!
         xAxis.labelTextColor = .lightGray
         xAxis.labelCount = 7
-//        xAxis.axisMinimum = 0
         xAxis.granularity = 1
-//        xAxis.centerAxisLabelsEnabled = true
     }
 }
