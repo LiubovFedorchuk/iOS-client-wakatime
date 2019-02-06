@@ -12,6 +12,10 @@ import Charts
 class ChartFilling {
     let chartSetUp = ChartSetUp()
     
+    //TODO: think about it
+    var dataEntriesCoding: [BarChartDataEntry] = []
+    var dataEntriesBuilding: [BarChartDataEntry] = []
+    
     //TODO: rename variables (like itemList, etc.)
     func pieChartFilling(pieChartView: PieChartView, itemsList: [EntrySummary]) {
         var entryWorkingTimeItem = [PieChartDataEntry]()
@@ -100,6 +104,7 @@ class ChartFilling {
         data.barData = BarChartData(dataSets: [barChartDataSet])
         data.barData.barWidth = 1
         data.lineData = LineChartData(dataSets: [lineDataSet])
+//        combinedChartView.marker = createBalloonMarker()
         combinedChartView.data = data
         chartSetUp.setUpCombinedChartView(combinedChartView: combinedChartView)
     }
@@ -137,8 +142,8 @@ class ChartFilling {
         multipleBarChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: daysOfGivenTimePeriodArray)
         
         if (codingTimePerDay.isEmpty == false && buildingTimePerDay != nil) {
-            var dataEntriesCoding: [BarChartDataEntry] = []
-            var dataEntriesBuilding: [BarChartDataEntry] = []
+//            var dataEntriesCoding: [BarChartDataEntry] = []
+//            var dataEntriesBuilding: [BarChartDataEntry] = []
             
             for i in 0..<daysOfGivenTimePeriodArray.count {
                 
@@ -158,10 +163,13 @@ class ChartFilling {
             for i in 0..<daysOfGivenTimePeriodArray.count {
                 let dataEntry = BarChartDataEntry(x: Double(i) , y: codingTimePerDay[i])
                 dataEntriesCoding.append(dataEntry)
+                
+//                multipleBarChartView.marker = createBalloonMarker(date: daysOfGivenTimePeriodArray[i])
             }
             self.setUpCodingPartOfMultipleBarChart(dataEntriesCoding: dataEntriesCoding,
-                                                       multipleBarChartView: multipleBarChartView)
+                                                   multipleBarChartView: multipleBarChartView)
         }
+//        multipleBarChartView.marker = createBalloonMarker(date: daysOfGivenTimePeriodArray)
         chartSetUp.setUpMultipleBarChartView(multipleBarChartView: multipleBarChartView)
     }
     
@@ -176,13 +184,13 @@ class ChartFilling {
         data.barWidth = 0.3
         multipleBarChartView.data = data
         multipleBarChartView.data?.highlightEnabled = true
-        addBalloonMarkerOnMultipleBarChartView(multipleBarChartView: multipleBarChartView)
+//        multipleBarChartView.marker = createBalloonMarker()
     }
     
     func setUpTotalWorkingOfMultipleBarChart(dataEntriesCoding: [BarChartDataEntry],
-                                                dataEntriesBuilding: [BarChartDataEntry],
-                                                groupCount: Int,
-                                                multipleBarChartView: BarChartView) {
+                                            dataEntriesBuilding: [BarChartDataEntry],
+                                            groupCount: Int,
+                                            multipleBarChartView: BarChartView) {
         let groupSpace = 0.3
         let barSpace = 0.05
         let barWidth = 0.3
@@ -206,7 +214,7 @@ class ChartFilling {
         data.groupBars(fromX: Double(axisMin), groupSpace: groupSpace, barSpace: barSpace)
         multipleBarChartView.data = data
         multipleBarChartView.data?.highlightEnabled = true
-        addBalloonMarkerOnMultipleBarChartView(multipleBarChartView: multipleBarChartView)
+//        multipleBarChartView.marker = createBalloonMarker()
     }
 
     //TODO: rename variables (like itemList, etc.)
@@ -241,11 +249,5 @@ class ChartFilling {
         }
         halfPieChartView.animate(xAxisDuration: 1.5, yAxisDuration: 1.5, easingOption: .linear)
         chartSetUp.setUpHalfPieChartView(halfPieChartView: halfPieChartView)
-    }
-    
-    func addBalloonMarkerOnMultipleBarChartView(multipleBarChartView: BarChartView) {
-        let marker : BalloonMarker = BalloonMarker(color: UIColor.darkGray.withAlphaComponent(0.6), font: UIFont(name: "PingFangSC-Light", size: 11)!, textColor: UIColor.white, insets: UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0))
-        marker.minimumSize = CGSize(width: CGFloat(60.0), height: CGFloat(35.0))
-        multipleBarChartView.marker = marker
     }
 }
