@@ -103,7 +103,6 @@ class ChartSetUp {
     
     func setUpMultipleBarChartView(multipleBarChartView: BarChartView) {
         multipleBarChartView.noDataText = "No chart data available."
-        multipleBarChartView.rightAxis.enabled = false
         multipleBarChartView.chartDescription?.enabled = false
         multipleBarChartView.drawBarShadowEnabled = false
         multipleBarChartView.highlightFullBarEnabled = false
@@ -150,6 +149,15 @@ class ChartSetUp {
         leftAxis.labelFont = UIFont(name: "PingFangSC-Light", size: 10)!
         leftAxis.labelTextColor = .lightGray
         leftAxis.drawGridLinesEnabled = false
+        
+        let rightAxis = multipleBarChartView.rightAxis
+        rightAxis.axisMinimum = 0
+        rightAxis.drawZeroLineEnabled = false
+        rightAxis.drawGridLinesEnabled = false
+        rightAxis.drawTopYLabelEntryEnabled = false
+        rightAxis.drawBottomYLabelEntryEnabled = false
+        rightAxis.drawAxisLineEnabled = false
+        rightAxis.drawLabelsEnabled = false
     }
     
     func setUpCombinedChartView(combinedChartView: CombinedChartView) {
@@ -179,10 +187,13 @@ class ChartSetUp {
         legend.font = UIFont(name: "PingFangSC-Light", size: 11)!
         
         let rightAxis = combinedChartView.rightAxis
-        rightAxis.drawLabelsEnabled = false
-        rightAxis.drawAxisLineEnabled = false
+        rightAxis.axisMinimum = 0
         rightAxis.drawZeroLineEnabled = false
         rightAxis.drawGridLinesEnabled = false
+        rightAxis.drawTopYLabelEntryEnabled = false
+        rightAxis.drawBottomYLabelEntryEnabled = false
+        rightAxis.drawAxisLineEnabled = false
+        rightAxis.drawLabelsEnabled = false
         
         let leftAxis = combinedChartView.leftAxis
         leftAxis.axisMinimum = 0

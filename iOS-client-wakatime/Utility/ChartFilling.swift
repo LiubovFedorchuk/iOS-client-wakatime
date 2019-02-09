@@ -104,7 +104,6 @@ class ChartFilling {
         data.barData = BarChartData(dataSets: [barChartDataSet])
         data.barData.barWidth = 1
         data.lineData = LineChartData(dataSets: [lineDataSet])
-//        combinedChartView.marker = createBalloonMarker()
         combinedChartView.data = data
         chartSetUp.setUpCombinedChartView(combinedChartView: combinedChartView)
     }
@@ -159,17 +158,14 @@ class ChartFilling {
                                                         groupCount: groupCount,
                                                         multipleBarChartView: multipleBarChartView)
         } else {
-            var dataEntriesCoding: [BarChartDataEntry] = []
+//            var dataEntriesCoding: [BarChartDataEntry] = []
             for i in 0..<daysOfGivenTimePeriodArray.count {
                 let dataEntry = BarChartDataEntry(x: Double(i) , y: codingTimePerDay[i])
                 dataEntriesCoding.append(dataEntry)
-                
-//                multipleBarChartView.marker = createBalloonMarker(date: daysOfGivenTimePeriodArray[i])
             }
             self.setUpCodingPartOfMultipleBarChart(dataEntriesCoding: dataEntriesCoding,
                                                    multipleBarChartView: multipleBarChartView)
         }
-//        multipleBarChartView.marker = createBalloonMarker(date: daysOfGivenTimePeriodArray)
         chartSetUp.setUpMultipleBarChartView(multipleBarChartView: multipleBarChartView)
     }
     
@@ -184,7 +180,6 @@ class ChartFilling {
         data.barWidth = 0.3
         multipleBarChartView.data = data
         multipleBarChartView.data?.highlightEnabled = true
-//        multipleBarChartView.marker = createBalloonMarker()
     }
     
     func setUpTotalWorkingOfMultipleBarChart(dataEntriesCoding: [BarChartDataEntry],
@@ -214,7 +209,6 @@ class ChartFilling {
         data.groupBars(fromX: Double(axisMin), groupSpace: groupSpace, barSpace: barSpace)
         multipleBarChartView.data = data
         multipleBarChartView.data?.highlightEnabled = true
-//        multipleBarChartView.marker = createBalloonMarker()
     }
 
     //TODO: rename variables (like itemList, etc.)
