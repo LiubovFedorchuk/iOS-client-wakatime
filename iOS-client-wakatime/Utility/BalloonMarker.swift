@@ -10,13 +10,12 @@ import Foundation
 import Charts
 
 open class BalloonMarker: MarkerImage {
-    
-    var color: UIColor
-    var arrowSize = CGSize(width: 15, height: 11)
-    var font: UIFont
-    var textColor: UIColor
-    var insets: UIEdgeInsets
-    var minimumSize = CGSize()
+    open var color: UIColor
+    open var arrowSize = CGSize(width: 15, height: 11)
+    open var font: UIFont
+    open var textColor: UIColor
+    open var insets: UIEdgeInsets
+    open var minimumSize = CGSize()
     
     fileprivate var label: String?
     fileprivate var labelSize: CGSize = CGSize()
@@ -28,7 +27,6 @@ open class BalloonMarker: MarkerImage {
         self.font = font
         self.textColor = textColor
         self.insets = insets
-        
         paragraphStyle = NSParagraphStyle.default.mutableCopy() as? NSMutableParagraphStyle
         paragraphStyle?.alignment = .center
         super.init()
@@ -55,16 +53,14 @@ open class BalloonMarker: MarkerImage {
         
         if origin.x + offset.x < 0.0 {
             offset.x = -origin.x + padding
-        }
-        else if let chart = chartView,
+        } else if let chart = chartView,
             origin.x + width + offset.x > chart.bounds.size.width {
             offset.x = chart.bounds.size.width - origin.x - width - padding
         }
         
         if origin.y + offset.y < 0 {
             offset.y = height + padding
-        }
-        else if let chart = chartView,
+        } else if let chart = chartView,
             origin.y + height + offset.y > chart.bounds.size.height {
             offset.y = chart.bounds.size.height - origin.y - height - padding
         }
@@ -96,8 +92,7 @@ open class BalloonMarker: MarkerImage {
             context.addLine(to: CGPoint(x: rect.origin.x, y: rect.origin.y + rect.size.height))
             context.addLine(to: CGPoint(x: rect.origin.x, y: rect.origin.y + arrowSize.height))
             context.fillPath()
-        }
-        else {
+        } else {
             context.beginPath()
             context.move(to: CGPoint(x: rect.origin.x, y: rect.origin.y))
             context.addLine(to: CGPoint(x: rect.origin.x + rect.size.width, y: rect.origin.y))
@@ -129,7 +124,6 @@ open class BalloonMarker: MarkerImage {
     
     open func setLabel(_ newLabel: String) {
         label = newLabel
-        
         drawAttributes.removeAll()
         drawAttributes[.font] = self.font
         drawAttributes[.paragraphStyle] = paragraphStyle

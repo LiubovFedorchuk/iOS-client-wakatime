@@ -3,7 +3,7 @@
 //  iOS-client-wakatime
 //
 //  Created by Liubov Fedorchuk on 10/11/18.
-//  Copyright © 2018 dorovska. All rights reserved.
+//  Copyright © 2018 Liubov Fedorchuk. All rights reserved.
 //
 
 import Foundation

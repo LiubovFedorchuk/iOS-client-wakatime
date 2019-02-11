@@ -12,6 +12,15 @@ import Charts
 
 class ChartSetUp {
 
+    lazy var formatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.maximumFractionDigits = 2
+        formatter.minimumFractionDigits = 0
+        formatter.positiveSuffix = " hrs"
+        
+        return formatter
+    }()
+    
     func setUpPieChartView(pieChartView: PieChartView) {
         pieChartView.chartDescription?.enabled = false
         pieChartView.drawHoleEnabled = false
@@ -82,8 +91,8 @@ class ChartSetUp {
         horizontalBarChartView.xAxis.drawGridLinesEnabled = false
         horizontalBarChartView.xAxis.drawAxisLineEnabled = false
         
-        horizontalBarChartView.leftAxis.axisMinimum = 0.0
-        horizontalBarChartView.rightAxis.axisMinimum = 0.0
+        horizontalBarChartView.leftAxis.axisMinimum = 0
+        horizontalBarChartView.rightAxis.axisMinimum = 0
         horizontalBarChartView.xAxis.labelPosition = .top
         horizontalBarChartView.xAxis.granularityEnabled = true
         horizontalBarChartView.xAxis.granularity = 1
@@ -94,12 +103,10 @@ class ChartSetUp {
     
     func setUpMultipleBarChartView(multipleBarChartView: BarChartView) {
         multipleBarChartView.noDataText = "No chart data available."
-        multipleBarChartView.rightAxis.enabled = false
         multipleBarChartView.chartDescription?.enabled = false
         multipleBarChartView.drawBarShadowEnabled = false
         multipleBarChartView.highlightFullBarEnabled = false
         multipleBarChartView.drawGridBackgroundEnabled = false
-//        multipleBarChartView.fitBars = true
         multipleBarChartView.isUserInteractionEnabled = true
         multipleBarChartView.drawMarkers = true
         multipleBarChartView.extraBottomOffset = 10
@@ -135,17 +142,22 @@ class ChartSetUp {
         xAxis.granularityEnabled = true
         xAxis.granularity = 1
         
-        let leftAxisFormatter = NumberFormatter()
-        leftAxisFormatter.minimumFractionDigits = 0
-        leftAxisFormatter.maximumFractionDigits = 2
-        
         let leftAxis = multipleBarChartView.leftAxis
-        leftAxis.valueFormatter = DefaultAxisValueFormatter(formatter: leftAxisFormatter)
+        leftAxis.valueFormatter = DefaultAxisValueFormatter(formatter: formatter)
         leftAxis.axisMinimum = 0
         leftAxis.labelCount = 6
         leftAxis.labelFont = UIFont(name: "PingFangSC-Light", size: 10)!
         leftAxis.labelTextColor = .lightGray
         leftAxis.drawGridLinesEnabled = false
+        
+        let rightAxis = multipleBarChartView.rightAxis
+        rightAxis.axisMinimum = 0
+        rightAxis.drawZeroLineEnabled = false
+        rightAxis.drawGridLinesEnabled = false
+        rightAxis.drawTopYLabelEntryEnabled = false
+        rightAxis.drawBottomYLabelEntryEnabled = false
+        rightAxis.drawAxisLineEnabled = false
+        rightAxis.drawLabelsEnabled = false
     }
     
     func setUpCombinedChartView(combinedChartView: CombinedChartView) {
@@ -162,24 +174,41 @@ class ChartSetUp {
         combinedChartView.drawBarShadowEnabled = false
         combinedChartView.highlightFullBarEnabled = false
         combinedChartView.drawOrder = [DrawOrder.bar.rawValue, DrawOrder.line.rawValue]
+        combinedChartView.setExtraOffsets(left: 20.0, top: 0.0, right: 20.0, bottom: 0.0)
         combinedChartView.animate(xAxisDuration: 1.5, yAxisDuration: 1.5, easingOption: .linear)
+        combinedChartView.notifyDataSetChanged()
         
         let legend = combinedChartView.legend
-        legend.wordWrapEnabled = true
         legend.horizontalAlignment = .center
         legend.verticalAlignment = .bottom
         legend.orientation = .horizontal
         legend.drawInside = false
+        legend.textColor = .lightGray
+        legend.font = UIFont(name: "PingFangSC-Light", size: 11)!
         
         let rightAxis = combinedChartView.rightAxis
         rightAxis.axisMinimum = 0
+        rightAxis.drawZeroLineEnabled = false
+        rightAxis.drawGridLinesEnabled = false
+        rightAxis.drawTopYLabelEntryEnabled = false
+        rightAxis.drawBottomYLabelEntryEnabled = false
+        rightAxis.drawAxisLineEnabled = false
+        rightAxis.drawLabelsEnabled = false
         
         let leftAxis = combinedChartView.leftAxis
         leftAxis.axisMinimum = 0
-        
+        leftAxis.drawLabelsEnabled = false
+        leftAxis.drawAxisLineEnabled = false
+        leftAxis.drawZeroLineEnabled = false
+        leftAxis.drawGridLinesEnabled = false
+
         let xAxis = combinedChartView.xAxis
-        xAxis.labelPosition = .bothSided
-        xAxis.axisMinimum = 0
+        xAxis.drawGridLinesEnabled = false
+        xAxis.drawAxisLineEnabled = true
+        xAxis.labelPosition = .bottom
+        xAxis.labelFont = UIFont(name: "PingFangSC-Light", size: 10)!
+        xAxis.labelTextColor = .lightGray
+        xAxis.labelCount = 7
         xAxis.granularity = 1
     }
 }

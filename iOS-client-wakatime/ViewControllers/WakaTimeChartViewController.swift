@@ -14,13 +14,14 @@ import Charts
 class WakaTimeChartViewController: UIViewController, ChartViewDelegate {
     
     lazy var dateManager = DateManager()
-    lazy var chartFill = ChartFill()
+    lazy var chartFilling = ChartFilling()
+    lazy var markerDataManager = MarkerDataManager()
     let statisticController = StatisticController()
     let summaryController = SummaryController()
     let alertSetUp = AlertSetUp()
     var isAuthenticated = false
-    var codingTimeForWeeklyBreakdownOverActivityByDayMultipleBarChartViewTap = [String]()
-    var buildingTimeForWeeklyBreakdownOverActivityByDayMultipleBarChartViewTap = [String]()
+    let tagForCombinedChartView = 001
+    let tagForMultipleBarChartView = 002
     
     @IBOutlet weak var todayChangesOfWorkingProgress: UILabel!
     @IBOutlet weak var todayWorkingProgressInPercent: UILabel!
@@ -34,11 +35,11 @@ class WakaTimeChartViewController: UIViewController, ChartViewDelegate {
     @IBOutlet weak var editorPieChartView: PieChartView!
     @IBOutlet weak var languagePieChartView: PieChartView!
     @IBOutlet weak var operatingSystemPieChartView: PieChartView!
-    @IBOutlet weak var codingActivityCombinedChartView: CombinedChartView!
+    @IBOutlet weak var codingActivityForLast7DaysByDaysCombinedChartView: CombinedChartView!
     @IBOutlet weak var codingDailyAverageHalfPieChartView: PieChartView!
     @IBOutlet weak var codingActivityCurrentlyHorizontalBarChartView: HorizontalBarChartView!
-    @IBOutlet weak var weeklyBreakdownOverActivityHorizontalBarChartView: HorizontalBarChartView!
-    @IBOutlet weak var weeklyBreakdownOverActivityByDayMultipleBarChartView: BarChartView!
+    @IBOutlet weak var workingBreakdownOverActivityHorizontalBarChartView: HorizontalBarChartView!
+    @IBOutlet weak var workingBreakdownOverActivityByDayMultipleBarChartView: BarChartView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,14 +60,18 @@ class WakaTimeChartViewController: UIViewController, ChartViewDelegate {
                 self.performSegue(withIdentifier: "showWakaTimeLoginView", sender: self)
                 log.debug("Unregistered user logout worked out successfully.")
             } else {
-                weeklyBreakdownOverActivityByDayMultipleBarChartView.delegate = self
+                self.codingActivityForLast7DaysByDaysCombinedChartView.tag = tagForCombinedChartView
+                self.workingBreakdownOverActivityByDayMultipleBarChartView.tag = tagForMultipleBarChartView
+                workingBreakdownOverActivityByDayMultipleBarChartView.delegate = self
+                codingActivityForLast7DaysByDaysCombinedChartView.delegate = self
+                
                 getStatisticForLast7DaysForFillingPieChartsView()
                 getSummaryForLast7DaysForFillingLabelsWithWorkingTime()
                 getDailyProgressForDailyCodingAvarageChart()
                 getSummaryForLast7DaysForWeeklyBreakdownOverActivity()
-                getSummaryForLast7DaysForweeklyBreakdownOverActivityByDay()
-                chartFill.combinedChartFill(combinedChartView: codingActivityCombinedChartView)
-                fillLabelWithCurrentDailyWorkingTime()
+                getSummaryForLast7DaysForWeeklyBreakdownOverActivityByDay()
+                getSummaryOfCodingActivityForLast7DaysByDays()
+                fillingLabelWithCurrentDailyWorkingTime()
             }
         }
     }
@@ -81,21 +86,49 @@ class WakaTimeChartViewController: UIViewController, ChartViewDelegate {
     
     //MARK: Chart delegate methods
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
-        let position = Int(entry.x)
-        log.debug("Selecting the column of Weekly Breakdown Over Activity By Day MultipleBarChartView was successful.")
-        if(buildingTimeForWeeklyBreakdownOverActivityByDayMultipleBarChartViewTap.count == 7) {
-            buildingTimePerDayInPercentLabel.text = buildingTimeForWeeklyBreakdownOverActivityByDayMultipleBarChartViewTap[position]
-            codingTimePerDayInPercentLabel.text = codingTimeForWeeklyBreakdownOverActivityByDayMultipleBarChartViewTap[position]
-            log.debug("Coding and Building Time Per Day In Percent Labels are filled successfully.")
+        let position = Int(highlight.x)
+        if(chartView.tag == tagForMultipleBarChartView) {
+            log.debug("Selecting the column of Weekly Breakdown Over Activity By Day MultipleBarChartView was successful.")
+            if(markerDataManager.buildingTimeInPercentForWeeklyBreakdownOverActivityByDays.count == 7) {
+                buildingTimePerDayInPercentLabel.text = markerDataManager.buildingTimeInPercentForWeeklyBreakdownOverActivityByDays[position]
+                codingTimePerDayInPercentLabel.text = markerDataManager.codingTimeInPercentForWeeklyBreakdownOverActivityByDays[position]
+                let marker = createBalloonMarkerForWorkingBreakdownOverActivity(
+                    date: markerDataManager.daysOfGivenTimePeriodArray[position],
+                    coding: "Coding:  \(markerDataManager.codingTimeForWeeklyBreakdownOverActivityByDay[position])\n",
+                    building: "Building: \(markerDataManager.buildingTimeForWeeklyBreakdownOverActivityByDay[position])")
+                marker.chartView = chartView
+                chartView.marker = marker
+            
+                log.debug("Coding and Building Time Per Day In Percent Labels are filled successfully.")
+            } else {
+                buildingTimePerDayInPercentLabel.isHidden = true
+                codingTimePerDayInPercentLabel.text = markerDataManager.codingTimeInPercentForWeeklyBreakdownOverActivityByDays[position]
+                let marker = createBalloonMarkerForWorkingBreakdownOverActivity(
+                    date: markerDataManager.daysOfGivenTimePeriodArray[position],
+                    coding: "Coding: \(markerDataManager.codingTimeForWeeklyBreakdownOverActivityByDay[position])",
+                    building: "")
+                marker.chartView = chartView
+                chartView.marker = marker
+                log.debug("Coding Time Per Day In Percent Labels are filled successfully.")
+            }
         } else {
-            buildingTimePerDayInPercentLabel.isHidden = true
-            codingTimePerDayInPercentLabel.text = codingTimeForWeeklyBreakdownOverActivityByDayMultipleBarChartViewTap[position]
-            log.debug("Coding Time Per Day In Percent Label is filled successfully.")
+            log.debug("Selecting the column of Coding Activity For Last 7 Days By Days Combined Chart View was successful.")
+            let marker = createBalloonMarkerForCodingActivity(
+                date: markerDataManager.daysOfGivenTimePeriodArray[position],
+                total: markerDataManager.totalCodingActivityPerDay[position],
+                projectNameByDay: markerDataManager.projectNameByDay[position]!,
+                projectWorkingTimePerDay: markerDataManager.projectWorkingTimePerDay[position]!)
+            marker.chartView = chartView
+            chartView.marker = marker
         }
     }
     
     func chartValueNothingSelected(_ chartView: ChartViewBase) {
-        log.debug("Deselecting the column of Weekly Breakdown Over Activity By Day MultipleBarChartView was successful.")
+        if(chartView.tag == tagForMultipleBarChartView) {
+            log.debug("Deselecting the column of Weekly Breakdown Over Activity By Day MultipleBarChartView was successful.")
+        } else {
+            log.debug("Deselecting the column of Coding Activity For Last 7 Days By Days Combined Chart View was successful.")
+        }
     }
     
     func logoutUserFromWakaTime() {
@@ -109,13 +142,13 @@ class WakaTimeChartViewController: UIViewController, ChartViewDelegate {
     func getStatisticForLast7DaysForFillingPieChartsView() {
         statisticController.getUserStatisticsForGivenTimeRange(completionHandler: { statistic, status in
             if (statistic != nil && status == 200) {
-                self.chartFill.pieChartFill(pieChartView: self.languagePieChartView,
+                self.chartFilling.pieChartFilling(pieChartView: self.languagePieChartView,
                                   itemsList: (statistic?.usedLanguages)!)
                 log.debug("Language Pie Chart View is filled successfully.")
-                self.chartFill.pieChartFill(pieChartView: self.editorPieChartView,
+                self.chartFilling.pieChartFilling(pieChartView: self.editorPieChartView,
                                     itemsList: (statistic?.usedEditors)!)
                 log.debug("Editor Pie Chart View is filled successfully.")
-                self.chartFill.pieChartFill(pieChartView: self.operatingSystemPieChartView,
+                self.chartFilling.pieChartFilling(pieChartView: self.operatingSystemPieChartView,
                                   itemsList: (statistic?.usedOperatingSystems)!)
                 log.debug("Operating System Pie Chart View is filled successfully.")
                 self.dailyAverageTimeLabel.text = statistic?.humanReadableDailyAverage!
@@ -142,6 +175,7 @@ class WakaTimeChartViewController: UIViewController, ChartViewDelegate {
         return (seconds / 3600, (seconds % 3600) / 60)
     }
     
+    //change this "if else"
     func getSummaryForLast7DaysForFillingLabelsWithWorkingTime() {
         let start = dateManager.getStartDayAsString()
         let end = dateManager.getCurrentDateAsString()
@@ -209,6 +243,101 @@ class WakaTimeChartViewController: UIViewController, ChartViewDelegate {
         })
     }
     
+    //TODO: needed refactoring THIS function
+    //less loops
+    func getSummaryOfCodingActivityForLast7DaysByDays() {
+        let start = dateManager.getStartDayAsString()
+        let end = dateManager.getCurrentDateAsString()
+        var projectsDictionary = [String:[Double]]()
+        var daysOfGivenTimePeriodArray = [String]()
+        var counter = 0
+        var projectWorkingTimePerDay = [Int:[String]]()
+        var projectNameByDays = [Int:[String]]()
+        
+        
+        summaryController.getUserSummaryForGivenTimeRange(startDate: start,
+                                                          endDate: end,
+                                                          completionHandler: {summary, status in
+            if(summary != nil && status == 200) {
+                log.debug("Request for Summary Of coding activity for last 7 days by days passed successfully.")
+                for summaryItem in summary! {
+                    var projectNames = [String]()
+                    var workingTimePerProjects = [String]()
+                    guard let projects = summaryItem.project else {
+                        //TODO: add some warning or error
+                        return
+                    }
+                    if(projects.isEmpty && !projectsDictionary.isEmpty) {
+                        projectNames.append("")
+                        workingTimePerProjects.append("")
+                        for key in projectsDictionary.keys {
+                            projectsDictionary[key]?.insert(0, at: counter)
+                        }
+                    } else {
+                        for projectItem in projects {
+                            
+                            
+                            guard let projectName = projectItem.entryName, let workingTimePerProject = projectItem.workingTimeAsText else {
+                                //TODO: add some warning or error
+                                return
+                            }
+                            let totalCodingTimeHoursPortionPerProjectByDay = projectItem.workingTimeHoursPortion
+                            let totalCodingTimeMinutesPortionPerProjectByDay = projectItem.workingTimeMinutesPortion
+                            let totalCodingTimePerProjectByDay = Double(totalCodingTimeHoursPortionPerProjectByDay!) + (Double(totalCodingTimeMinutesPortionPerProjectByDay!) * 0.01)
+                            projectNames.append(projectName + ": ")
+                            workingTimePerProjects.append(workingTimePerProject)
+                            
+                            if(!projectsDictionary.keys.contains(projectName)) {
+                                var array = [Double]()
+                                array = Array(repeating: 0, count: counter)
+                                array.insert(totalCodingTimePerProjectByDay, at: counter)
+                                projectsDictionary[projectName] = array
+                            } else {
+                                if(projects.count < projectsDictionary.keys.count) {
+                                    for key in projectsDictionary.keys {
+                                        projectsDictionary[key]?.insert(0, at: counter)
+                                    }
+                                    projectsDictionary[projectName]?.remove(at: counter)
+                                    projectsDictionary[projectName]?.insert(totalCodingTimePerProjectByDay, at: counter)
+                                } else {
+                                    projectsDictionary[projectName]?.insert(totalCodingTimePerProjectByDay, at: counter)
+
+                                }
+                            }
+                        }
+                    }
+                    projectNameByDays[counter] = projectNames
+                    projectWorkingTimePerDay[counter] = workingTimePerProjects
+                    counter += 1
+                    let date = self.dateManager.convertToAnotherDateFormat(date: summaryItem.dateOfCurrentRange!)
+                    daysOfGivenTimePeriodArray.append(date)
+                    guard let totalCodingTimeAsString = summaryItem.grandTotalTimeOfCodindAsText else {
+                        return
+                    }
+                    self.markerDataManager.totalCodingActivityPerDay.append(totalCodingTimeAsString)
+                }
+                self.markerDataManager.projectNameByDay = projectNameByDays
+                self.markerDataManager.projectWorkingTimePerDay = projectWorkingTimePerDay
+                
+                self.chartFilling.combinedChartFilling(combinedChartView: self.codingActivityForLast7DaysByDaysCombinedChartView,
+                                                 codingTimePerProjectsByDaysForBarChart: Array(projectsDictionary.values),
+                                                 projectNameArray: Array(projectsDictionary.keys),
+                                                 daysOfGivenTimePeriodArray: daysOfGivenTimePeriodArray)
+            } else {
+                guard status != nil else {
+                    let alert = self.alertSetUp.showAlert(alertTitle: "Unexpected error", alertMessage: "Please, try again later.")
+                    self.present(alert, animated: true, completion: nil)
+                    log.error("Unexpected error without status code.")
+                    log.debug("Alert with unexpected error shown successfully.")
+                    return
+                }
+                self.alertSetUp.showAlertAccordingToStatusCode(fromController: self, statusCode: status!)
+                log.debug("Alert according to status code shown successfully.")
+                log.error("Unexpected error with statistic request with status code: \(status!)")
+            }
+        })
+    }
+    
     func getSummaryForLast7DaysForWeeklyBreakdownOverActivity() {
         let start = dateManager.getStartDayAsString()
         let end = dateManager.getCurrentDateAsString()
@@ -236,7 +365,6 @@ class WakaTimeChartViewController: UIViewController, ChartViewDelegate {
                     }
                 }
                 weeklyWorkingTime = weeklyCodingTimeInSeconds + weeklyBuildingTimeInSeconds
-               
                 weeklyBuildingTimeInPercent = Double((weeklyBuildingTimeInSeconds * 100) / weeklyWorkingTime).rounded(toPlaces: 2)
                 let weeklyBuildingTimeInPercentAsString = "\(weeklyBuildingTimeInPercent) %"
                 if weeklyBuildingTimeInPercent != 0.0 {
@@ -247,8 +375,7 @@ class WakaTimeChartViewController: UIViewController, ChartViewDelegate {
                 let weeklyCodingTimeInPercentAsString = "\(weeklyCodingTimeInPercent) %"
                 weeklyWorkingTimeListInPercentAsString.append(weeklyCodingTimeInPercentAsString)
                 weeklyWorkingTimeListInPercent.append(weeklyCodingTimeInPercent)
-                
-                self.chartFill.horizontalBarChartFill(horizontalBarChartView: self.weeklyBreakdownOverActivityHorizontalBarChartView, workingTimeAsPercentage: weeklyWorkingTimeListInPercent, workingTimeAsPercentageAsString: weeklyWorkingTimeListInPercentAsString)
+                self.chartFilling.horizontalBarChartFilling(horizontalBarChartView: self.workingBreakdownOverActivityHorizontalBarChartView, workingTimeAsPercentage: weeklyWorkingTimeListInPercent, workingTimeAsPercentageAsString: weeklyWorkingTimeListInPercentAsString)
                 log.debug("Weekly Breakdown Over Activity Horizontal Bar Chart is filled successfully.")
             } else {
                 guard status != nil else {
@@ -265,7 +392,8 @@ class WakaTimeChartViewController: UIViewController, ChartViewDelegate {
         })
     }
     
-    func getSummaryForLast7DaysForweeklyBreakdownOverActivityByDay() {
+    //TODO: add alerts
+    func getSummaryForLast7DaysForWeeklyBreakdownOverActivityByDay() {
         let start = dateManager.getStartDayAsString()
         let end = dateManager.getCurrentDateAsString()
         
@@ -276,7 +404,7 @@ class WakaTimeChartViewController: UIViewController, ChartViewDelegate {
                 log.debug("Request for Summary for weekly breakdown over activity passed successfully.")
                 var codingTimePerDay = [Double]()
                 var buildingTimePerDay = [Double]()
-                var daysOfTheWeekArray = [String]()
+                var daysOfGivenTimePeriodArray = [String]()
                 
                 for summaryItem in summary! {
                     if(summaryItem.category != nil && summaryItem.category?.isEmpty == false) {
@@ -284,40 +412,51 @@ class WakaTimeChartViewController: UIViewController, ChartViewDelegate {
                             if(categoryItem.entryName == "Coding" && categoryItem.workingTimeMinutesPortion != nil) {
                                 let totalCodingTimeAsDouble = Double(categoryItem.workingTimeHoursPortion!) + Double(categoryItem.workingTimeMinutesPortion!) / 100
                                 codingTimePerDay.append(totalCodingTimeAsDouble.rounded(toPlaces: 2))
+                                guard let workingTime = categoryItem.workingTimeAsText,
+                                    let workingTimeInPercent = categoryItem.workingTimeInPercent else {
+                                    return
+                                }
+                                self.markerDataManager.codingTimeInPercentForWeeklyBreakdownOverActivityByDays.append("\(workingTimeInPercent)%")
+                                self.markerDataManager.codingTimeForWeeklyBreakdownOverActivityByDay.append(workingTime)
                                 
-                                self.codingTimeForWeeklyBreakdownOverActivityByDayMultipleBarChartViewTap.append("\(categoryItem.workingTimeInPercent!)%")
-//                                self.workingTimeForTap.append(categoryItem.workingTimeAsText ?? "0s")
                             } else if(categoryItem.entryName == "Building" && categoryItem.workingTimeMinutesPortion != nil) {
                                 let totalBuilingTimeAsDouble = Double(categoryItem.workingTimeHoursPortion!) + Double(categoryItem.workingTimeMinutesPortion!) / 100
                                 buildingTimePerDay.append(totalBuilingTimeAsDouble.rounded(toPlaces: 2))
                                 
-                                self.buildingTimeForWeeklyBreakdownOverActivityByDayMultipleBarChartViewTap.append("\(categoryItem.workingTimeInPercent!)%")
-//                                self.workingTimeForTap.append(categoryItem.workingTimeAsText ?? "0s")
+                                guard let buildingTime = categoryItem.workingTimeAsText,
+                                    let workingTimeInPercent = categoryItem.workingTimeInPercent else {
+                                        return
+                                }
+                                
+                                self.markerDataManager.buildingTimeInPercentForWeeklyBreakdownOverActivityByDays.append("\(workingTimeInPercent)%")
+                                self.markerDataManager.buildingTimeForWeeklyBreakdownOverActivityByDay.append(buildingTime)
                             }
                         }
                     } else if(summaryItem.category?.isEmpty == true ) {
                         codingTimePerDay.append(0)
                         buildingTimePerDay.append(0)
-                        self.codingTimeForWeeklyBreakdownOverActivityByDayMultipleBarChartViewTap.append("0%")
-                        self.buildingTimeForWeeklyBreakdownOverActivityByDayMultipleBarChartViewTap.append("0%")
+                        self.markerDataManager.codingTimeInPercentForWeeklyBreakdownOverActivityByDays.append("0%")
+                        self.markerDataManager.buildingTimeInPercentForWeeklyBreakdownOverActivityByDays.append("0%")
+                        
+                        self.markerDataManager.codingTimeForWeeklyBreakdownOverActivityByDay.append("0m")
+                        self.markerDataManager.buildingTimeForWeeklyBreakdownOverActivityByDay.append("0m")
                     }
                     let date = self.dateManager.convertToAnotherDateFormat(date: summaryItem.dateOfCurrentRange!)
-                    daysOfTheWeekArray.append(date)
+                    daysOfGivenTimePeriodArray.append(date)
+                    self.markerDataManager.daysOfGivenTimePeriodArray = daysOfGivenTimePeriodArray
                 }
-                if(buildingTimePerDay.count != 7) {
-                    self.chartFill.multipleBarChartViewFill(multipleBarChartView: self.weeklyBreakdownOverActivityByDayMultipleBarChartView, codingTimePerDay: codingTimePerDay, buildingTimePerDay: nil, daysOfTheWeekArray: daysOfTheWeekArray)
+                if(buildingTimePerDay.count != daysOfGivenTimePeriodArray.count) {
+                    self.chartFilling.multipleBarChartFilling(multipleBarChartView: self.workingBreakdownOverActivityByDayMultipleBarChartView, codingTimePerDay: codingTimePerDay, buildingTimePerDay: nil, daysOfGivenTimePeriodArray: daysOfGivenTimePeriodArray)
                     log.debug("Weekly Breakdown Over Activity Multiple Bar Chart is filled successfully.")
                 } else {
-                    self.chartFill.multipleBarChartViewFill(multipleBarChartView: self.weeklyBreakdownOverActivityByDayMultipleBarChartView, codingTimePerDay: codingTimePerDay, buildingTimePerDay: buildingTimePerDay, daysOfTheWeekArray: daysOfTheWeekArray)
+                    self.chartFilling.multipleBarChartFilling(multipleBarChartView: self.workingBreakdownOverActivityByDayMultipleBarChartView, codingTimePerDay: codingTimePerDay, buildingTimePerDay: buildingTimePerDay, daysOfGivenTimePeriodArray: daysOfGivenTimePeriodArray)
                     log.debug("Weekly Breakdown Over Activity Multiple Bar Chart is filled successfully.")
                 }
-//                self.chartFill.multipleBarChartViewFill(multipleBarChartView: self.weeklyBreakdownOverActivityByDayMultipleBarChartView, codingTimePerDay: codingTimePerDay, buildingTimePerDay: buildingTimePerDay, daysOfTheWeekArray: daysOfTheWeekArray)
-//                log.debug("Weekly Breakdown Over Activity Multiple Bar Chart is filled successfully.")
             }
         })
     }
     
-    func fillLabelWithCurrentDailyWorkingTime() {
+    func fillingLabelWithCurrentDailyWorkingTime() {
         let currentDate = dateManager.getCurrentDateAsString()
         
         summaryController.getUserSummaryForGivenTimeRange(startDate: currentDate,
@@ -382,12 +521,12 @@ class WakaTimeChartViewController: UIViewController, ChartViewDelegate {
                                 let decrease = 100.0 - progressWorkingTimeInPercent
                                 dailyProgressListInPercent.append(decrease)
                                 self.todayWorkingProgressInPercent.text = "\(progressWorkingTimeInPercent)%"
-                                self.todayChangesOfWorkingProgress.text = "\(decrease.rounded(toPlaces: 1)) % Decrease"
+                                self.todayChangesOfWorkingProgress.text = "\(decrease.rounded(toPlaces: 1))% Decrease"
                                 log.debug("Today working progress is decrease.")
                             }
                         }
                     }
-                    self.chartFill.halfPieChartFill(halfPieChartView: self.codingDailyAverageHalfPieChartView,
+                    self.chartFilling.halfPieChartFilling(halfPieChartView: self.codingDailyAverageHalfPieChartView,
                                               itemsList: dailyProgressListInPercent)
                     log.debug("Daily Coding Avarage Chart is filled successfully.")
                 } else {
@@ -406,5 +545,23 @@ class WakaTimeChartViewController: UIViewController, ChartViewDelegate {
                 }
             })
         })
+    }
+    
+    func createBalloonMarkerForWorkingBreakdownOverActivity(date: String, coding: String, building: String) -> BalloonMarkerForWorkingBreakdownOverActivity {
+        let marker : BalloonMarkerForWorkingBreakdownOverActivity = BalloonMarkerForWorkingBreakdownOverActivity(color: UIColor.darkGray.withAlphaComponent(0.75), font: UIFont(name: "PingFangSC-Light", size: 11)!, textColor: UIColor.white, insets: UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0), date: date, coding: coding, building: building)
+        if(building == "") {
+            marker.minimumSize = CGSize(width: CGFloat(90), height: CGFloat(55))
+        } else {
+            marker.minimumSize = CGSize(width: CGFloat(90), height: CGFloat(65))
+        }
+        return marker
+    }
+    
+    func createBalloonMarkerForCodingActivity(date: String, total: String, projectNameByDay: [String], projectWorkingTimePerDay:[String]) -> BalloonMarkerForCodingActivity {
+        let marker : BalloonMarkerForCodingActivity = BalloonMarkerForCodingActivity(color: UIColor.darkGray.withAlphaComponent(0.75), font: UIFont(name: "PingFangSC-Light", size: 11)!, textColor: UIColor.white, insets: UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0), date: date, total: total, projectNameByDay: projectNameByDay, projectWorkingTimePerDay: projectWorkingTimePerDay)
+        
+         marker.minimumSize = CGSize(width: CGFloat(90), height: CGFloat(0))
+        
+        return marker
     }
 }

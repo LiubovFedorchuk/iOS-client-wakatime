@@ -34,7 +34,7 @@ class KeychainManager {
             fatalError("Error reading secret API key from keychain - \(error)")
         }
         
-        return userSecretAPIkey;
+        return userSecretAPIkey
     }
     
     func createAuthorizationHeadersForRequest(userApiKey: String?) -> [String:String] {
