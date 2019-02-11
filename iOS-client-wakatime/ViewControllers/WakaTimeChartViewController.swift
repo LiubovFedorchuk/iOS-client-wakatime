@@ -92,29 +92,34 @@ class WakaTimeChartViewController: UIViewController, ChartViewDelegate {
             if(markerDataManager.buildingTimeInPercentForWeeklyBreakdownOverActivityByDays.count == 7) {
                 buildingTimePerDayInPercentLabel.text = markerDataManager.buildingTimeInPercentForWeeklyBreakdownOverActivityByDays[position]
                 codingTimePerDayInPercentLabel.text = markerDataManager.codingTimeInPercentForWeeklyBreakdownOverActivityByDays[position]
-                
-                workingBreakdownOverActivityByDayMultipleBarChartView.marker = createBalloonMarkerForWorkingBreakdownOverActivity(
+                let marker = createBalloonMarkerForWorkingBreakdownOverActivity(
                     date: markerDataManager.daysOfGivenTimePeriodArray[position],
                     coding: "Coding:  \(markerDataManager.codingTimeForWeeklyBreakdownOverActivityByDay[position])\n",
                     building: "Building: \(markerDataManager.buildingTimeForWeeklyBreakdownOverActivityByDay[position])")
+                marker.chartView = chartView
+                chartView.marker = marker
+            
                 log.debug("Coding and Building Time Per Day In Percent Labels are filled successfully.")
             } else {
                 buildingTimePerDayInPercentLabel.isHidden = true
                 codingTimePerDayInPercentLabel.text = markerDataManager.codingTimeInPercentForWeeklyBreakdownOverActivityByDays[position]
-                
-                workingBreakdownOverActivityByDayMultipleBarChartView.marker = createBalloonMarkerForWorkingBreakdownOverActivity(
+                let marker = createBalloonMarkerForWorkingBreakdownOverActivity(
                     date: markerDataManager.daysOfGivenTimePeriodArray[position],
                     coding: "Coding: \(markerDataManager.codingTimeForWeeklyBreakdownOverActivityByDay[position])",
                     building: "")
+                marker.chartView = chartView
+                chartView.marker = marker
                 log.debug("Coding Time Per Day In Percent Labels are filled successfully.")
             }
         } else {
             log.debug("Selecting the column of Coding Activity For Last 7 Days By Days Combined Chart View was successful.")
-            codingActivityForLast7DaysByDaysCombinedChartView.marker = createBalloonMarkerForCodingActivity(
+            let marker = createBalloonMarkerForCodingActivity(
                 date: markerDataManager.daysOfGivenTimePeriodArray[position],
                 total: markerDataManager.totalCodingActivityPerDay[position],
                 projectNameByDay: markerDataManager.projectNameByDay[position]!,
                 projectWorkingTimePerDay: markerDataManager.projectWorkingTimePerDay[position]!)
+            marker.chartView = chartView
+            chartView.marker = marker
         }
     }
     
@@ -256,15 +261,15 @@ class WakaTimeChartViewController: UIViewController, ChartViewDelegate {
             if(summary != nil && status == 200) {
                 log.debug("Request for Summary Of coding activity for last 7 days by days passed successfully.")
                 for summaryItem in summary! {
-                    var tmp = [String]()
-                    var tmp2 = [String]()
+                    var projectNames = [String]()
+                    var workingTimePerProjects = [String]()
                     guard let projects = summaryItem.project else {
                         //TODO: add some warning or error
                         return
                     }
                     if(projects.isEmpty && !projectsDictionary.isEmpty) {
-                        tmp.append("")
-                        tmp2.append("")
+                        projectNames.append("")
+                        workingTimePerProjects.append("")
                         for key in projectsDictionary.keys {
                             projectsDictionary[key]?.insert(0, at: counter)
                         }
@@ -279,8 +284,8 @@ class WakaTimeChartViewController: UIViewController, ChartViewDelegate {
                             let totalCodingTimeHoursPortionPerProjectByDay = projectItem.workingTimeHoursPortion
                             let totalCodingTimeMinutesPortionPerProjectByDay = projectItem.workingTimeMinutesPortion
                             let totalCodingTimePerProjectByDay = Double(totalCodingTimeHoursPortionPerProjectByDay!) + (Double(totalCodingTimeMinutesPortionPerProjectByDay!) * 0.01)
-                            tmp.append(projectName)
-                            tmp2.append(workingTimePerProject)
+                            projectNames.append(projectName + ": ")
+                            workingTimePerProjects.append(workingTimePerProject)
                             
                             if(!projectsDictionary.keys.contains(projectName)) {
                                 var array = [Double]()
@@ -301,8 +306,8 @@ class WakaTimeChartViewController: UIViewController, ChartViewDelegate {
                             }
                         }
                     }
-                    projectNameByDays[counter] = tmp
-                    projectWorkingTimePerDay[counter] = tmp2
+                    projectNameByDays[counter] = projectNames
+                    projectWorkingTimePerDay[counter] = workingTimePerProjects
                     counter += 1
                     let date = self.dateManager.convertToAnotherDateFormat(date: summaryItem.dateOfCurrentRange!)
                     daysOfGivenTimePeriodArray.append(date)
@@ -545,9 +550,9 @@ class WakaTimeChartViewController: UIViewController, ChartViewDelegate {
     func createBalloonMarkerForWorkingBreakdownOverActivity(date: String, coding: String, building: String) -> BalloonMarkerForWorkingBreakdownOverActivity {
         let marker : BalloonMarkerForWorkingBreakdownOverActivity = BalloonMarkerForWorkingBreakdownOverActivity(color: UIColor.darkGray.withAlphaComponent(0.75), font: UIFont(name: "PingFangSC-Light", size: 11)!, textColor: UIColor.white, insets: UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0), date: date, coding: coding, building: building)
         if(building == "") {
-            marker.minimumSize = CGSize(width: CGFloat(90), height: CGFloat(55.0))
+            marker.minimumSize = CGSize(width: CGFloat(90), height: CGFloat(55))
         } else {
-            marker.minimumSize = CGSize(width: CGFloat(90), height: CGFloat(65.0))
+            marker.minimumSize = CGSize(width: CGFloat(90), height: CGFloat(65))
         }
         return marker
     }
@@ -555,7 +560,7 @@ class WakaTimeChartViewController: UIViewController, ChartViewDelegate {
     func createBalloonMarkerForCodingActivity(date: String, total: String, projectNameByDay: [String], projectWorkingTimePerDay:[String]) -> BalloonMarkerForCodingActivity {
         let marker : BalloonMarkerForCodingActivity = BalloonMarkerForCodingActivity(color: UIColor.darkGray.withAlphaComponent(0.75), font: UIFont(name: "PingFangSC-Light", size: 11)!, textColor: UIColor.white, insets: UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0), date: date, total: total, projectNameByDay: projectNameByDay, projectWorkingTimePerDay: projectWorkingTimePerDay)
         
-         marker.minimumSize = CGSize(width: CGFloat(90), height: CGFloat(65.0))
+         marker.minimumSize = CGSize(width: CGFloat(90), height: CGFloat(0))
         
         return marker
     }

@@ -38,9 +38,13 @@ public class BalloonMarkerForCodingActivity: BalloonMarker {
             + total
             + "\n"
         for i in 0..<projectNameByDay.count {
-            string.append(projectNameByDay[i] + ": ")
-            string.append(projectWorkingTimePerDay[i] + "\n")
+            if(projectNameByDay[i] == "" && projectWorkingTimePerDay[i] == "") {
+                setLabel(string)
+            } else {
+                string.append(projectNameByDay[i])
+                string.append(projectWorkingTimePerDay[i] + "\n")
+                setLabel(string)
+            }
         }
-        setLabel(string)
     }
 }
