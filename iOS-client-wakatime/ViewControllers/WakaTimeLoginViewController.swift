@@ -10,13 +10,11 @@ import UIKit
 
 class WakaTimeLoginViewController: UIViewController, UITextFieldDelegate {
     
-    let alertSetUp = AlertSetUp()
     // MARK: - IBOutlets
     @IBOutlet weak var userSecretAPIkeyTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
-    @IBOutlet weak var userPasswordTextField: UITextField!
-    @IBOutlet weak var userEmailTextField: UITextField!
-    @IBOutlet weak var loginGitHubButton: UIButton!
+    
+    let alertSetUp = AlertSetUp()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +28,6 @@ class WakaTimeLoginViewController: UIViewController, UITextFieldDelegate {
             }
             self.userSecretAPIkeyTextField.delegate = self
             loginButtonSetUp(button: loginButton)
-            loginButtonSetUp(button: loginGitHubButton)
         }
     }
 

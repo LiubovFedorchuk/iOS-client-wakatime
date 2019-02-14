@@ -53,14 +53,10 @@ DerivedData/
 !default.mode2v3
 *.perspectivev3
 !default.perspectivev3
-xcuserdata/
-xcshareddata
 
 ## Other
 *.moved-aside
-*.xccheckout
 *.xcscmblueprint
-*.xcuserstate
 
 
 ## Obj-C/Swift specific
@@ -77,20 +73,6 @@ xcshareddata
 # Package.pins
 .build/
 
-# Carthage - Refactored to standalone file
-
-# fastlane
-#
-# It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
-# screenshots whenever they are needed.
-# For more information about the recommended setup visit:
-# https://docs.fastlane.tools/best-practices/source-control/#source-control
-
-fastlane/report.xml
-fastlane/Preview.html
-fastlane/screenshots
-fastlane/test_output
-
 ### Xcode ###
 # Xcode
 #
@@ -98,10 +80,6 @@ fastlane/test_output
 
 
 ### Xcode Patch ###
-*.xcodeproj/*
-!*.xcodeproj/project.pbxproj
-!*.xcodeproj/xcshareddata/
-!*.xcworkspace/contents.xcworkspacedata
 /*.gcno
 
 

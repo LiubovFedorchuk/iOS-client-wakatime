@@ -24,7 +24,7 @@ class UserController {
     
     let BASE_URL = "https://wakatime.com/api/v1"
     
-    func getUser (headers: [String:String], completionHandler: @escaping (Int?) -> Void) {
+    func getUser (headers: [String: String], completionHandler: @escaping (Int?) -> Void) {
         Alamofire.request(BASE_URL + "/users/current",
                           method: .get,
                           parameters: nil,

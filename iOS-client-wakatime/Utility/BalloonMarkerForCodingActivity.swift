@@ -6,7 +6,6 @@
 //  Copyright © 2019 Liubov Fedorchuk. All rights reserved.
 //
 
-import Foundation
 import Charts
 
 public class BalloonMarkerForCodingActivity: BalloonMarker {
@@ -33,7 +32,7 @@ public class BalloonMarkerForCodingActivity: BalloonMarker {
     public override func refreshContent(entry: ChartDataEntry, highlight: Highlight) {
         var string = ""
         string = date
-            + " \n"
+            + "\n"
             + "Total: "
             + total
             + "\n"

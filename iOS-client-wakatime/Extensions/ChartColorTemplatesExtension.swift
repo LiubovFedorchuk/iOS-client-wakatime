@@ -6,7 +6,6 @@
 //  Copyright © 2019 Liubov Fedorchuk. All rights reserved.
 //
 
-import Foundation
 import Charts
 
 extension ChartColorTemplates {

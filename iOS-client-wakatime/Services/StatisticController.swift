@@ -1,8 +1,8 @@
 //
-//  DurationController.swift
+//  StatisticController.swift
 //  iOS-client-wakatime
 //
-//  Created by Liubov Fedorchuk on 30.01.2018.
+//  Created by Liubov Fedorchuk on 25.01.2018.
 //  Copyright © 2018 Liubov Fedorchuk. All rights reserved.
 //
 
@@ -13,41 +13,44 @@ import AlamofireObjectMapper
 /**
     # Controller
  
-    [WakaTime API v1: Durations]: https://wakatime.com/developers#durations
+    [WakaTime API v1: Stats]: https://wakatime.com/developers#stats
  
-    Usage: to get user's coding activity for the given day as an array of duration blocks.
+    Usage: to get user's coding activity for the given time range.
  
-    See also: [WakaTime API v1: Durations]
+    See also: [WakaTime API v1: Stats]
  
     ## URL Parameters:
+    `range` (_String_) - necessary - show user's coding activity for:
+    - `last_7_days`
+    - `last_30_days`
+    - `last_6_months`
+    - `last_year`
  
-    `date` (_String_) - necessary - durations will be returned from 12am until 11:59pm in user's timezone for this day.
- 
-    `project` (_String_) - optional - show durations for this project.
- 
-    `branches` (_String_) - optional - show durations for these branches; comma separated list of branch names.
+    `project` (_String_) - optional - show more detailed stats limited to this project.
  
  */
 
-class DurationController {
+class StatisticController {
     
     let BASE_URL = "https://wakatime.com/api/v1"
     
-    func getDurationOfUserCodingActivity(currentDate: String, completionHandler: @escaping ([Duration]?, Int?) -> Void) {
+    func getUserStatisticsForGivenTimeRange(completionHandler: @escaping (Statistic?, Int?) -> Void) {
+        //TODO: add opportunity to change time range for getting user's coding activity
+        let range = "last_7_days"
         let keychainManager = KeychainManager()
         let headers = keychainManager.createAuthorizationHeadersForRequest(userApiKey: nil)
         
-        Alamofire.request(BASE_URL + "/users/current/durations?date=\(currentDate)",
+        Alamofire.request(BASE_URL + "/users/current/stats/\(range)",
             method: .get,
             parameters: nil,
             encoding: JSONEncoding.default,
-            headers: headers).validate().responseArray(keyPath: "data") {
-                (response: DataResponse<[Duration]>) in
+            headers: headers).validate().responseObject(keyPath: "data") {
+                (response: DataResponse<Statistic>) in
                 let status = response.response?.statusCode
                 switch response.result {
                 case .success:
                     guard status == 200 else {
-                        log.debug("Request passed with status code, but not 200 OK: \(status!)");
+                        log.debug("Request passed with status code, but not 200 OK: \(status!)")
                         completionHandler(nil, status!)
                         return
                     }
@@ -62,7 +65,7 @@ class DurationController {
                     }
                     
                     log.debug("Request failure with error: \(error)")
-                    completionHandler(nil, nil);
+                    completionHandler(nil, nil)
                 }
         }
     }

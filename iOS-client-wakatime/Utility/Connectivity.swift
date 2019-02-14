@@ -6,11 +6,10 @@
 //  Copyright © 2018 Liubov Fedorchuk. All rights reserved.
 //
 
-import Foundation
 import Alamofire
 
 class Connectivity {
-    class var isConnectedToInternet:Bool {
+    class var isConnectedToInternet: Bool {
         return NetworkReachabilityManager()!.isReachable
     }
 }

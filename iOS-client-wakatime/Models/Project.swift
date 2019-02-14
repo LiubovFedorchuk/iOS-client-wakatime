@@ -6,7 +6,6 @@
 //  Copyright © 2018 Liubov Fedorchuk. All rights reserved.
 //
 
-import Foundation
 import ObjectMapper
 
 class Project: Mappable {
@@ -23,8 +22,7 @@ class Project: Mappable {
         self.id = id
         self.name = name
         self.privacy = privacy
-        self.repository = repository
-        
+        self.repository = repository  
     }
     
     required init?(map: Map) {

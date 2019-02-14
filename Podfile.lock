@@ -7,7 +7,7 @@ PODS:
     - Charts/Core (= 3.2.1)
   - Charts/Core (3.2.1)
   - ObjectMapper (3.4.2)
-  - SwiftyBeaver (1.6.1)
+  - SwiftyBeaver (1.6.2)
 
 DEPENDENCIES:
   - Alamofire (~> 4.7)
@@ -29,7 +29,7 @@ SPEC CHECKSUMS:
   AlamofireObjectMapper: 92b6ce2423a9d159e686f6a1d514a009bf903ddc
   Charts: f122fb70b19847fa5817d018b77d6c5a2296ab25
   ObjectMapper: 0d4402610f4e468903ae64629eec4784531e5c51
-  SwiftyBeaver: ccfcdf85a04d429f1633f668650b0ce8020bda3a
+  SwiftyBeaver: 8e67ab3cd94389cbbb7a9c7cc02748d98bfee68e
 
 PODFILE CHECKSUM: bcd9ebda79030430975bb321804b0a403fcd5c83
 

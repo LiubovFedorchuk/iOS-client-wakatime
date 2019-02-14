@@ -6,7 +6,6 @@
 //  Copyright © 2018 Liubov Fedorchuk. All rights reserved.
 //
 
-import Foundation
 import Charts
 
 class ChartFilling {
@@ -16,10 +15,9 @@ class ChartFilling {
     var dataEntriesCoding: [BarChartDataEntry] = []
     var dataEntriesBuilding: [BarChartDataEntry] = []
     
-    //TODO: rename variables (like itemList, etc.)
-    func pieChartFilling(pieChartView: PieChartView, itemsList: [EntrySummary]) {
+    func pieChartFilling(pieChartView: PieChartView, statisticItemsList: [EntrySummary]) {
         var entryWorkingTimeItem = [PieChartDataEntry]()
-        for item in itemsList {
+        for item in statisticItemsList {
             let dataEntry = PieChartDataEntry(value: Double(item.workingTimeInPercent!),
                                           label: "\(item.entryName!)")
             entryWorkingTimeItem.append(dataEntry)
@@ -241,7 +239,6 @@ class ChartFilling {
             let data = PieChartData(dataSet: dataSet)
             halfPieChartView.data = data
         }
-        halfPieChartView.animate(xAxisDuration: 1.5, yAxisDuration: 1.5, easingOption: .linear)
         chartSetUp.setUpHalfPieChartView(halfPieChartView: halfPieChartView)
     }
 }
