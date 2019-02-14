@@ -6,7 +6,6 @@
 //  Copyright © 2019 Liubov Fedorchuk. All rights reserved.
 //
 
-import Foundation
 import Charts
 
 public class BalloonMarkerForWorkingBreakdownOverActivity: BalloonMarker {
@@ -29,7 +28,7 @@ public class BalloonMarkerForWorkingBreakdownOverActivity: BalloonMarker {
     
     public override func refreshContent(entry: ChartDataEntry, highlight: Highlight) {
         let string = date
-            + " \n"
+            + "\n"
             + coding
             + building
         setLabel(string)

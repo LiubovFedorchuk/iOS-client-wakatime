@@ -12,9 +12,7 @@
 		763F92AF201A1D0F00818354 /* Statistic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763F92AE201A1D0F00818354 /* Statistic.swift */; };
 		763F92B3201A1D4C00818354 /* EntrySummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763F92B2201A1D4C00818354 /* EntrySummary.swift */; };
 		769E2D85202098FC00E023AF /* Summary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769E2D84202098FC00E023AF /* Summary.swift */; };
-		769E2D872020B13100E023AF /* Duration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769E2D862020B13100E023AF /* Duration.swift */; };
 		769E2D892020B90500E023AF /* SummaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769E2D882020B90500E023AF /* SummaryController.swift */; };
-		769E2D8B2020DBD600E023AF /* DurationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769E2D8A2020DBD600E023AF /* DurationController.swift */; };
 		76B737362018A863005260D5 /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B737352018A863005260D5 /* KeychainPasswordItem.swift */; };
 		76B737382018A8D5005260D5 /* KeychainConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B737372018A8D5005260D5 /* KeychainConfiguration.swift */; };
 		76D82677211DC7520094ABDA /* ChartSetUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D82676211DC7520094ABDA /* ChartSetUp.swift */; };
@@ -33,10 +31,16 @@
 		F0374E102170ECF9002C6DDD /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0374E0F2170ECF9002C6DDD /* Project.swift */; };
 		F0374E122170EF19002C6DDD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0374E112170EF19002C6DDD /* User.swift */; };
 		F04689ED21EFDE040038A36E /* BalloonMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04689EC21EFDE030038A36E /* BalloonMarker.swift */; };
-		F0722BE821A99E3A00010701 /* ChartFill.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0722BE721A99E3A00010701 /* ChartFill.swift */; };
-		F0F3C7C5216F88970024A74A /* Double+Conversions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F3C7C4216F88970024A74A /* Double+Conversions.swift */; };
+		F06E8BDD2213694300D7B2F5 /* MarkerDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06E8BDC2213694300D7B2F5 /* MarkerDataManager.swift */; };
+		F06E8BDF2213695100D7B2F5 /* BalloonMarkerViewForWorkingBreakdownOverActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06E8BDE2213695100D7B2F5 /* BalloonMarkerViewForWorkingBreakdownOverActivity.swift */; };
+		F06E8BE12213695900D7B2F5 /* ChartFilling.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06E8BE02213695900D7B2F5 /* ChartFilling.swift */; };
+		F06E8BE32213696100D7B2F5 /* BalloonMarkerForCodingActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06E8BE22213696100D7B2F5 /* BalloonMarkerForCodingActivity.swift */; };
+		F06E8BE5221369CF00D7B2F5 /* ChartColorTemplatesExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06E8BE4221369CF00D7B2F5 /* ChartColorTemplatesExtension.swift */; };
+		F0CC31A12215E4E00034D974 /* DateExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CC31A02215E4E00034D974 /* DateExtentions.swift */; };
+		F0CC31A32215ECC30034D974 /* IntExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CC31A22215ECC30034D974 /* IntExtensions.swift */; };
+		F0CC31A52215EE530034D974 /* StringExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CC31A42215EE530034D974 /* StringExtention.swift */; };
+		F0F3C7C5216F88970024A74A /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F3C7C4216F88970024A74A /* DoubleExtension.swift */; };
 		F0F3C7C7216F89D80024A74A /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F3C7C6216F89D80024A74A /* KeychainManager.swift */; };
-		F0F3C7C9216FA7C00024A74A /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F3C7C8216FA7C00024A74A /* DateManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,9 +60,7 @@
 		763F92AE201A1D0F00818354 /* Statistic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statistic.swift; sourceTree = "<group>"; };
 		763F92B2201A1D4C00818354 /* EntrySummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntrySummary.swift; sourceTree = "<group>"; };
 		769E2D84202098FC00E023AF /* Summary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Summary.swift; sourceTree = "<group>"; };
-		769E2D862020B13100E023AF /* Duration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Duration.swift; sourceTree = "<group>"; };
 		769E2D882020B90500E023AF /* SummaryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryController.swift; sourceTree = "<group>"; };
-		769E2D8A2020DBD600E023AF /* DurationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationController.swift; sourceTree = "<group>"; };
 		76B737352018A863005260D5 /* KeychainPasswordItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainPasswordItem.swift; sourceTree = "<group>"; };
 		76B737372018A8D5005260D5 /* KeychainConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainConfiguration.swift; sourceTree = "<group>"; };
 		76D82676211DC7520094ABDA /* ChartSetUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartSetUp.swift; sourceTree = "<group>"; };
@@ -84,10 +86,16 @@
 		F0374E0F2170ECF9002C6DDD /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		F0374E112170EF19002C6DDD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F04689EC21EFDE030038A36E /* BalloonMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalloonMarker.swift; sourceTree = "<group>"; };
-		F0722BE721A99E3A00010701 /* ChartFill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartFill.swift; sourceTree = "<group>"; };
-		F0F3C7C4216F88970024A74A /* Double+Conversions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Conversions.swift"; sourceTree = "<group>"; };
+		F06E8BDC2213694300D7B2F5 /* MarkerDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkerDataManager.swift; sourceTree = "<group>"; };
+		F06E8BDE2213695100D7B2F5 /* BalloonMarkerViewForWorkingBreakdownOverActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalloonMarkerViewForWorkingBreakdownOverActivity.swift; sourceTree = "<group>"; };
+		F06E8BE02213695900D7B2F5 /* ChartFilling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartFilling.swift; sourceTree = "<group>"; };
+		F06E8BE22213696100D7B2F5 /* BalloonMarkerForCodingActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalloonMarkerForCodingActivity.swift; sourceTree = "<group>"; };
+		F06E8BE4221369CF00D7B2F5 /* ChartColorTemplatesExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartColorTemplatesExtension.swift; sourceTree = "<group>"; };
+		F0CC31A02215E4E00034D974 /* DateExtentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtentions.swift; sourceTree = "<group>"; };
+		F0CC31A22215ECC30034D974 /* IntExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExtensions.swift; sourceTree = "<group>"; };
+		F0CC31A42215EE530034D974 /* StringExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtention.swift; sourceTree = "<group>"; };
+		F0F3C7C4216F88970024A74A /* DoubleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExtension.swift; sourceTree = "<group>"; };
 		F0F3C7C6216F89D80024A74A /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
-		F0F3C7C8216FA7C00024A74A /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,7 +141,6 @@
 			children = (
 				763F92AA201A007600818354 /* StatisticController.swift */,
 				769E2D882020B90500E023AF /* SummaryController.swift */,
-				769E2D8A2020DBD600E023AF /* DurationController.swift */,
 				F0374E0D2170E498002C6DDD /* UserController.swift */,
 			);
 			path = Services;
@@ -154,7 +161,6 @@
 				763F92AE201A1D0F00818354 /* Statistic.swift */,
 				763F92B2201A1D4C00818354 /* EntrySummary.swift */,
 				769E2D84202098FC00E023AF /* Summary.swift */,
-				769E2D862020B13100E023AF /* Duration.swift */,
 				F0374E0F2170ECF9002C6DDD /* Project.swift */,
 				F0374E112170EF19002C6DDD /* User.swift */,
 			);
@@ -185,7 +191,7 @@
 		76E16580200F786400898273 /* iOS-client-wakatime */ = {
 			isa = PBXGroup;
 			children = (
-				F0F3C7C3216F885F0024A74A /* Extension */,
+				F0F3C7C3216F885F0024A74A /* Extensions */,
 				F0F3C7C2216F88010024A74A /* Utility */,
 				764C5C582013A6FE00526EF2 /* Models */,
 				764C5C572013A6F200526EF2 /* ViewControllers */,
@@ -227,27 +233,33 @@
 		F0F3C7C2216F88010024A74A /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				76D82676211DC7520094ABDA /* ChartSetUp.swift */,
+				F06E8BE02213695900D7B2F5 /* ChartFilling.swift */,
+				F06E8BE22213696100D7B2F5 /* BalloonMarkerForCodingActivity.swift */,
+				F06E8BDE2213695100D7B2F5 /* BalloonMarkerViewForWorkingBreakdownOverActivity.swift */,
+				F04689EC21EFDE030038A36E /* BalloonMarker.swift */,
+				F06E8BDC2213694300D7B2F5 /* MarkerDataManager.swift */,
 				76E16581200F786400898273 /* AppDelegate.swift */,
 				76B737372018A8D5005260D5 /* KeychainConfiguration.swift */,
 				76B737352018A863005260D5 /* KeychainPasswordItem.swift */,
-				76D82676211DC7520094ABDA /* ChartSetUp.swift */,
 				76D82678211DC84C0094ABDA /* AlertSetUp.swift */,
 				76E16588200F786400898273 /* Assets.xcassets */,
 				F0F3C7C6216F89D80024A74A /* KeychainManager.swift */,
-				F0F3C7C8216FA7C00024A74A /* DateManager.swift */,
 				F0374E0B2170CF39002C6DDD /* Connectivity.swift */,
-				F0722BE721A99E3A00010701 /* ChartFill.swift */,
-				F04689EC21EFDE030038A36E /* BalloonMarker.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
 		};
-		F0F3C7C3216F885F0024A74A /* Extension */ = {
+		F0F3C7C3216F885F0024A74A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				F0F3C7C4216F88970024A74A /* Double+Conversions.swift */,
+				F06E8BE4221369CF00D7B2F5 /* ChartColorTemplatesExtension.swift */,
+				F0F3C7C4216F88970024A74A /* DoubleExtension.swift */,
+				F0CC31A02215E4E00034D974 /* DateExtentions.swift */,
+				F0CC31A22215ECC30034D974 /* IntExtensions.swift */,
+				F0CC31A42215EE530034D974 /* StringExtention.swift */,
 			);
-			path = Extension;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -423,17 +435,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				763F92AB201A007600818354 /* StatisticController.swift in Sources */,
-				769E2D8B2020DBD600E023AF /* DurationController.swift in Sources */,
+				F06E8BE5221369CF00D7B2F5 /* ChartColorTemplatesExtension.swift in Sources */,
+				F0CC31A12215E4E00034D974 /* DateExtentions.swift in Sources */,
 				F0374E0C2170CF39002C6DDD /* Connectivity.swift in Sources */,
 				F0374E102170ECF9002C6DDD /* Project.swift in Sources */,
-				769E2D872020B13100E023AF /* Duration.swift in Sources */,
 				763F92B3201A1D4C00818354 /* EntrySummary.swift in Sources */,
+				F06E8BE32213696100D7B2F5 /* BalloonMarkerForCodingActivity.swift in Sources */,
 				76E16584200F786400898273 /* WakaTimeLoginViewController.swift in Sources */,
+				F06E8BDD2213694300D7B2F5 /* MarkerDataManager.swift in Sources */,
+				F0CC31A52215EE530034D974 /* StringExtention.swift in Sources */,
+				F0CC31A32215ECC30034D974 /* IntExtensions.swift in Sources */,
 				76B737382018A8D5005260D5 /* KeychainConfiguration.swift in Sources */,
 				76D82679211DC84C0094ABDA /* AlertSetUp.swift in Sources */,
 				F0F3C7C7216F89D80024A74A /* KeychainManager.swift in Sources */,
-				F0F3C7C9216FA7C00024A74A /* DateManager.swift in Sources */,
-				F0722BE821A99E3A00010701 /* ChartFill.swift in Sources */,
+				F06E8BE12213695900D7B2F5 /* ChartFilling.swift in Sources */,
 				F04689ED21EFDE040038A36E /* BalloonMarker.swift in Sources */,
 				76B737362018A863005260D5 /* KeychainPasswordItem.swift in Sources */,
 				769E2D892020B90500E023AF /* SummaryController.swift in Sources */,
@@ -441,7 +456,8 @@
 				76F456FA2017677A00AF3F8B /* WakaTimeChartViewController.swift in Sources */,
 				F0374E0E2170E498002C6DDD /* UserController.swift in Sources */,
 				763F92AF201A1D0F00818354 /* Statistic.swift in Sources */,
-				F0F3C7C5216F88970024A74A /* Double+Conversions.swift in Sources */,
+				F06E8BDF2213695100D7B2F5 /* BalloonMarkerViewForWorkingBreakdownOverActivity.swift in Sources */,
+				F0F3C7C5216F88970024A74A /* DoubleExtension.swift in Sources */,
 				76D82677211DC7520094ABDA /* ChartSetUp.swift in Sources */,
 				76E16582200F786400898273 /* AppDelegate.swift in Sources */,
 				F0374E122170EF19002C6DDD /* User.swift in Sources */,

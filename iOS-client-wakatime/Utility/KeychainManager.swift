@@ -6,9 +6,6 @@
 //  Copyright © 2018 Liubov Fedorchuk. All rights reserved.
 //
 
-import Foundation
-import UIKit
-
 class KeychainManager {
     
     func deleteUserSecretAPIkeyFromKeychain() {
@@ -37,17 +34,16 @@ class KeychainManager {
         return userSecretAPIkey
     }
     
-    func createAuthorizationHeadersForRequest(userApiKey: String?) -> [String:String] {
-        if (userApiKey != nil) {
-            let userSecretAPIkeyUsingEncoding = userApiKey!.data(using: String.Encoding.utf8)!
-            let userSecretAPIkeyBase64Encoded = userSecretAPIkeyUsingEncoding.base64EncodedString(options: [])
-            let headers = ["Authorization" : "Basic \(userSecretAPIkeyBase64Encoded)"]
-            return headers
-        } else {
+    func createAuthorizationHeadersForRequest(userApiKey: String?) -> [String: String] {
+        guard let apiKey = userApiKey else {
             let userSecretAPIkeyUsingEncoding = self.readUserSecretAPIkeyFromKeychain().data(using: String.Encoding.utf8)!
             let userSecretAPIkeyBase64Encoded = userSecretAPIkeyUsingEncoding.base64EncodedString(options: [])
             let header = ["Authorization" : "Basic \(userSecretAPIkeyBase64Encoded)"]
             return header
         }
+        let userSecretAPIkeyUsingEncoding = apiKey.data(using: String.Encoding.utf8)!
+        let userSecretAPIkeyBase64Encoded = userSecretAPIkeyUsingEncoding.base64EncodedString(options: [])
+        let headers = ["Authorization" : "Basic \(userSecretAPIkeyBase64Encoded)"]
+        return headers
     }
 }

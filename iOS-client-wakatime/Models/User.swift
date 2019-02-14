@@ -6,7 +6,6 @@
 //  Copyright © 2018 Liubov Fedorchuk. All rights reserved.
 //
 
-import Foundation
 import ObjectMapper
 
 class User: Mappable {
@@ -36,7 +35,6 @@ class User: Mappable {
         self.lastPluginName = lastPluginName
         self.lastProject = lastProject
         self.location = location
-        
     }
     
     required init?(map: Map) {

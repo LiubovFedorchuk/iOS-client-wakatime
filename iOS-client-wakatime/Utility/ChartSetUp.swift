@@ -6,8 +6,6 @@
 //  Copyright © 2018 Liubov Fedorchuk. All rights reserved.
 //
 
-import Foundation
-import UIKit
 import Charts
 
 class ChartSetUp {
@@ -22,115 +20,109 @@ class ChartSetUp {
     }()
     
     func setUpPieChartView(pieChartView: PieChartView) {
-        pieChartView.chartDescription?.enabled = false
         pieChartView.drawHoleEnabled = false
-        pieChartView.noDataText = "No chart data available."
-        pieChartView.noDataTextColor = UIColor(red: 123.0/255.0,
-                                               green: 128.0/255.0,
-                                               blue: 131.0/255.0,
-                                               alpha: 1.0)
+        pieChartView.chartDescription?.enabled = false
         pieChartView.isUserInteractionEnabled = true
-        pieChartView.backgroundColor = UIColor(red: 45.0/255.0,
-                                               green: 53.0/255.0,
-                                               blue: 60.0/255.0,
-                                               alpha: 1.0);
-        pieChartView.legend.textColor = UIColor(red: 123.0/255.0,
-                                                green: 128.0/255.0,
-                                                blue: 131.0/255.0,
-                                                alpha: 1.0);
-        pieChartView.legend.font = UIFont(name: "PingFangSC-Light", size: 12)!
-        pieChartView.legend.orientation = .horizontal
-        pieChartView.legend.verticalAlignment = .bottom
-        pieChartView.legend.horizontalAlignment = .left
+        pieChartView.noDataText = "No chart data available."
+        pieChartView.noDataTextColor = UIColor(red: 123/255,
+                                               green: 128/255,
+                                               blue: 131/255,
+                                               alpha: 1)
+        pieChartView.backgroundColor = UIColor(red: 45/255,
+                                               green: 53/255,
+                                               blue: 60/255,
+                                               alpha: 1)
         pieChartView.animate(xAxisDuration: 1.5, yAxisDuration: 1.5, easingOption: .linear)
         pieChartView.notifyDataSetChanged()
+        
+        let legend = pieChartView.legend
+        legend.font = UIFont(name: "PingFangSC-Light", size: 12)!
+        legend.textColor = UIColor(red: 123/255,
+                                   green: 128/255,
+                                   blue: 131/255,
+                                   alpha: 1)
+        legend.orientation = .horizontal
+        legend.verticalAlignment = .bottom
+        legend.horizontalAlignment = .left
     }
     
     func setUpHalfPieChartView(halfPieChartView: PieChartView) {
         halfPieChartView.maxAngle = 180
         halfPieChartView.rotationAngle = 180
-        halfPieChartView.rotationEnabled = false
-        halfPieChartView.chartDescription?.enabled = false
-        halfPieChartView.legend.enabled = false
-        halfPieChartView.noDataText = ""
-        halfPieChartView.isUserInteractionEnabled = true
-        halfPieChartView.backgroundColor = UIColor(red: 45.0/255.0,
-                                                   green: 53.0/255.0,
-                                                   blue: 60.0/255.0,
-                                                   alpha: 1.0)
-        halfPieChartView.holeColor = UIColor(red: 45.0/255.0,
-                                             green: 53.0/255.0,
-                                             blue: 60.0/255.0,
-                                             alpha: 1.0)
         halfPieChartView.holeRadiusPercent = 0.6
+        halfPieChartView.rotationEnabled = false
+        halfPieChartView.legend.enabled = false
         halfPieChartView.drawEntryLabelsEnabled = false
+        halfPieChartView.chartDescription?.enabled = false
+        halfPieChartView.noDataText = "No chart data available."
+        halfPieChartView.isUserInteractionEnabled = true
+        halfPieChartView.backgroundColor = UIColor(red: 45/255,
+                                                   green: 53/255,
+                                                   blue: 60/255,
+                                                   alpha: 1)
+        halfPieChartView.holeColor = halfPieChartView.backgroundColor
         halfPieChartView.animate(xAxisDuration: 1.5, yAxisDuration: 1.5, easingOption: .linear)
         halfPieChartView.notifyDataSetChanged()
     }
     
     func setUpHorizontalBarChartView(horizontalBarChartView: HorizontalBarChartView) {
         horizontalBarChartView.noDataText = "No chart data available."
-        horizontalBarChartView.noDataTextColor = UIColor(red: 123.0/255.0,
-                                                        green: 128.0/255.0,
-                                                        blue: 131.0/255.0,
-                                                        alpha: 1.0)
-        horizontalBarChartView.backgroundColor = UIColor(red: 45.0/255.0,
-                                                         green: 53.0/255.0,
-                                                         blue: 60.0/255.0,
-                                                         alpha: 1.0)
+        horizontalBarChartView.noDataTextColor = UIColor(red: 123/255,
+                                                         green: 128/255,
+                                                         blue: 131/255,
+                                                         alpha: 1)
+        horizontalBarChartView.backgroundColor = UIColor(red: 45/255,
+                                                         green: 53/255,
+                                                         blue: 60/255,
+                                                         alpha: 1)
         horizontalBarChartView.legend.enabled = false
-        horizontalBarChartView.drawBarShadowEnabled = false
-        horizontalBarChartView.chartDescription?.enabled = false
-        horizontalBarChartView.isUserInteractionEnabled = true
-        horizontalBarChartView.drawGridBackgroundEnabled = false
-        horizontalBarChartView.animate(xAxisDuration: 1.5, yAxisDuration: 1.5, easingOption: .linear)
-        horizontalBarChartView.notifyDataSetChanged()
-        
         horizontalBarChartView.leftAxis.enabled = false
         horizontalBarChartView.rightAxis.enabled = false
-        horizontalBarChartView.xAxis.drawGridLinesEnabled = false
-        horizontalBarChartView.xAxis.drawAxisLineEnabled = false
+        horizontalBarChartView.drawBarShadowEnabled = false
+        horizontalBarChartView.drawGridBackgroundEnabled = false
+        horizontalBarChartView.chartDescription?.enabled = false
+        horizontalBarChartView.isUserInteractionEnabled = true
+        horizontalBarChartView.animate(xAxisDuration: 1.5, yAxisDuration: 1.5, easingOption: .linear)
+        horizontalBarChartView.notifyDataSetChanged()
+        horizontalBarChartView.setExtraOffsets(left: 65, top: 65, right: 0, bottom: 65)
         
-        horizontalBarChartView.leftAxis.axisMinimum = 0
-        horizontalBarChartView.rightAxis.axisMinimum = 0
-        horizontalBarChartView.xAxis.labelPosition = .top
-        horizontalBarChartView.xAxis.granularityEnabled = true
-        horizontalBarChartView.xAxis.granularity = 1
-        horizontalBarChartView.xAxis.labelTextColor = .lightGray
-        
-        horizontalBarChartView.setExtraOffsets(left: 65.0, top: 65.0, right: 0.0, bottom: 65.0)
+        let xAxis = horizontalBarChartView.xAxis
+        xAxis.drawGridLinesEnabled = false
+        xAxis.drawAxisLineEnabled = false
+        xAxis.labelPosition = .top
+        xAxis.granularity = 1
+        xAxis.labelTextColor = .lightGray
     }
     
     func setUpMultipleBarChartView(multipleBarChartView: BarChartView) {
         multipleBarChartView.noDataText = "No chart data available."
-        multipleBarChartView.chartDescription?.enabled = false
         multipleBarChartView.drawBarShadowEnabled = false
         multipleBarChartView.highlightFullBarEnabled = false
         multipleBarChartView.drawGridBackgroundEnabled = false
-        multipleBarChartView.isUserInteractionEnabled = true
+        multipleBarChartView.chartDescription?.enabled = false
         multipleBarChartView.drawMarkers = true
+        multipleBarChartView.isUserInteractionEnabled = true
         multipleBarChartView.extraBottomOffset = 10
         multipleBarChartView.animate(xAxisDuration: 1.5, yAxisDuration: 1.5, easingOption: .linear)
         multipleBarChartView.notifyDataSetChanged()
         
-        multipleBarChartView.noDataTextColor = UIColor(red: 123.0/255.0,
-                                                    green: 128.0/255.0,
-                                                    blue: 131.0/255.0,
-                                                    alpha: 1.0)
-        multipleBarChartView.backgroundColor = UIColor(red: 45.0/255.0,
-                                                    green: 53.0/255.0,
-                                                    blue: 60.0/255.0,
-                                                    alpha: 1.0)
+        multipleBarChartView.noDataTextColor = UIColor(red: 123/255,
+                                                    green: 128/255,
+                                                    blue: 131/255,
+                                                    alpha: 1)
+        multipleBarChartView.backgroundColor = UIColor(red: 45/255,
+                                                    green: 53/255,
+                                                    blue: 60/255,
+                                                    alpha: 1)
         let legend = multipleBarChartView.legend
-        legend.enabled = true
         legend.horizontalAlignment = .right
         legend.verticalAlignment = .top
         legend.orientation = .horizontal
         legend.textColor = .lightGray
         legend.font = UIFont(name: "PingFangSC-Light", size: 11)!
-        legend.yOffset = 3.0
-        legend.xOffset = 119.0
-        legend.xEntrySpace = 90.0
+        legend.yOffset = 3
+        legend.xOffset = 119
+        legend.xEntrySpace = 90
         
         let xAxis = multipleBarChartView.xAxis
         xAxis.drawGridLinesEnabled = false
@@ -162,19 +154,19 @@ class ChartSetUp {
     
     func setUpCombinedChartView(combinedChartView: CombinedChartView) {
         combinedChartView.noDataText = "No chart data available."
-        combinedChartView.noDataTextColor = UIColor(red: 123.0/255.0,
-                                                    green: 128.0/255.0,
-                                                    blue: 131.0/255.0,
-                                                    alpha: 1.0)
-        combinedChartView.backgroundColor = UIColor(red: 45.0/255.0,
-                                                    green: 53.0/255.0,
-                                                    blue: 60.0/255.0,
-                                                    alpha: 1.0)
+        combinedChartView.noDataTextColor = UIColor(red: 123/255,
+                                                    green: 128/255,
+                                                    blue: 131/255,
+                                                    alpha: 1)
+        combinedChartView.backgroundColor = UIColor(red: 45/255,
+                                                    green: 53/255,
+                                                    blue: 60/255,
+                                                    alpha: 1)
         combinedChartView.chartDescription?.enabled = false
         combinedChartView.drawBarShadowEnabled = false
         combinedChartView.highlightFullBarEnabled = false
         combinedChartView.drawOrder = [DrawOrder.bar.rawValue, DrawOrder.line.rawValue]
-        combinedChartView.setExtraOffsets(left: 20.0, top: 0.0, right: 20.0, bottom: 0.0)
+        combinedChartView.setExtraOffsets(left: 20, top: 0, right: 20, bottom: 0)
         combinedChartView.animate(xAxisDuration: 1.5, yAxisDuration: 1.5, easingOption: .linear)
         combinedChartView.notifyDataSetChanged()
         

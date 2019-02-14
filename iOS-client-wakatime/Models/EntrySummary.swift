@@ -6,7 +6,6 @@
 //  Copyright © 2018 Liubov Fedorchuk. All rights reserved.
 //
 
-import Foundation
 import ObjectMapper
 
 class EntrySummary: Mappable {
