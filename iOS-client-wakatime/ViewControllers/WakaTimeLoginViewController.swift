@@ -19,12 +19,17 @@ class WakaTimeLoginViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         if !Connectivity.isConnectedToInternet {
-            let alert = alertSetUp.showAlert(alertTitle: "No Internet Conection", alertMessage: "Turn on cellural data or use Wi-Fi to access data.")
+            log.warning("No Internet Conection.Needed turning on cellular data or use Wifi to access data.")
+            let alert = alertSetUp.showAlert(alertTitle: "No Internet Conection", alertMessage: "Turn on cellular data or use Wi-Fi to access data.")
             self.present(alert, animated: true, completion: nil)
+            log.debug("Alert with no internet connection error prsented successfully.")
         } else {
             let hasLogin = UserDefaults.standard.bool(forKey: "hasUserSecretAPIkey")
-            if (hasLogin) {
+            if hasLogin {
                 performSegue(withIdentifier: "dismissWakaTimeLoginView", sender: self)
+                log.debug("User is log in.")
+            } else {
+                log.debug("User is not log in. Needed loginning.")
             }
             self.userSecretAPIkeyTextField.delegate = self
             loginButtonSetUp(button: loginButton)
@@ -54,31 +59,37 @@ class WakaTimeLoginViewController: UIViewController, UITextFieldDelegate {
         let newUserSecretAPIkey = userSecretAPIkeyTextField.text
         UserDefaults.standard.set(false, forKey: "hasUserSecretAPIkey")
         
-        if((newUserSecretAPIkey?.isEmpty)!) {
+        if (newUserSecretAPIkey?.isEmpty)! {
             let alert = self.alertSetUp.showAlert(alertTitle: "Text field is empty",
                                   alertMessage: "Please, enter your secret API key.")
             self.present(alert, animated: true, completion: nil)
         } else {
-            let userController = UserController()
+            let userManager = UserManager()
             let keychainManager = KeychainManager()
             let headers = keychainManager.createAuthorizationHeadersForRequest(userApiKey: newUserSecretAPIkey)
-            userController.getUser(headers: headers, completionHandler: { status in
-                if (status == 200) {
+            
+            userManager.getUser(headers: headers, completionHandler: { status in
+                guard let status = status else {
+                    log.warning("Status code is nil.")
+                    return
+                }
+                
+                if status == 200 {
                     do {
-                        // This is a new account, create a new keychain item.
                         let userSecretAPIKeyItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName, accessGroup: KeychainConfiguration.accessGroup)
-                        
-                        // Save the userSecretAPIkey for the new item.
-                        try userSecretAPIKeyItem.savePassword(newUserSecretAPIkey!)
+                        guard let newUserSecretAPIkey = newUserSecretAPIkey else {
+                            log.error("Secret API Key not found - API key is nil.")
+                            return
+                        }
+                        try userSecretAPIKeyItem.savePassword(newUserSecretAPIkey)
                     } catch {
                         fatalError("Error updating keychain - \(error)")
                     }
                     UserDefaults.standard.set(true, forKey: "hasUserSecretAPIkey")
                     self.performSegue(withIdentifier: "dismissWakaTimeLoginView", sender: self)
-//                    self.transition(Sender: self.loginButton)
                     log.debug("API key is valid")
                 } else {
-                    self.alertSetUp.showAlertAccordingToStatusCode(fromController: self, statusCode: status!)
+                    self.alertSetUp.showAlertAccordingToStatusCode(fromController: self, statusCode: status)
                 }
             })
         }

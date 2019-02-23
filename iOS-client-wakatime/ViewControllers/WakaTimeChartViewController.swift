@@ -28,23 +28,21 @@ class WakaTimeChartViewController: UIViewController, ChartViewDelegate {
     @IBOutlet weak var workingBreakdownOverActivityHorizontalBarChartView: HorizontalBarChartView!
     @IBOutlet weak var workingBreakdownOverActivityByDayMultipleBarChartView: BarChartView!
     
-//    lazy var dateManager = DateManager()
     lazy var chartFilling = ChartFilling()
     lazy var markerDataManager = MarkerDataManager()
-    let statisticController = StatisticController()
-    let summaryController = SummaryController()
+    let statisticManager = StatisticManager()
+    let summaryManager = SummaryManager()
     let alertSetUp = AlertSetUp()
     var isAuthenticated = false
-    let tagForCombinedChartView = 001
-    let tagForMultipleBarChartView = 002
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         if !Connectivity.isConnectedToInternet {
-            let alert = alertSetUp.showAlert(alertTitle: "No Internet Connection", alertMessage: "Turn on cellural data or use Wi-Fi to access data.")
+            log.warning("No Internet Conection. Needed turning on cellular data or use Wifi to access data.")
+            let alert = alertSetUp.showAlert(alertTitle: "No Internet Connection", alertMessage: "Turn on cellular data or use Wi-Fi to access data.")
             self.present(alert, animated: true, completion: nil)
             log.debug("Alert with no internet connection error prsented successfully.")
         } else {
@@ -53,8 +51,8 @@ class WakaTimeChartViewController: UIViewController, ChartViewDelegate {
                 self.performSegue(withIdentifier: "showWakaTimeLoginView", sender: self)
                 log.debug("Unregistered user logout worked out successfully.")
             } else {
-                self.codingActivityForLast7DaysByDaysCombinedChartView.tag = tagForCombinedChartView
-                self.workingBreakdownOverActivityByDayMultipleBarChartView.tag = tagForMultipleBarChartView
+                self.codingActivityForLast7DaysByDaysCombinedChartView.tag = Constants.tagForCombinedChartView
+                self.workingBreakdownOverActivityByDayMultipleBarChartView.tag = Constants.tagForMultipleBarChartView
                 workingBreakdownOverActivityByDayMultipleBarChartView.delegate = self
                 codingActivityForLast7DaysByDaysCombinedChartView.delegate = self
                 
@@ -80,7 +78,7 @@ class WakaTimeChartViewController: UIViewController, ChartViewDelegate {
     //MARK: Chart delegate methods
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
         let position = Int(highlight.x)
-        if chartView.tag == tagForMultipleBarChartView {
+        if chartView.tag == Constants.tagForMultipleBarChartView {
             log.debug("Selecting the column of Weekly Breakdown Over Activity By Day MultipleBarChartView was successful.")
             if markerDataManager.buildingTimeInPercentForWeeklyBreakdownOverActivityByDays.count == 7 {
                 buildingTimePerDayInPercentLabel.text = markerDataManager.buildingTimeInPercentForWeeklyBreakdownOverActivityByDays[position]
@@ -117,7 +115,7 @@ class WakaTimeChartViewController: UIViewController, ChartViewDelegate {
     }
     
     func chartValueNothingSelected(_ chartView: ChartViewBase) {
-        if chartView.tag == tagForMultipleBarChartView {
+        if chartView.tag == Constants.tagForMultipleBarChartView {
             log.debug("Deselecting the column of Weekly Breakdown Over Activity By Day MultipleBarChartView was successful.")
         } else {
             log.debug("Deselecting the column of Coding Activity For Last 7 Days By Days Combined Chart View was successful.")
@@ -133,7 +131,8 @@ class WakaTimeChartViewController: UIViewController, ChartViewDelegate {
     }
     
     func getStatisticForLast7DaysForFillingPieChartsView() {
-        statisticController.getUserStatisticsForGivenTimeRange(completionHandler: { statistic, status in
+        let range = "last_7_days"
+        statisticManager.getUserStatisticsForGivenTimeRange(range: range, completionHandler: { statistic, status in
             if(statistic != nil && status == 200) {
                 self.chartFilling.pieChartFilling(pieChartView: self.languagePieChartView,
                                   statisticItemsList: (statistic?.usedLanguages)!)
@@ -170,7 +169,7 @@ class WakaTimeChartViewController: UIViewController, ChartViewDelegate {
         let start = Date().dateAsStringSevenDaysAgoFromNow()
         let end = Date().stringFromDate()
         
-        summaryController.getUserSummaryForGivenTimeRange(startDate: start,
+        summaryManager.getUserSummaryForGivenTimeRange(startDate: start,
                                                           endDate: end,
                                                           completionHandler: { summary, status in
             if (summary != nil && status == 200) {
@@ -246,7 +245,7 @@ class WakaTimeChartViewController: UIViewController, ChartViewDelegate {
         var projectWorkingTimePerDay = [Int:[String]]()
         var projectNameByDays = [Int:[String]]()
         
-        summaryController.getUserSummaryForGivenTimeRange(startDate: start,
+        summaryManager.getUserSummaryForGivenTimeRange(startDate: start,
                                                           endDate: end,
                                                           completionHandler: {summary, status in
             if(summary != nil && status == 200) {
@@ -342,7 +341,7 @@ class WakaTimeChartViewController: UIViewController, ChartViewDelegate {
         let start = Date().dateAsStringSevenDaysAgoFromNow()
         let end = Date().stringFromDate()
         
-        summaryController.getUserSummaryForGivenTimeRange(startDate: start,
+        summaryManager.getUserSummaryForGivenTimeRange(startDate: start,
                                                           endDate: end,
                                                           completionHandler: { summary, status in
             if (summary != nil && status == 200) {
@@ -397,7 +396,7 @@ class WakaTimeChartViewController: UIViewController, ChartViewDelegate {
         let start = Date().dateAsStringSevenDaysAgoFromNow()
         let end = Date().stringFromDate()
         
-        summaryController.getUserSummaryForGivenTimeRange(startDate: start,
+        summaryManager.getUserSummaryForGivenTimeRange(startDate: start,
                                                           endDate: end,
                                                           completionHandler: { summary, status in
             if (summary != nil && status == 200) {
@@ -459,7 +458,7 @@ class WakaTimeChartViewController: UIViewController, ChartViewDelegate {
     func fillingLabelWithCurrentDailyWorkingTime() {
         let currentDate = Date().stringFromDate()
         
-        summaryController.getUserSummaryForGivenTimeRange(startDate: currentDate,
+        summaryManager.getUserSummaryForGivenTimeRange(startDate: currentDate,
                                                           endDate: currentDate,
                                                           completionHandler: { summary, status in
             if (summary != nil && status == 200) {
@@ -490,8 +489,9 @@ class WakaTimeChartViewController: UIViewController, ChartViewDelegate {
     
     func getDailyProgressForDailyCodingAvarageChart() {
         let currentDate = Date().stringFromDate()
-        statisticController.getUserStatisticsForGivenTimeRange(completionHandler: { statistic, statusForStatistic in
-            self.summaryController.getUserSummaryForGivenTimeRange(startDate: currentDate,
+        let range = "last_7_days"
+        statisticManager.getUserStatisticsForGivenTimeRange(range: range, completionHandler: { statistic, statusForStatistic in
+            self.summaryManager.getUserSummaryForGivenTimeRange(startDate: currentDate,
                                                                      endDate: currentDate,
                                                                      completionHandler:{ summary,
                                                                         statusForSummary in

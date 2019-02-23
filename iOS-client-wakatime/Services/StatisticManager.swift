@@ -1,17 +1,16 @@
 //
-//  StatisticController.swift
+//  StatisticManager.swift
 //  iOS-client-wakatime
 //
 //  Created by Liubov Fedorchuk on 25.01.2018.
 //  Copyright © 2018 Liubov Fedorchuk. All rights reserved.
 //
 
-import Foundation
 import Alamofire
 import AlamofireObjectMapper
 
 /**
-    # Controller
+    # Service
  
     [WakaTime API v1: Stats]: https://wakatime.com/developers#stats
  
@@ -30,17 +29,13 @@ import AlamofireObjectMapper
  
  */
 
-class StatisticController {
+class StatisticManager {
     
-    let BASE_URL = "https://wakatime.com/api/v1"
-    
-    func getUserStatisticsForGivenTimeRange(completionHandler: @escaping (Statistic?, Int?) -> Void) {
-        //TODO: add opportunity to change time range for getting user's coding activity
-        let range = "last_7_days"
+    func getUserStatisticsForGivenTimeRange(range: String, completionHandler: @escaping (Statistic?, Int?) -> Void) {
         let keychainManager = KeychainManager()
         let headers = keychainManager.createAuthorizationHeadersForRequest(userApiKey: nil)
         
-        Alamofire.request(BASE_URL + "/users/current/stats/\(range)",
+        Alamofire.request(Constants.BASE_URL + "/users/current/stats/\(range)",
             method: .get,
             parameters: nil,
             encoding: JSONEncoding.default,
@@ -49,23 +44,28 @@ class StatisticController {
                 let status = response.response?.statusCode
                 switch response.result {
                 case .success:
-                    guard status == 200 else {
-                        log.debug("Request passed with status code, but not 200 OK: \(status!)")
-                        completionHandler(nil, status!)
+                    guard let status = status else {
+                        log.error("Request passed without status code - status code is nil.")
+                        completionHandler(nil, nil)
                         return
                     }
                     
-                    let statisticsData = response.result.value!
-                    completionHandler(statisticsData, status!)
+                    guard status == 200,
+                        let statisticsData = response.result.value else {
+                            log.debug("Request passed with status code, but not 200 OK: \(status)")
+                            completionHandler(nil, status)
+                            return
+                    }
+                    
+                    completionHandler(statisticsData, status)
                 case .failure(let error):
-                    guard status == nil else {
-                        log.debug("Request failure with status code: \(status!)")
-                        completionHandler(nil, status!)
+                    guard let status = status else {
+                        log.debug("Request failure with error: \(error)")
+                        completionHandler(nil, nil)
                         return
                     }
-                    
-                    log.debug("Request failure with error: \(error)")
-                    completionHandler(nil, nil)
+                    log.debug("Request failure with status code: \(status)")
+                    completionHandler(nil, status)
                 }
         }
     }

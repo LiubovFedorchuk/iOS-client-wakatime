@@ -8,11 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		23ED7211D7EC83592503F989 /* Pods_iOS_client_wakatime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 720D77E2903182E0201514F9 /* Pods_iOS_client_wakatime.framework */; };
-		763F92AB201A007600818354 /* StatisticController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763F92AA201A007600818354 /* StatisticController.swift */; };
+		763F92AB201A007600818354 /* StatisticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763F92AA201A007600818354 /* StatisticManager.swift */; };
 		763F92AF201A1D0F00818354 /* Statistic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763F92AE201A1D0F00818354 /* Statistic.swift */; };
 		763F92B3201A1D4C00818354 /* EntrySummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763F92B2201A1D4C00818354 /* EntrySummary.swift */; };
 		769E2D85202098FC00E023AF /* Summary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769E2D84202098FC00E023AF /* Summary.swift */; };
-		769E2D892020B90500E023AF /* SummaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769E2D882020B90500E023AF /* SummaryController.swift */; };
+		769E2D892020B90500E023AF /* SummaryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769E2D882020B90500E023AF /* SummaryManager.swift */; };
 		76B737362018A863005260D5 /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B737352018A863005260D5 /* KeychainPasswordItem.swift */; };
 		76B737382018A8D5005260D5 /* KeychainConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B737372018A8D5005260D5 /* KeychainConfiguration.swift */; };
 		76D82677211DC7520094ABDA /* ChartSetUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D82676211DC7520094ABDA /* ChartSetUp.swift */; };
@@ -27,10 +27,11 @@
 		76F456FA2017677A00AF3F8B /* WakaTimeChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F456F92017677A00AF3F8B /* WakaTimeChartViewController.swift */; };
 		9EDA42C5C2D6E2BFBB4F3FA7 /* Pods_iOS_client_wakatimeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1CFC8D035215324BAB87D29 /* Pods_iOS_client_wakatimeTests.framework */; };
 		F0374E0C2170CF39002C6DDD /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0374E0B2170CF39002C6DDD /* Connectivity.swift */; };
-		F0374E0E2170E498002C6DDD /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0374E0D2170E498002C6DDD /* UserController.swift */; };
+		F0374E0E2170E498002C6DDD /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0374E0D2170E498002C6DDD /* UserManager.swift */; };
 		F0374E102170ECF9002C6DDD /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0374E0F2170ECF9002C6DDD /* Project.swift */; };
 		F0374E122170EF19002C6DDD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0374E112170EF19002C6DDD /* User.swift */; };
 		F04689ED21EFDE040038A36E /* BalloonMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04689EC21EFDE030038A36E /* BalloonMarker.swift */; };
+		F05678FC2221F62500E19EF8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05678FB2221F62500E19EF8 /* Constants.swift */; };
 		F06E8BDD2213694300D7B2F5 /* MarkerDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06E8BDC2213694300D7B2F5 /* MarkerDataManager.swift */; };
 		F06E8BDF2213695100D7B2F5 /* BalloonMarkerViewForWorkingBreakdownOverActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06E8BDE2213695100D7B2F5 /* BalloonMarkerViewForWorkingBreakdownOverActivity.swift */; };
 		F06E8BE12213695900D7B2F5 /* ChartFilling.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06E8BE02213695900D7B2F5 /* ChartFilling.swift */; };
@@ -56,11 +57,11 @@
 /* Begin PBXFileReference section */
 		3D41A6A5158E32E2EFA83206 /* Pods-iOS-client-wakatimeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-client-wakatimeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOS-client-wakatimeTests/Pods-iOS-client-wakatimeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		720D77E2903182E0201514F9 /* Pods_iOS_client_wakatime.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_client_wakatime.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		763F92AA201A007600818354 /* StatisticController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticController.swift; sourceTree = "<group>"; };
+		763F92AA201A007600818354 /* StatisticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticManager.swift; sourceTree = "<group>"; };
 		763F92AE201A1D0F00818354 /* Statistic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statistic.swift; sourceTree = "<group>"; };
 		763F92B2201A1D4C00818354 /* EntrySummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntrySummary.swift; sourceTree = "<group>"; };
 		769E2D84202098FC00E023AF /* Summary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Summary.swift; sourceTree = "<group>"; };
-		769E2D882020B90500E023AF /* SummaryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryController.swift; sourceTree = "<group>"; };
+		769E2D882020B90500E023AF /* SummaryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryManager.swift; sourceTree = "<group>"; };
 		76B737352018A863005260D5 /* KeychainPasswordItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainPasswordItem.swift; sourceTree = "<group>"; };
 		76B737372018A8D5005260D5 /* KeychainConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainConfiguration.swift; sourceTree = "<group>"; };
 		76D82676211DC7520094ABDA /* ChartSetUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartSetUp.swift; sourceTree = "<group>"; };
@@ -82,10 +83,11 @@
 		C8891AF9F153BC2035D85798 /* Pods-iOS-client-wakatime.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-client-wakatime.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOS-client-wakatime/Pods-iOS-client-wakatime.release.xcconfig"; sourceTree = "<group>"; };
 		D1CFC8D035215324BAB87D29 /* Pods_iOS_client_wakatimeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_client_wakatimeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0374E0B2170CF39002C6DDD /* Connectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connectivity.swift; sourceTree = "<group>"; };
-		F0374E0D2170E498002C6DDD /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
+		F0374E0D2170E498002C6DDD /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		F0374E0F2170ECF9002C6DDD /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		F0374E112170EF19002C6DDD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F04689EC21EFDE030038A36E /* BalloonMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalloonMarker.swift; sourceTree = "<group>"; };
+		F05678FB2221F62500E19EF8 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F06E8BDC2213694300D7B2F5 /* MarkerDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkerDataManager.swift; sourceTree = "<group>"; };
 		F06E8BDE2213695100D7B2F5 /* BalloonMarkerViewForWorkingBreakdownOverActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalloonMarkerViewForWorkingBreakdownOverActivity.swift; sourceTree = "<group>"; };
 		F06E8BE02213695900D7B2F5 /* ChartFilling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartFilling.swift; sourceTree = "<group>"; };
@@ -130,8 +132,8 @@
 		764C5C552013A6C200526EF2 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				76E16585200F786400898273 /* Main.storyboard */,
-				76E1658A200F786400898273 /* LaunchScreen.storyboard */,
+				F05678FD2221F68A00E19EF8 /* Storyboards */,
+				76E16588200F786400898273 /* Assets.xcassets */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -139,9 +141,9 @@
 		764C5C562013A6DE00526EF2 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				763F92AA201A007600818354 /* StatisticController.swift */,
-				769E2D882020B90500E023AF /* SummaryController.swift */,
-				F0374E0D2170E498002C6DDD /* UserController.swift */,
+				763F92AA201A007600818354 /* StatisticManager.swift */,
+				769E2D882020B90500E023AF /* SummaryManager.swift */,
+				F0374E0D2170E498002C6DDD /* UserManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -191,7 +193,8 @@
 		76E16580200F786400898273 /* iOS-client-wakatime */ = {
 			isa = PBXGroup;
 			children = (
-				F0F3C7C3216F885F0024A74A /* Extensions */,
+				F05678F92221F5FE00E19EF8 /* Helpers */,
+				F05678F82221F5D900E19EF8 /* Application */,
 				F0F3C7C2216F88010024A74A /* Utility */,
 				764C5C582013A6FE00526EF2 /* Models */,
 				764C5C572013A6F200526EF2 /* ViewControllers */,
@@ -230,6 +233,45 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		F05678F82221F5D900E19EF8 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				76E16581200F786400898273 /* AppDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		F05678F92221F5FE00E19EF8 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				76D82678211DC84C0094ABDA /* AlertSetUp.swift */,
+				F0374E0B2170CF39002C6DDD /* Connectivity.swift */,
+				76B737372018A8D5005260D5 /* KeychainConfiguration.swift */,
+				76B737352018A863005260D5 /* KeychainPasswordItem.swift */,
+				F0F3C7C6216F89D80024A74A /* KeychainManager.swift */,
+				F05678FA2221F61800E19EF8 /* Constants */,
+				F0F3C7C3216F885F0024A74A /* Extensions */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		F05678FA2221F61800E19EF8 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				F05678FB2221F62500E19EF8 /* Constants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		F05678FD2221F68A00E19EF8 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				76E16585200F786400898273 /* Main.storyboard */,
+				76E1658A200F786400898273 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
 		F0F3C7C2216F88010024A74A /* Utility */ = {
 			isa = PBXGroup;
 			children = (
@@ -239,13 +281,6 @@
 				F06E8BDE2213695100D7B2F5 /* BalloonMarkerViewForWorkingBreakdownOverActivity.swift */,
 				F04689EC21EFDE030038A36E /* BalloonMarker.swift */,
 				F06E8BDC2213694300D7B2F5 /* MarkerDataManager.swift */,
-				76E16581200F786400898273 /* AppDelegate.swift */,
-				76B737372018A8D5005260D5 /* KeychainConfiguration.swift */,
-				76B737352018A863005260D5 /* KeychainPasswordItem.swift */,
-				76D82678211DC84C0094ABDA /* AlertSetUp.swift */,
-				76E16588200F786400898273 /* Assets.xcassets */,
-				F0F3C7C6216F89D80024A74A /* KeychainManager.swift */,
-				F0374E0B2170CF39002C6DDD /* Connectivity.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -434,7 +469,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				763F92AB201A007600818354 /* StatisticController.swift in Sources */,
+				763F92AB201A007600818354 /* StatisticManager.swift in Sources */,
 				F06E8BE5221369CF00D7B2F5 /* ChartColorTemplatesExtension.swift in Sources */,
 				F0CC31A12215E4E00034D974 /* DateExtentions.swift in Sources */,
 				F0374E0C2170CF39002C6DDD /* Connectivity.swift in Sources */,
@@ -445,16 +480,17 @@
 				F06E8BDD2213694300D7B2F5 /* MarkerDataManager.swift in Sources */,
 				F0CC31A52215EE530034D974 /* StringExtention.swift in Sources */,
 				F0CC31A32215ECC30034D974 /* IntExtensions.swift in Sources */,
+				F05678FC2221F62500E19EF8 /* Constants.swift in Sources */,
 				76B737382018A8D5005260D5 /* KeychainConfiguration.swift in Sources */,
 				76D82679211DC84C0094ABDA /* AlertSetUp.swift in Sources */,
 				F0F3C7C7216F89D80024A74A /* KeychainManager.swift in Sources */,
 				F06E8BE12213695900D7B2F5 /* ChartFilling.swift in Sources */,
 				F04689ED21EFDE040038A36E /* BalloonMarker.swift in Sources */,
 				76B737362018A863005260D5 /* KeychainPasswordItem.swift in Sources */,
-				769E2D892020B90500E023AF /* SummaryController.swift in Sources */,
+				769E2D892020B90500E023AF /* SummaryManager.swift in Sources */,
 				769E2D85202098FC00E023AF /* Summary.swift in Sources */,
 				76F456FA2017677A00AF3F8B /* WakaTimeChartViewController.swift in Sources */,
-				F0374E0E2170E498002C6DDD /* UserController.swift in Sources */,
+				F0374E0E2170E498002C6DDD /* UserManager.swift in Sources */,
 				763F92AF201A1D0F00818354 /* Statistic.swift in Sources */,
 				F06E8BDF2213695100D7B2F5 /* BalloonMarkerViewForWorkingBreakdownOverActivity.swift in Sources */,
 				F0F3C7C5216F88970024A74A /* DoubleExtension.swift in Sources */,

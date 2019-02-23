@@ -10,27 +10,23 @@ import ObjectMapper
 
 class Project: Mappable {
     
-    var id: String?
     var name: String?
     var privacy: String?
     var repository: String?
     
-    init(id: String,
-         name: String,
+    init(name: String,
          privacy: String,
          repository: String) {
-        self.id = id
         self.name = name
         self.privacy = privacy
         self.repository = repository  
     }
     
     required init?(map: Map) {
-        
+        mapping(map: map)
     }
     
     func mapping(map: Map) {
-        id               <- map["id"]
         name             <- map["name"]
         privacy          <- map["privacy"]
         repository       <- map["repository"]
